@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: us-open-demo
+    runtime: python
+    region: frankfurt
+    plan: 0.5c-512mb
+    numInstances: 1
+    buildCommand: pip install --disable-pip-version-check -r requirements.txt
+    startCommand: python3 serve.py
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    maxShutdownDelaySeconds: 10
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: K1ND_HOST
+        value: 0.0.0.0
+      - key: K1ND_DATA_DIR
+        value: /opt/render/project/src/data
+      - key: K1ND_SECURE_COOKIES
+        value: "true"
+      - key: K1ND_TRUST_PROXY_HEADERS
+        value: "true"
+      - key: K1ND_DEMO_PIN
+        sync: false
+    disk:
+      name: k1nd-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1

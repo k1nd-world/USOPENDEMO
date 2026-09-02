@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>K1ND · Moderation engine — test harness</title>
+  <link rel="stylesheet" href="/assets/css/styles.css?v=4.24.1.0" />
+  <style>
+    .wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 96px; }
+    .head { margin-bottom: 24px; }
+    .summary {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 12px;
+      padding: 8px 14px; border-radius: var(--r-pill); font-weight: 620;
+      border: 1px solid var(--line);
+    }
+    .summary.ok { background: var(--ok-tint); color: var(--ok); border-color: #BFE3CD; }
+    .case { padding: 18px 20px; }
+    .case + .case { border-top: 1px solid var(--line); }
+    .case-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .case-input {
+      font-family: var(--font-mono); font-size: .92rem; background: var(--paper);
+      border: 1px solid var(--line); border-radius: var(--r-sm);
+      padding: 8px 11px; margin: 12px 0; word-break: break-word;
+    }
+    .rw { display: grid; grid-template-columns: 84px 1fr; gap: 6px 12px; margin-top: 8px; font-size: .9rem; }
+    .rw dt { color: var(--muted); }
+    .rw .got { font-weight: 560; }
+    .outcome-clean { color: var(--ok); }
+    .tester textarea {
+      width: 100%; min-height: 90px; resize: vertical; font-family: var(--font-sans);
+      font-size: 1rem; padding: 12px 14px; border: 1px solid var(--line-strong);
+      border-radius: var(--r-md); box-sizing: border-box;
+    }
+    .tester textarea:focus-visible { outline: 2px solid var(--teal); outline-offset: 1px; border-color: var(--teal); }
+    .result { margin-top: 16px; }
+    .result-block {
+      border-radius: var(--r-md); padding: 16px 18px; border: 1px solid var(--line);
+    }
+    .result-block.clean { background: var(--ok-tint); border-color: #BFE3CD; }
+    .result-block.warning { background: var(--warn-tint); border-color: #EAD6B0; }
+    .result-block.block { background: var(--danger-tint); border-color: #EBC9C4; }
+    .result-block.review { background: var(--teal-tint); border-color: var(--teal-line); }
+    .result-block h4 { margin-bottom: 6px; }
+    .rewrite-card {
+      margin-top: 12px; background: #fff; border: 1px solid var(--teal-line);
+      border-left: 3px solid var(--teal); border-radius: var(--r-sm); padding: 12px 14px;
+    }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .chip {
+      cursor: pointer; font-size: .82rem; border: 1px solid var(--line-strong);
+      background: #fff; border-radius: var(--r-pill); padding: 6px 12px;
+    }
+    .chip:hover { background: var(--paper); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <a class="brand" href="/" data-link><span class="k">K1ND</span><span class="dot">.</span><span class="world">world</span></a>
+      <div class="demo-note" style="margin-top:14px">
+        <span>🧪</span>
+        <div><b>Stage 2 · Moderation engine (standalone).</b> This page is not part of
+        the product UI — it exists to verify the engine logic on its own before it's
+        wired into posting/commenting. It runs the canonical allow, warn, enhanced-review and block cases and lets
+        you test your own text below.</div>
+      </div>
+    </div>
+
+    <section>
+      <div class="row spread center" style="margin-bottom:12px">
+        <h2>§6 canonical cases</h2>
+        <div id="summary" class="summary">running…</div>
+      </div>
+      <div class="card" id="cases"></div>
+    </section>
+
+    <section class="tester" style="margin-top:36px">
+      <h2>Try your own</h2>
+      <p class="muted" style="margin:6px 0 14px">Type anything — the engine classifies it and shows whether it is allowed, safely rewritten, held for enhanced review, or blocked.</p>
+      <textarea id="input" placeholder="e.g. That line call was a joke, the umpire is clueless"></textarea>
+      <div class="chips" id="chips"></div>
+      <div class="result" id="result"></div>
+    </section>
+  </div>
+
+  <script>
+    // Robustness helper (classic script — always runs, even if modules can't).
+    // The engine is loaded as an ES module below; ES modules are blocked when a
+    // page is opened via file:// (double-clicked). Detect that and any load
+    // failure, and replace the silent "running…" state with a clear fix.
+    function showLoadHelp(reason) {
+      var s = document.getElementById("summary");
+      if (s) { s.textContent = "engine not loaded"; s.classList.remove("ok"); }
+      var box = document.getElementById("cases");
+      if (box) {
+        box.innerHTML =
+          '<div class="case"><div class="result-block block">' +
+          '<h4>The moderation engine didn\'t load</h4>' +
+          '<p style="margin-top:6px">' + reason + '</p>' +
+          '<p style="margin-top:10px"><b>Fix:</b> serve the folder over http instead of opening the file directly:</p>' +
+          '<ol style="margin:8px 0 0 18px"><li>In a terminal, <code>cd</code> into the <code>k1nd-site</code> folder.</li>' +
+          '<li>Run <code>python3 serve.py</code></li>' +
+          '<li>Open <code>http://localhost:8000/moderation-test.html</code></li></ol>' +
+          '</div></div>';
+      }
+    }
+    if (location.protocol === "file:") {
+      showLoadHelp("This page was opened directly from disk (a <code>file://</code> address), so the browser blocks its JavaScript modules.");
+    } else {
+      // Watchdog: if the module hasn't reported success shortly, surface an error.
+      window.__k1ndLoaded = false;
+      setTimeout(function () {
+        if (!window.__k1ndLoaded) {
+          showLoadHelp("The engine module failed to load. Check the browser console for details.");
+        }
+      }, 2500);
+    }
+  </script>
+
+  <script type="module">
+    let moderateContent, TEST_CASES;
+    try {
+      ({ moderateContent, TEST_CASES } = await import("/assets/js/moderation.js?v=4.24.1.0"));
+      window.__attachLiveSafetyGuard = (await import("/assets/js/lib/liveGuard.js?v=4.24.1.0")).attachLiveSafetyGuard;
+      window.__k1ndLoaded = true;
+    } catch (err) {
+      console.error("Failed to load moderation engine:", err);
+      // The classic-script watchdog will show the help message.
+      throw err;
+    }
+
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c]));
+    const outcomeBadge = (o) => {
+      const map = { clean: ["badge-ok","Clean · allowed"], warning: ["badge-warn","Warning · rewrite or review"], review: ["badge-review","Enhanced review · held"], block: ["badge-danger","Hard block · cannot post"] };
+      const [cls, label] = map[o];
+      return `<span class="badge ${cls}">${label}</span>`;
+    };
+
+    // ---- canonical cases ----
+    let pass = 0;
+    const rows = TEST_CASES.map((c) => {
+      const r = moderateContent(c.input, c.context || {});
+      const outcomeOK = r.outcome === c.expect;
+      const categoryOK = c.expectCategory ? r.category === c.expectCategory : true;
+      const rewriteOK = c.expectRewrite ? (r.rewriteSuggestion === c.expectRewrite || (r.rewrite?.suppressedCandidate === c.expectRewrite && r.rewrite?.evaluation?.suitable === false)) : true;
+      const expectedNoRewriteOK = c.expectNoRewrite ? r.rewriteSuggestion === undefined : true;
+      const safeDraftOK = c.expectSafeDraft ? r.safeDraftSuggestion === c.expectSafeDraft : true;
+      const expectedNoSafeDraftOK = c.expectNoSafeDraft ? r.safeDraftSuggestion === undefined : true;
+      const sourceBasisOK = c.expectSourceBasis ? String(r.rewrite?.sourceBasis || "").toLowerCase().includes(c.expectSourceBasis.toLowerCase()) : true;
+      const safeDraftValidated = !r.safeDraftSuggestion || (r.rewrite?.status === "safe_new_draft" && r.rewrite?.validatedClean === true && moderateContent(r.safeDraftSuggestion, c.context || {}).outcome === "clean");
+      const noRewriteOK = c.expect === "block" ? r.rewriteSuggestion === undefined && safeDraftValidated : true;
+      const assessment = r.analysis && r.analysis.contextAssessment;
+      const targetRoleOK = c.expectTargetRole ? assessment?.targetAudience?.role === c.expectTargetRole : true;
+      const targetScopeOK = c.expectTargetScope ? assessment?.targetScope === c.expectTargetScope : true;
+      const pileOnOK = c.expectPileOn ? assessment?.conversation?.pileOn === true : true;
+      const repeatedOK = c.expectRepeatedTargeting != null ? assessment?.conversation?.repeatedAuthorInterventions === c.expectRepeatedTargeting : true;
+      const speechActOK = c.expectSpeechAct ? assessment?.speechActId === c.expectSpeechAct : true;
+      const rewriteOptionsOK = c.expectRewriteOptions ? (r.rewrite?.options?.length >= c.expectRewriteOptions || r.rewrite?.status === "fidelity_not_proven") : true;
+      const clauseMapOK = c.expectClauseMap ? r.rewrite?.clauses?.length >= 2 : true;
+      const codeSwitchOK = c.expectCodeSwitch ? r.codeSwitch === true : true;
+      const codedMeaningOK = c.expectCodedMeaning ? !!r.analysis?.codedMeaning : true;
+      const crossThreadOK = c.expectCrossThread != null ? assessment?.conversation?.crossThreadInterventions === c.expectCrossThread : true;
+      const semantic = r.analysis?.semanticIntent;
+      const semanticActOK = c.expectSemanticAct ? semantic?.summary?.dominantSpeechAct === c.expectSemanticAct : true;
+      const mixedIntentOK = c.expectMixedIntent ? semantic?.summary?.mixedIntent === true : true;
+      const severeFloorOK = c.expectSevereFloor ? semantic?.severeFloor?.locked === true : true;
+      const ok = outcomeOK && categoryOK && rewriteOK && expectedNoRewriteOK && safeDraftOK && expectedNoSafeDraftOK && sourceBasisOK && noRewriteOK && targetRoleOK && targetScopeOK && pileOnOK && repeatedOK && speechActOK && rewriteOptionsOK && clauseMapOK && codeSwitchOK && codedMeaningOK && crossThreadOK && semanticActOK && mixedIntentOK && severeFloorOK;
+      if (ok) pass++;
+
+      let rewriteHtml = "";
+      if (c.expectRewrite) {
+        rewriteHtml = `
+          <dl class="rw">
+            <dt>expected</dt><dd>${esc(c.expectRewrite)}</dd>
+            <dt>generated</dt><dd class="got">${esc(r.rewriteSuggestion || "—")} ${rewriteOK ? "✓" : "✗"}</dd>
+          </dl>`;
+      } else if (c.expectNoRewrite) {
+        rewriteHtml = `<dl class="rw"><dt>expected</dt><dd>no automatic rewrite</dd><dt>generated</dt><dd class="got">${r.rewriteSuggestion ? esc(r.rewriteSuggestion) + " ✗" : "not offered ✓"}</dd></dl>`;
+      } else if (c.expectSafeDraft) {
+        rewriteHtml = `<dl class="rw"><dt>expected safe draft</dt><dd>${esc(c.expectSafeDraft)}</dd><dt>generated</dt><dd class="got">${esc(r.safeDraftSuggestion || "—")} ${safeDraftOK && safeDraftValidated ? "✓" : "✗"}</dd></dl>`;
+      } else if (c.expect === "block") {
+        rewriteHtml = `<dl class="rw"><dt>original</dt><dd class="got">blocked with no bypass ${r.rewriteSuggestion === undefined ? "✓" : "✗"}</dd><dt>separate safe draft</dt><dd>${r.safeDraftSuggestion ? esc(r.safeDraftSuggestion) : "not offered"}</dd></dl>`;
+      }
+
+      const shownInput = c.displayInput || c.input;
+      return `
+        <div class="case">
+          <div class="case-top">
+            <span class="badge ${ok ? "badge-ok" : "badge-danger"}">${ok ? "✓ PASS" : "✗ FAIL"}</span>
+            ${outcomeBadge(r.outcome)}
+            <span class="muted" style="font-size:.86rem">${esc(r.reason)}</span>
+          </div>
+          <div class="case-input">${esc(shownInput)}</div>
+          ${c.note ? `<p class="muted" style="font-size:.84rem;margin:0 0 4px">${esc(c.note)}</p>` : ""}
+          ${rewriteHtml}
+        </div>`;
+    }).join("");
+    document.getElementById("cases").innerHTML = rows;
+
+    const sEl = document.getElementById("summary");
+    const all = TEST_CASES.length;
+    sEl.textContent = `${pass}/${all} cases passing`;
+    if (pass === all) sEl.classList.add("ok");
+
+    // ---- live tester ----
+    const input = document.getElementById("input");
+    const result = document.getElementById("result");
+    function runLive() {
+      const val = input.value;
+      if (!val.trim()) { result.innerHTML = ""; return; }
+      const r = moderateContent(val);
+      let inner = `<div class="result-block ${r.outcome}">
+        <h4>${outcomeBadge(r.outcome)}</h4>
+        <p class="muted" style="font-size:.9rem">${esc(r.reason)}</p>`;
+      const draft = r.rewriteSuggestion || r.safeDraftSuggestion;
+      if (draft) {
+        inner += `<div class="rewrite-card"><div class="seal">${r.safeDraftSuggestion ? "Validated new draft · original stays blocked" : "Source-backed rewrite"}</div>
+          <p style="margin-top:6px">${esc(draft)}</p>
+          ${r.rewrite?.sourceBasis ? `<p class="muted" style="margin-top:6px"><b>Kept from the post:</b> ${esc(r.rewrite.sourceBasis)}</p>` : ""}</div>`;
+      }
+      if (r.outcome === "review") {
+        inner += `<p style="margin-top:8px;font-weight:560">The original stays hidden until enhanced moderation approves it.</p>`;
+      }
+      if (r.outcome === "block") {
+        inner += `<p style="margin-top:8px;font-weight:560">The original cannot be posted on K1ND${r.safeDraftSuggestion ? "; only the separately validated clean draft may be used" : ""}.</p>`;
+      }
+      inner += `</div>`;
+      result.innerHTML = inner;
+    }
+    window.__attachLiveSafetyGuard(input, { onSafeInput: runLive });
+    input.addEventListener("input", runLive);
+
+    const samples = [
+      "As an England fan I hope Norway loses.",
+      "I wish the umpire gets cancer.",
+      "What a stupid shot under pressure.",
+      "kys",
+      "The umpire is a corrupt idiot.",
+      "Everyone go spam her account after that loss.",
+      "You ruined my acca and owe me money.",
+      "Go back to where you came from.",
+      "Call her on 07700 900123.",
+      "You live at 42 Oakfield Road, SW1A 2AA.",
+    ];
+    document.getElementById("chips").innerHTML = samples
+      .map((s) => `<button class="chip" data-s="${esc(s)}">${esc(s)}</button>`).join("");
+    document.getElementById("chips").addEventListener("click", (e) => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      input.value = b.dataset.s; runLive(); input.focus();
+    });
+  </script>
+</body>
+</html>

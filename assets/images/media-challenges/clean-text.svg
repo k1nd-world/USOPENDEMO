@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#082f36"/><stop offset="1" stop-color="#0e6870"/></linearGradient></defs>
+  <rect width="1000" height="560" rx="32" fill="url(#bg)"/>
+  <circle cx="875" cy="95" r="130" fill="#65e2c3" opacity=".13"/><circle cx="110" cy="485" r="180" fill="#65e2c3" opacity=".08"/>
+  <text x="72" y="98" fill="#77efd1" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">MATCH ANALYSIS</text>
+  <text x="72" y="270" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">That return was late.</text>
+  <text x="72" y="338" fill="#c7e8e4" font-family="Arial, Helvetica, sans-serif" font-size="31">Performance criticism — no personal attack</text>
+  <rect x="72" y="420" width="250" height="58" rx="29" fill="#65e2c3"/><text x="110" y="458" fill="#062f35" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">SPORTING POINT</text>
+</svg>

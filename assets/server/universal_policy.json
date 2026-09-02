@@ -1,0 +1,89 @@
+{
+  "version": "k1nd-universal-policy-4.19.0",
+  "governance": {
+    "authority": "server_authoritative",
+    "changeControl": "native review, regression, shadow, explicit human promotion",
+    "automaticLiveLearning": false,
+    "rawLexiconExposure": "restricted",
+    "releaseRule": "zero generated severe misses and zero protected neutral-control regressions"
+  },
+  "families": [
+    {
+      "id": "self_harm_encouragement",
+      "label": "Self-harm encouragement",
+      "harmCategory": "high-risk direction or encouragement of self-harm",
+      "severity": "critical",
+      "defaultAction": "block",
+      "specialistRoute": "self_harm_safety",
+      "provenance": "K1ND server core plus retained adversarial fixtures",
+      "nativeReview": "required for language expansion",
+      "contextSafeguard": "reporting and prevention language remains a distinct stance signal; clinical assessment is never inferred"
+    },
+    {
+      "id": "targeted_violence",
+      "label": "Targeted violence",
+      "harmCategory": "threat, violent intent, method or access signal",
+      "severity": "critical",
+      "defaultAction": "block",
+      "specialistRoute": "credible_violence",
+      "provenance": "K1ND server core plus event-command threat controls",
+      "nativeReview": "required for new languages and coded threats",
+      "contextSafeguard": "a keyword does not establish credibility; intent, target, method, location and imminence are assessed separately"
+    },
+    {
+      "id": "identity_hate",
+      "label": "Identity hate",
+      "harmCategory": "identity slur, dehumanisation or protected-class attack",
+      "severity": "high",
+      "defaultAction": "block",
+      "specialistRoute": "identity_hate",
+      "provenance": "governed multilingual K1ND policy packs",
+      "nativeReview": "required per language, dialect and reclaimed-use boundary",
+      "contextSafeguard": "quotation, counterspeech, education, self-reference and direct targeting are separated"
+    },
+    {
+      "id": "sexual_violence",
+      "label": "Sexual violence and degradation",
+      "harmCategory": "sexual threat, coercion or targeted sexual degradation",
+      "severity": "critical",
+      "defaultAction": "block",
+      "specialistRoute": "sexual_safety",
+      "provenance": "K1ND protected severe-harm rules",
+      "nativeReview": "required for slang and euphemism expansion",
+      "contextSafeguard": "consensual discussion and victim reporting are not treated as authorial threats"
+    },
+    {
+      "id": "personal_contact",
+      "label": "Personal data exposure",
+      "harmCategory": "contact, address or location exposure",
+      "severity": "critical",
+      "defaultAction": "block",
+      "specialistRoute": "privacy_safeguarding",
+      "provenance": "K1ND server personal-data detectors",
+      "nativeReview": "required for regional address and identifier formats",
+      "contextSafeguard": "public venue information and personal location data are separated"
+    },
+    {
+      "id": "campaign_harassment",
+      "label": "Campaign harassment",
+      "harmCategory": "repeat, cross-thread or coordinated targeting",
+      "severity": "high",
+      "defaultAction": "review",
+      "specialistRoute": "campaign_safety",
+      "provenance": "K1ND cross-thread intervention graph",
+      "nativeReview": "required before any coordinated-behaviour conclusion",
+      "contextSafeguard": "repeat signals are routing evidence, not proof of coordination"
+    },
+    {
+      "id": "personal_degradation",
+      "label": "Person-directed degradation",
+      "harmCategory": "insult, degrading label or humiliating comparison",
+      "severity": "medium",
+      "defaultAction": "warning",
+      "specialistRoute": "community_integrity",
+      "provenance": "K1ND multilingual policy packs and context rules",
+      "nativeReview": "required for ambiguous slang and reclaimed usage",
+      "contextSafeguard": "criticism of play, tactics and performance remains permitted"
+    }
+  ]
+}

@@ -1,0 +1,4467 @@
+{
+  "version": "server-policy-4.19.0",
+  "sourceRuleCount": 259,
+  "executablePatternCount": 276,
+  "rules": [
+    {
+      "id": "unalive-self",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "self_harm_encouragement",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "unalive yourself"
+        }
+      ],
+      "safeExample": "The villain was unalived in the story."
+    },
+    {
+      "id": "npc-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "NPC"
+        }
+      ],
+      "safeExample": "NPC characters can make games feel repetitive."
+    },
+    {
+      "id": "bot-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "bot"
+        }
+      ],
+      "safeExample": "The support bot answered quickly."
+    },
+    {
+      "id": "mid-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "mid"
+        }
+      ],
+      "safeExample": "That album was mid."
+    },
+    {
+      "id": "cooked-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "second_person",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "cooked"
+        }
+      ],
+      "safeExample": "This team is cooked after that injury."
+    },
+    {
+      "id": "washed-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "washed"
+        }
+      ],
+      "safeExample": "That was a washed-out match."
+    },
+    {
+      "id": "delulu-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "mental_state_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "delulu"
+        }
+      ],
+      "safeExample": "That is a delulu take."
+    },
+    {
+      "id": "glazer-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "personal_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "glazer"
+        }
+      ],
+      "safeExample": "There is too much glazing in that review."
+    },
+    {
+      "id": "yapper-person",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "silencing_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "yapper"
+        }
+      ],
+      "safeExample": "We spent the evening yapping about the match."
+    },
+    {
+      "id": "skill-issue",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "taunting",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "second_person",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "skill issue"
+        }
+      ],
+      "safeExample": "The analysis identified a technical skill issue."
+    },
+    {
+      "id": "touch-grass",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "dismissal",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "direct",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "touch grass"
+        }
+      ],
+      "safeExample": "I need to go outside and touch grass."
+    },
+    {
+      "id": "cry-more",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "taunting",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "direct",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "cry more"
+        }
+      ],
+      "safeExample": "The coach said the baby may cry more tonight."
+    },
+    {
+      "id": "delete-account",
+      "pack": "emerging",
+      "language": "English / contextual",
+      "mechanism": "exclusion",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "delete your account"
+        }
+      ],
+      "safeExample": "I need to delete my old account."
+    },
+    {
+      "id": "sa-suspected-family-evasion",
+      "pack": "south_asian",
+      "language": "Uncorroborated / suspected evasion",
+      "mechanism": "suspected_evasive_abuse",
+      "outcome": "review",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "hin\\s*ch(?:o|u|oo)t?d(?:e|s)?"
+        }
+      ],
+      "safeExample": "A moderator asks whether ‘hinchod’ is a misspelling."
+    },
+    {
+      "id": "sa-family-sexual-sister",
+      "pack": "south_asian",
+      "language": "Hindustani · Punjabi · code-mixed",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:behen|behn|bhen|ben|bahen|bahan|bahin|bhaen|pen|pan)\\s*ch(?:o|u|oo)t?d(?:e|s)?"
+        }
+      ],
+      "safeExample": "The term ‘benchod’ is a severe South Asian insult."
+    },
+    {
+      "id": "sa-family-sexual-mother",
+      "pack": "south_asian",
+      "language": "Hindustani · code-mixed",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:madar|mader|madhar|maadar|madr)\\s*ch(?:o|u|oo)t?d(?:e|s)?"
+        }
+      ],
+      "safeExample": "The paper analyses variants of the word ‘madarchod’."
+    },
+    {
+      "id": "sa-sexualised-woman",
+      "pack": "south_asian",
+      "language": "Hindi · Urdu · Gujarati · code-mixed",
+      "mechanism": "sexualised_misogyny",
+      "outcome": "block",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "randi(?:i|ya|yon|o)?"
+        }
+      ],
+      "safeExample": "The dictionary labels ‘randi’ as derogatory."
+    },
+    {
+      "id": "sa-sexualised-insult",
+      "pack": "south_asian",
+      "language": "Hindi · Gujarati · code-mixed",
+      "mechanism": "sexualised_personal_abuse",
+      "outcome": "warning",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "chut(?:iya|ia|iye|iyo|iy[a-z]*)"
+        }
+      ],
+      "safeExample": "The dataset lists ‘chutiya’ as an offensive code-mixed term."
+    },
+    {
+      "id": "sa-sexualised-insult-gandu",
+      "pack": "south_asian",
+      "language": "Hindi · Gujarati · code-mixed",
+      "mechanism": "sexualised_personal_abuse",
+      "outcome": "warning",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "gand(?:u|oo|ua|ue)"
+        }
+      ],
+      "safeExample": "The moderator is reviewing the word ‘gandu’ as a quoted term."
+    },
+    {
+      "id": "sa-legitimacy-insult",
+      "pack": "south_asian",
+      "language": "Hindi · Urdu · Gujarati · code-mixed",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "hara?mi(?:o|yon)?"
+        }
+      ],
+      "safeExample": "The article quotes ‘harami’ while discussing translation."
+    },
+    {
+      "id": "sa-mental-ridicule",
+      "pack": "south_asian",
+      "language": "Hindi · Urdu · Gujarati · code-mixed",
+      "mechanism": "mental_state_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": "clean",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "paagal|pagal"
+        }
+      ],
+      "safeExample": "That was a pagal match!"
+    },
+    {
+      "id": "sa-sycophant-ridicule",
+      "pack": "south_asian",
+      "language": "Hindi · Urdu · Gujarati · code-mixed",
+      "mechanism": "personal_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": "clean",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "chamcha(?:s|giri)?"
+        }
+      ],
+      "safeExample": "Pass me a chamcha from the kitchen."
+    },
+    {
+      "id": "sa-silencing",
+      "pack": "south_asian",
+      "language": "Hindi · Urdu · code-mixed",
+      "mechanism": "dismissal",
+      "outcome": "warning",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "chup\\s+ho(?:\\s+jao?)?"
+        }
+      ],
+      "safeExample": "The phrase ‘chup ho’ translates as ‘be quiet’."
+    },
+    {
+      "id": "sa-saala",
+      "pack": "south_asian",
+      "language": "Hindi · Urdu · Gujarati · code-mixed",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "saa?l(?:a|i|e|ey)"
+        }
+      ],
+      "safeExample": "My saala (brother-in-law) is visiting this weekend."
+    },
+    {
+      "id": "sa-haraam-saala",
+      "pack": "south_asian",
+      "language": "Hindi · Urdu · code-mixed",
+      "mechanism": "stacked_personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": "warning",
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "haraa?m(?:i)?\\s+saa?l(?:a|i|e)"
+        }
+      ],
+      "safeExample": "The moderator is reviewing the phrase ‘haraam saala’."
+    },
+    {
+      "id": "pl-kurwa-mac",
+      "pack": "polish",
+      "language": "English / contextual",
+      "mechanism": "strong_profanity",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The dictionary defines ‘kurwa mać’ as a vulgar exclamation."
+    },
+    {
+      "id": "pl-kurwa-target",
+      "pack": "polish",
+      "language": "English / contextual",
+      "mechanism": "sexualised_misogyny",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "Kurwa! Znowu przegraliśmy! (an untargeted exclamation)"
+    },
+    {
+      "id": "pl-kurwa-expletive",
+      "pack": "polish",
+      "language": "English / contextual",
+      "mechanism": "strong_profanity",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "A linguistics paper discusses the word ‘kurwa’."
+    },
+    {
+      "id": "racial-nword-cyrillic",
+      "pack": "global_racial",
+      "language": "Russian / Ukrainian transliteration",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "ниггер"
+        },
+        {
+          "type": "literal",
+          "value": "ніґґер"
+        },
+        {
+          "type": "literal",
+          "value": "ниґґер"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-nword-devanagari",
+      "pack": "global_racial",
+      "language": "Devanagari transliteration",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "निग्गर"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-nword-gujarati",
+      "pack": "global_racial",
+      "language": "Gujarati transliteration",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "નિગ્ગર"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-polish",
+      "pack": "global_racial",
+      "language": "Polish",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "czarnuch"
+        },
+        {
+          "type": "literal",
+          "value": "czarnucha"
+        },
+        {
+          "type": "literal",
+          "value": "czarnuchy"
+        },
+        {
+          "type": "literal",
+          "value": "czarnuchem"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-dutch",
+      "pack": "global_racial",
+      "language": "Dutch",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "nikker"
+        },
+        {
+          "type": "literal",
+          "value": "nikkers"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-german",
+      "pack": "global_racial",
+      "language": "German",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "neger"
+        },
+        {
+          "type": "literal",
+          "value": "negerin"
+        },
+        {
+          "type": "literal",
+          "value": "negern"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-french",
+      "pack": "global_racial",
+      "language": "French",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "négro"
+        },
+        {
+          "type": "literal",
+          "value": "négros"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-north-african-french",
+      "pack": "global_racial",
+      "language": "French",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "bougnoule"
+        },
+        {
+          "type": "literal",
+          "value": "bougnoules"
+        },
+        {
+          "type": "literal",
+          "value": "bicot"
+        },
+        {
+          "type": "literal",
+          "value": "bicots"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-spanish",
+      "pack": "global_racial",
+      "language": "Spanish",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "negrata"
+        },
+        {
+          "type": "literal",
+          "value": "negratas"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-south-american-spanish",
+      "pack": "global_racial",
+      "language": "Spanish",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "sudaca"
+        },
+        {
+          "type": "literal",
+          "value": "sudacas"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-italian",
+      "pack": "global_racial",
+      "language": "Italian",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "negraccio"
+        },
+        {
+          "type": "literal",
+          "value": "negracci"
+        },
+        {
+          "type": "literal",
+          "value": "negraccia"
+        },
+        {
+          "type": "literal",
+          "value": "negracce"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-mandarin",
+      "pack": "global_racial",
+      "language": "Mandarin",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "identity_slur",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "黑鬼"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-portuguese-targeted",
+      "pack": "global_racial",
+      "language": "Portuguese",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "macaco"
+        },
+        {
+          "type": "literal",
+          "value": "macaca"
+        },
+        {
+          "type": "literal",
+          "value": "macacos"
+        },
+        {
+          "type": "literal",
+          "value": "macacas"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-hindi-targeted",
+      "pack": "global_racial",
+      "language": "Hindi / Urdu / Gujarati",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "habshi"
+        },
+        {
+          "type": "literal",
+          "value": "habsi"
+        },
+        {
+          "type": "literal",
+          "value": "हब्शी"
+        },
+        {
+          "type": "literal",
+          "value": "हबशी"
+        },
+        {
+          "type": "literal",
+          "value": "حبشی"
+        },
+        {
+          "type": "literal",
+          "value": "હબશી"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-middle-eastern-german-targeted",
+      "pack": "global_racial",
+      "language": "German",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "kanake"
+        },
+        {
+          "type": "literal",
+          "value": "kanaken"
+        },
+        {
+          "type": "literal",
+          "value": "kanacke"
+        },
+        {
+          "type": "literal",
+          "value": "kanak"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "racial-black-arabic-vocative",
+      "pack": "global_racial",
+      "language": "Arabic",
+      "mechanism": "contextual_signal",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "literal",
+          "value": "يا عبيد"
+        }
+      ],
+      "safeExample": null
+    },
+    {
+      "id": "au-fool-labels",
+      "pack": "australian",
+      "language": "English / contextual",
+      "mechanism": "personal_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "drongos?|galahs?|dills?|drop\\s*kicks?|ratbags?"
+        }
+      ],
+      "safeExample": "A galah landed beside the oval; the player practised a drop kick."
+    },
+    {
+      "id": "au-contempt-labels",
+      "pack": "australian",
+      "language": "English / contextual",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "flogs?|grubs?|dead\\s*shits?"
+        }
+      ],
+      "safeExample": "The gardener found a grub; the club will flog the old merchandise."
+    },
+    {
+      "id": "au-emotion-taunt",
+      "pack": "australian",
+      "language": "English / contextual",
+      "mechanism": "emotional_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "sooks?|sook(?:y|ier|iest)|whingers?"
+        }
+      ],
+      "safeExample": "I had a sook after the result and then moved on."
+    },
+    {
+      "id": "au-class-ridicule",
+      "pack": "australian",
+      "language": "English / contextual",
+      "mechanism": "class_based_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "bogans?"
+        }
+      ],
+      "safeExample": "She proudly describes herself as a cashed-up bogan."
+    },
+    {
+      "id": "au-cooker-label",
+      "pack": "australian",
+      "language": "English / contextual",
+      "mechanism": "belief_based_ridicule",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "cookers?"
+        }
+      ],
+      "safeExample": "Put the rice in the cooker before the match."
+    },
+    {
+      "id": "au-strong-insult",
+      "pack": "australian",
+      "language": "English / contextual",
+      "mechanism": "strong_personal_abuse",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "fuck\\s*wits?|dick\\s*heads?"
+        }
+      ],
+      "safeExample": "The dictionary labels ‘fuckwit’ as offensive Australian slang."
+    },
+    {
+      "id": "au-pull-head-in",
+      "pack": "australian",
+      "language": "English / contextual",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "pull\\s+(?:your|ya)\\s+head\\s+in"
+        }
+      ],
+      "safeExample": "The coach explained what ‘pull your head in’ means in Australian English."
+    },
+    {
+      "id": "cz-personal-labels",
+      "pack": "czech_baltic",
+      "language": "Czech · West Slavic",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "blb(?:ec|ce|ci)|debil(?:e|ka|ko|i)?|kreten(?:e|i)?|hajzl(?:e|i)?|zmrd(?:e|i)?|curak(?:u|i)?|kokot(?:e|i)?|srac(?:i)?"
+        }
+      ],
+      "safeExample": "Slovo ‘blbec’ je ve slovníku označeno jako urážka."
+    },
+    {
+      "id": "cz-sexualised-target",
+      "pack": "czech_baltic",
+      "language": "Czech · West Slavic",
+      "mechanism": "sexualised_misogyny",
+      "outcome": "block",
+      "untargetedOutcome": "warning",
+      "mode": "sexualised",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "pica|kurva"
+        }
+      ],
+      "safeExample": "Lingvista vysvětluje význam slova ‘kurva’."
+    },
+    {
+      "id": "cz-dismissal",
+      "pack": "czech_baltic",
+      "language": "Czech · West Slavic",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "drz\\s+hubu|tahni\\s+do\\s+prdele"
+        }
+      ],
+      "safeExample": "Článek překládá frázi ‘drž hubu’."
+    },
+    {
+      "id": "cz-death-wish",
+      "pack": "czech_baltic",
+      "language": "Czech · West Slavic",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "chcipni"
+        }
+      ],
+      "safeExample": "Slovo ‘chcípni’ je uvedeno pouze jako překladový příklad."
+    },
+    {
+      "id": "cz-identity-slurs",
+      "pack": "czech_baltic",
+      "language": "Czech · West Slavic",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "buzn(?:a|o|y)|cigos(?:i|e)?|negr(?:e|i)?"
+        }
+      ],
+      "safeExample": "Výzkumník cituje urážlivé slovo v odborné analýze."
+    },
+    {
+      "id": "lt-personal-labels",
+      "pack": "czech_baltic",
+      "language": "Lithuanian · Baltic",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "debil(?:as|e|ai|u)|durn(?:ius|iau|iai)|idiot(?:as|e|ai)|loch(?:as|e|ai)|gaid(?:ys|y|ziai)"
+        }
+      ],
+      "safeExample": "Gaidys gieda kieme. (The rooster crows in the yard.)"
+    },
+    {
+      "id": "lt-dismissal",
+      "pack": "czech_baltic",
+      "language": "Lithuanian · Baltic",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "eik\\s+sikt"
+        }
+      ],
+      "safeExample": "Žodynas paaiškina frazę ‘eik šikt’."
+    },
+    {
+      "id": "lt-homophobic-slur",
+      "pack": "czech_baltic",
+      "language": "Lithuanian · Baltic",
+      "mechanism": "homophobic_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "p[yi]der(?:as|e|ai)"
+        }
+      ],
+      "safeExample": "Tyrimas analizuoja homofobinį žodį kaip duomenų pavyzdį."
+    },
+    {
+      "id": "lv-personal-labels",
+      "pack": "czech_baltic",
+      "language": "Latvian · Baltic",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "stulben(?:is|e|i)|loh(?:s|u|i)|idiot(?:s|e|i)|debil(?:s|ais|a|i)"
+        }
+      ],
+      "safeExample": "Vārdnīca skaidro vārdu ‘stulbenis’."
+    },
+    {
+      "id": "lv-sexualised-target",
+      "pack": "czech_baltic",
+      "language": "Latvian · Baltic",
+      "mechanism": "sexualised_misogyny",
+      "outcome": "block",
+      "untargetedOutcome": "warning",
+      "mode": "sexualised",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mauk(?:a|as|u)"
+        }
+      ],
+      "safeExample": "Pētnieks apspriež vārda ‘mauka’ lietojumu."
+    },
+    {
+      "id": "lv-dismissal",
+      "pack": "czech_baltic",
+      "language": "Latvian · Baltic",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ej\\s+dirst"
+        }
+      ],
+      "safeExample": "Vārdnīca tulko frāzi ‘ej dirst’."
+    },
+    {
+      "id": "lv-homophobic-slur",
+      "pack": "czech_baltic",
+      "language": "Latvian · Baltic",
+      "mechanism": "homophobic_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "pidar(?:s|i|u)"
+        }
+      ],
+      "safeExample": "Pētījums citē homofobisku apzīmējumu analīzes nolūkā."
+    },
+    {
+      "id": "et-personal-labels",
+      "pack": "czech_baltic",
+      "language": "Estonian · Finnic (Baltic region)",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "loll(?:id|i)?|jobu(?:d)?|idioot(?:i|id)?|debiilik(?:u|ud)?|sitapea(?:d)?|vardjas(?:e|ed)?"
+        }
+      ],
+      "safeExample": "See mõte on loll. (That idea is stupid.)"
+    },
+    {
+      "id": "et-dismissal",
+      "pack": "czech_baltic",
+      "language": "Estonian · Finnic (Baltic region)",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mine\\s+perss?e"
+        }
+      ],
+      "safeExample": "Sõnaraamat selgitab väljendit ‘mine persse’."
+    },
+    {
+      "id": "et-sexualised-target",
+      "pack": "czech_baltic",
+      "language": "Estonian · Finnic (Baltic region)",
+      "mechanism": "sexualised_misogyny",
+      "outcome": "block",
+      "untargetedOutcome": "warning",
+      "mode": "sexualised",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "hoor(?:a|ad|aks)?"
+        }
+      ],
+      "safeExample": "Keeleteadlane arutab sõna ‘hoor’ ajalugu."
+    },
+    {
+      "id": "et-identity-slurs",
+      "pack": "czech_baltic",
+      "language": "Estonian · Finnic (Baltic region)",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": null,
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "tibla(?:d)?|pede(?:d)?"
+        }
+      ],
+      "safeExample": "Uurimus käsitleb solvavat sõna ajaloolises kontekstis."
+    },
+    {
+      "id": "es-personal-labels",
+      "pack": "western_european",
+      "language": "Spanish",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "tu|usted|vos|eres|es|jugador|jugadora",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "idiot(?:a|as)|imbecil(?:es)?|inutil(?:es)?|payas(?:o|a|os|as)"
+        }
+      ],
+      "safeExample": "La palabra ‘idiota’ aparece en el diccionario."
+    },
+    {
+      "id": "es-dismissal",
+      "pack": "western_european",
+      "language": "Spanish",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "tu|usted|vos",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "vete\\s+a\\s+la\\s+mierda"
+        }
+      ],
+      "safeExample": "El artículo traduce la frase para un estudio."
+    },
+    {
+      "id": "es-family-abuse",
+      "pack": "western_european",
+      "language": "Spanish",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "tu|usted|vos|eres|jugador|jugadora",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "hij[oa]\\s+de\\s+put[ao]"
+        }
+      ],
+      "safeExample": "El estudio analiza un insulto familiar sin dirigirlo a nadie."
+    },
+    {
+      "id": "es-death-wish",
+      "pack": "western_european",
+      "language": "Spanish",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "te|tu|usted",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ojala\\s+(?:que\\s+)?te\\s+mueras"
+        }
+      ],
+      "safeExample": "La política cita la frase como ejemplo prohibido."
+    },
+    {
+      "id": "fr-personal-labels",
+      "pack": "western_european",
+      "language": "French",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "tu|vous|toi|es|etes|joueur|joueuse",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "idiot(?:e|s|es)?|imbecile(?:s)?|debile(?:s)?|minable(?:s)?"
+        }
+      ],
+      "safeExample": "Le mot ‘idiot’ est étudié dans le dictionnaire."
+    },
+    {
+      "id": "fr-dismissal",
+      "pack": "western_european",
+      "language": "French",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "tu|toi|vous",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "va\\s+te\\s+faire\\s+foutre"
+        }
+      ],
+      "safeExample": "Le linguiste traduit cette expression."
+    },
+    {
+      "id": "fr-family-abuse",
+      "pack": "western_european",
+      "language": "French",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "tu|vous|toi|es|etes|joueur|joueuse",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "fils\\s+de\\s+pute"
+        }
+      ],
+      "safeExample": "La recherche examine une insulte familiale citée."
+    },
+    {
+      "id": "fr-death-wish",
+      "pack": "western_european",
+      "language": "French",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "tu|toi|vous",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "va\\s+crever|crever\\s+toi"
+        }
+      ],
+      "safeExample": "La règle cite l'expression comme exemple interdit."
+    },
+    {
+      "id": "de-personal-labels",
+      "pack": "western_european",
+      "language": "German",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "du|sie|ihr|bist|seid|spieler|spielerin",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "idiot(?:en)?|trottel|versager|arschloch"
+        }
+      ],
+      "safeExample": "Das Wörterbuch erklärt das Wort ‘Idiot’."
+    },
+    {
+      "id": "de-dismissal",
+      "pack": "western_european",
+      "language": "German",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "du|dich|ihr|sie",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "verpiss\\s+dich"
+        }
+      ],
+      "safeExample": "Der Artikel übersetzt die Redewendung."
+    },
+    {
+      "id": "de-family-abuse",
+      "pack": "western_european",
+      "language": "German",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "du|sie|ihr|bist|seid|spieler|spielerin",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "hurensohn"
+        }
+      ],
+      "safeExample": "Die Studie untersucht ein zitiertes Schimpfwort."
+    },
+    {
+      "id": "de-death-wish",
+      "pack": "western_european",
+      "language": "German",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "du|sie|ihr",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "stirb"
+        }
+      ],
+      "safeExample": "Die Richtlinie nennt ‘stirb’ als verbotenes Beispiel."
+    },
+    {
+      "id": "it-personal-labels",
+      "pack": "western_european",
+      "language": "Italian",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "tu|lei|sei|siete|giocatore|giocatrice",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "idiot(?:a|i|e)|imbecill(?:e|i)|incapac(?:e|i)|pagliacci(?:o|a|i|e)"
+        }
+      ],
+      "safeExample": "Il dizionario spiega la parola ‘idiota’."
+    },
+    {
+      "id": "it-dismissal",
+      "pack": "western_european",
+      "language": "Italian",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "tu|lei|voi",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "vai\\s+a\\s+fanculo|vaffanculo"
+        }
+      ],
+      "safeExample": "Il linguista traduce l'espressione."
+    },
+    {
+      "id": "it-family-abuse",
+      "pack": "western_european",
+      "language": "Italian",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "tu|lei|sei|siete|giocatore|giocatrice",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "figli[oa]\\s+di\\s+puttana"
+        }
+      ],
+      "safeExample": "La ricerca analizza un insulto familiare citato."
+    },
+    {
+      "id": "it-death-wish",
+      "pack": "western_european",
+      "language": "Italian",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "tu|lei|voi",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "muori"
+        }
+      ],
+      "safeExample": "La policy cita ‘muori’ come esempio vietato."
+    },
+    {
+      "id": "pt-personal-labels",
+      "pack": "western_european",
+      "language": "Portuguese",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "tu|voce|voces|es|e|jogador|jogadora",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "idiot(?:a|as)|imbecil(?:is|s)?|inutil(?:eis|es)?|palhac(?:o|a|os|as)"
+        }
+      ],
+      "safeExample": "O dicionário explica a palavra ‘idiota’."
+    },
+    {
+      "id": "pt-dismissal",
+      "pack": "western_european",
+      "language": "Portuguese",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "tu|voce|voces",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "vai\\s+tomar\\s+no\\s+cu"
+        }
+      ],
+      "safeExample": "O artigo traduz a expressão para estudo."
+    },
+    {
+      "id": "pt-family-abuse",
+      "pack": "western_european",
+      "language": "Portuguese",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "tu|voce|voces|es|e|jogador|jogadora",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "filh[oa]\\s+d[ao]\\s+put[ao]"
+        }
+      ],
+      "safeExample": "A pesquisa analisa um insulto familiar citado."
+    },
+    {
+      "id": "pt-death-wish",
+      "pack": "western_european",
+      "language": "Portuguese",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "tu|voce|voces",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "morre"
+        }
+      ],
+      "safeExample": "A política cita ‘morre’ como exemplo proibido."
+    },
+    {
+      "id": "nl-personal-labels",
+      "pack": "western_european",
+      "language": "Dutch",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "jij|je|u|bent|speler|speelster",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "idioot|sukkel|loser|klootzak"
+        }
+      ],
+      "safeExample": "Het woordenboek legt het woord ‘idioot’ uit."
+    },
+    {
+      "id": "nl-dismissal",
+      "pack": "western_european",
+      "language": "Dutch",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "jij|je|u",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "rot\\s+op"
+        }
+      ],
+      "safeExample": "De taalkundige vertaalt de uitdrukking."
+    },
+    {
+      "id": "nl-family-abuse",
+      "pack": "western_european",
+      "language": "Dutch",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "jij|je|u|bent|speler|speelster",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "hoerenzoon"
+        }
+      ],
+      "safeExample": "Het onderzoek bespreekt een geciteerd scheldwoord."
+    },
+    {
+      "id": "nl-death-wish",
+      "pack": "western_european",
+      "language": "Dutch",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "jij|je|u",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "sterf"
+        }
+      ],
+      "safeExample": "Het beleid citeert ‘sterf’ als verboden voorbeeld."
+    },
+    {
+      "id": "ar-personal",
+      "pack": "priority_global",
+      "language": "Arabic",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "يا|انت|انتي|هو|هي|لاعب|لاعبة",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "يا\\s+(?:حمار|غبي)|انت\\s+غبي"
+        }
+      ],
+      "safeExample": "يشرح القاموس كلمة غبي كمثال لغوي."
+    },
+    {
+      "id": "ar-dismissal",
+      "pack": "priority_global",
+      "language": "Arabic",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "انت|انتي|يا",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "انقلع|اغرب\\s+عن\\s+وجهي"
+        }
+      ],
+      "safeExample": "يترجم البحث عبارة انقلع في سياق لغوي."
+    },
+    {
+      "id": "ar-family",
+      "pack": "priority_global",
+      "language": "Arabic",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "يا|انت|هو|لاعب",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ابن\\s+(?:الكلب|العاهر(?:ة|ه))"
+        }
+      ],
+      "safeExample": "يناقش البحث شتيمة عائلية دون توجيهها إلى شخص."
+    },
+    {
+      "id": "ar-death",
+      "pack": "priority_global",
+      "language": "Arabic",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "يا|انت|انتي",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "موت\\s+يا"
+        }
+      ],
+      "safeExample": "تذكر السياسة العبارة كمثال محظور."
+    },
+    {
+      "id": "ar-identity",
+      "pack": "priority_global",
+      "language": "Arabic",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "يا|انت|هو",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "يا\\s+شاذ"
+        }
+      ],
+      "safeExample": "يحلل الباحث المصطلح في دراسة عن خطاب الكراهية."
+    },
+    {
+      "id": "ru-personal",
+      "pack": "priority_global",
+      "language": "Russian",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ты|он|она|игрок|спортсмен|спортсменка",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:ты|он|она)\\s+(?:идиот|придурок|дебил)"
+        }
+      ],
+      "safeExample": "Словарь объясняет слово идиот как оскорбление."
+    },
+    {
+      "id": "ru-dismissal",
+      "pack": "priority_global",
+      "language": "Russian",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "ты|вы",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "пош(?:е|о)л(?:а)?\\s+на\\s+хуи"
+        }
+      ],
+      "safeExample": "Исследование переводит эту фразу как языковой пример."
+    },
+    {
+      "id": "ru-family",
+      "pack": "priority_global",
+      "language": "Russian",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ты|он|игрок",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "сын\\s+шлюхи"
+        }
+      ],
+      "safeExample": "Лингвист цитирует семейное оскорбление в исследовании."
+    },
+    {
+      "id": "ru-death",
+      "pack": "priority_global",
+      "language": "Russian",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ты|вы",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "сдохни"
+        }
+      ],
+      "safeExample": "Правило приводит слово сдохни только как запрещённый пример."
+    },
+    {
+      "id": "ru-identity",
+      "pack": "priority_global",
+      "language": "Russian",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "ты|он|она|они|игрок|спортсмен",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "чурк(?:а|и|у|ои)"
+        }
+      ],
+      "safeExample": "Словарь также описывает буквальное значение слова."
+    },
+    {
+      "id": "uk-personal",
+      "pack": "priority_global",
+      "language": "Ukrainian",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ти|він|вона|гравець|спортсмен|спортсменка",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:ти|він|вона)\\s+(?:ідіот|дурень|дебіл)"
+        }
+      ],
+      "safeExample": "Словник пояснює слово ідіот як образливе."
+    },
+    {
+      "id": "uk-dismissal",
+      "pack": "priority_global",
+      "language": "Ukrainian",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "ти|ви",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "іди\\s+нахуи"
+        }
+      ],
+      "safeExample": "Дослідження перекладає цю фразу як мовний приклад."
+    },
+    {
+      "id": "uk-family",
+      "pack": "priority_global",
+      "language": "Ukrainian",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ти|він|гравець",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "син\\s+пові{1,2}"
+        }
+      ],
+      "safeExample": "Лінгвіст цитує сімейну образу для дослідження."
+    },
+    {
+      "id": "uk-death",
+      "pack": "priority_global",
+      "language": "Ukrainian",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ти|ви",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "здохни"
+        }
+      ],
+      "safeExample": "Політика наводить це слово лише як заборонений приклад."
+    },
+    {
+      "id": "uk-identity",
+      "pack": "priority_global",
+      "language": "Ukrainian",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "ти|він|вона|вони|гравець",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "педик(?:и|а|ом)?"
+        }
+      ],
+      "safeExample": "Дослідження аналізує гомофобну лексику."
+    },
+    {
+      "id": "zh-personal",
+      "pack": "priority_global",
+      "language": "Mandarin Chinese",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "你|他|她|球员|运动员",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "你(?:就)?是(?:个)?(?:白痴|傻逼)"
+        }
+      ],
+      "safeExample": "词典把白痴列为侮辱性词语。"
+    },
+    {
+      "id": "zh-dismissal",
+      "pack": "priority_global",
+      "language": "Mandarin Chinese",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "你",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "滚开|滚蛋"
+        }
+      ],
+      "safeExample": "研究把滚开作为翻译例子。"
+    },
+    {
+      "id": "zh-family",
+      "pack": "priority_global",
+      "language": "Mandarin Chinese",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "你",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "操你妈|草你妈"
+        }
+      ],
+      "safeExample": "语言研究引用该家庭侮辱语。"
+    },
+    {
+      "id": "zh-death",
+      "pack": "priority_global",
+      "language": "Mandarin Chinese",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "你",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "去死"
+        }
+      ],
+      "safeExample": "政策把去死列为禁止示例。"
+    },
+    {
+      "id": "zh-identity",
+      "pack": "priority_global",
+      "language": "Mandarin Chinese",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "你|他|她|他们|日本人|中国人",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "支那(?:人)?"
+        }
+      ],
+      "safeExample": "历史研究解释支那一词的侮辱性。"
+    },
+    {
+      "id": "ja-personal",
+      "pack": "priority_global",
+      "language": "Japanese",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "お前|あなた|彼|彼女|選手",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:お前|あなた)は(?:馬鹿|バカ|アホ)"
+        }
+      ],
+      "safeExample": "辞書はバカという言葉を侮辱語として説明する。"
+    },
+    {
+      "id": "ja-dismissal",
+      "pack": "priority_global",
+      "language": "Japanese",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "お前|あなた",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "消えろ|失せろ"
+        }
+      ],
+      "safeExample": "研究は消えろという表現を翻訳例として扱う。"
+    },
+    {
+      "id": "ja-sexualised",
+      "pack": "priority_global",
+      "language": "Japanese",
+      "mechanism": "sexualised_misogyny",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "お前|あなた|この女",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:お前|この)(?:は)?売女"
+        }
+      ],
+      "safeExample": "歴史研究は売女という語の用法を分析する。"
+    },
+    {
+      "id": "ja-death",
+      "pack": "priority_global",
+      "language": "Japanese",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "お前|あなた",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "死ね"
+        }
+      ],
+      "safeExample": "方針は死ねを禁止例として引用する。"
+    },
+    {
+      "id": "ja-identity",
+      "pack": "priority_global",
+      "language": "Japanese",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "お前|あなた|彼|彼女|あいつ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "チョン"
+        }
+      ],
+      "safeExample": "研究はチョンという差別語の歴史を説明する。"
+    },
+    {
+      "id": "ko-personal",
+      "pack": "priority_global",
+      "language": "Korean",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "너|당신|그|그녀|선수",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "너(?:는|가)?\\s*(?:바보|병신)"
+        }
+      ],
+      "safeExample": "사전은 바보라는 단어를 모욕 표현으로 설명한다."
+    },
+    {
+      "id": "ko-dismissal",
+      "pack": "priority_global",
+      "language": "Korean",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "너|당신",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "꺼져"
+        }
+      ],
+      "safeExample": "연구는 꺼져라는 표현을 번역 예시로 사용한다."
+    },
+    {
+      "id": "ko-family",
+      "pack": "priority_global",
+      "language": "Korean",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "너|니|네",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:니\\s*애미|네\\s*엄마)\\s*창녀"
+        }
+      ],
+      "safeExample": "언어 연구는 가족 모욕 표현을 인용한다."
+    },
+    {
+      "id": "ko-death",
+      "pack": "priority_global",
+      "language": "Korean",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "너|당신",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "죽어"
+        }
+      ],
+      "safeExample": "정책은 죽어를 금지된 예시로 제시한다."
+    },
+    {
+      "id": "ko-identity",
+      "pack": "priority_global",
+      "language": "Korean",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "너|당신|그|그녀|중국인",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "짱깨"
+        }
+      ],
+      "safeExample": "연구는 짱깨라는 차별어를 분석한다."
+    },
+    {
+      "id": "tr-personal",
+      "pack": "priority_global",
+      "language": "Turkish",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "sen|o|oyuncu|sporcu",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "sen\\s+(?:aptals[ıi]n|salaks[ıi]n)|gerizekal[ıi]s[ıi]n"
+        }
+      ],
+      "safeExample": "Sözlük aptal kelimesini hakaret olarak açıklar."
+    },
+    {
+      "id": "tr-dismissal",
+      "pack": "priority_global",
+      "language": "Turkish",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "sen|siz",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "siktir\\s+git"
+        }
+      ],
+      "safeExample": "Araştırma siktir git ifadesini çeviri örneği olarak inceler."
+    },
+    {
+      "id": "tr-family",
+      "pack": "priority_global",
+      "language": "Turkish",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "sen|o|oyuncu",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "orospu\\s+cocugu"
+        }
+      ],
+      "safeExample": "Dilbilimci aileye yönelik hakareti araştırmada alıntılar."
+    },
+    {
+      "id": "tr-death",
+      "pack": "priority_global",
+      "language": "Turkish",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "sen|siz",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "geber"
+        }
+      ],
+      "safeExample": "Politika geber sözcüğünü yasaklı örnek olarak verir."
+    },
+    {
+      "id": "tr-identity",
+      "pack": "priority_global",
+      "language": "Turkish",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "sen|o|onlar|oyuncu",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ibne(?:sin|dir|ler)?"
+        }
+      ],
+      "safeExample": "Araştırma ibne kelimesinin hakaret kullanımını analiz eder."
+    },
+    {
+      "id": "el-personal",
+      "pack": "priority_global",
+      "language": "Greek",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "εσυ|εισαι|αυτος|αυτη|παικτης|αθλητης",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "εισαι\\s+(?:ηλιθιος|ηλιθια|βλακας|βλακα|μαλακας)"
+        }
+      ],
+      "safeExample": "Το λεξικό εξηγεί τη λέξη ηλίθιος ως προσβολή."
+    },
+    {
+      "id": "el-dismissal",
+      "pack": "priority_global",
+      "language": "Greek",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "εσυ|σου",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "αντε\\s+γαμησου"
+        }
+      ],
+      "safeExample": "Η έρευνα μεταφράζει τη φράση ως γλωσσικό παράδειγμα."
+    },
+    {
+      "id": "el-family",
+      "pack": "priority_global",
+      "language": "Greek",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "εσυ|αυτος|παικτης",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "γιε\\s+της\\s+πουτανας"
+        }
+      ],
+      "safeExample": "Ο γλωσσολόγος παραθέτει οικογενειακή προσβολή σε μελέτη."
+    },
+    {
+      "id": "el-death",
+      "pack": "priority_global",
+      "language": "Greek",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "εσυ|σου",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ψοφα"
+        }
+      ],
+      "safeExample": "Η πολιτική αναφέρει τη λέξη μόνο ως απαγορευμένο παράδειγμα."
+    },
+    {
+      "id": "el-identity",
+      "pack": "priority_global",
+      "language": "Greek",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "εσυ|αυτος|αυτη|αυτοι|παικτης",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "γυφτ(?:ος|ε|οι|ων)"
+        }
+      ],
+      "safeExample": "Η ιστορική μελέτη εξηγεί τη χρήση του όρου."
+    },
+    {
+      "id": "ro-personal",
+      "pack": "priority_global",
+      "language": "Romanian",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "tu|esti|el|ea|jucator|sportiv|sportiva",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "esti\\s+(?:prost|proasta|idiot|idioata)"
+        }
+      ],
+      "safeExample": "Dicționarul explică termenul idiot ca insultă."
+    },
+    {
+      "id": "ro-dismissal",
+      "pack": "priority_global",
+      "language": "Romanian",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "tu|voi",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "du\\s+te\\s+dracului"
+        }
+      ],
+      "safeExample": "Studiul traduce expresia ca exemplu lingvistic."
+    },
+    {
+      "id": "ro-family",
+      "pack": "priority_global",
+      "language": "Romanian",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "tu|el|jucator",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "fiu\\s+de\\s+curva"
+        }
+      ],
+      "safeExample": "Cercetarea citează insulta familială fără a o adresa cuiva."
+    },
+    {
+      "id": "ro-death",
+      "pack": "priority_global",
+      "language": "Romanian",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "tu|voi",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mori"
+        }
+      ],
+      "safeExample": "Politica menționează cuvântul mori ca exemplu interzis."
+    },
+    {
+      "id": "ro-identity",
+      "pack": "priority_global",
+      "language": "Romanian",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "tu|el|ei|jucator",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "poponar(?:ule|i)?"
+        }
+      ],
+      "safeExample": "Studiul analizează termenul homofob în context istoric."
+    },
+    {
+      "id": "hu-personal",
+      "pack": "priority_global",
+      "language": "Hungarian",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "te|vagy|o|jatekos|sportolo",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:hulye|idiota)\\s+vagy"
+        }
+      ],
+      "safeExample": "A szótár az idióta szót sértésként magyarázza."
+    },
+    {
+      "id": "hu-dismissal",
+      "pack": "priority_global",
+      "language": "Hungarian",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "te|ti",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "menj\\s+a\\s+picsaba"
+        }
+      ],
+      "safeExample": "A kutatás nyelvi példaként fordítja le a kifejezést."
+    },
+    {
+      "id": "hu-family",
+      "pack": "priority_global",
+      "language": "Hungarian",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "te|o|jatekos",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "kurva\\s+anyad"
+        }
+      ],
+      "safeExample": "A nyelvész kutatási példaként idézi a családi sértést."
+    },
+    {
+      "id": "hu-death",
+      "pack": "priority_global",
+      "language": "Hungarian",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "te|ti",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "dogolj\\s+meg"
+        }
+      ],
+      "safeExample": "A szabály csak tiltott példaként említi a kifejezést."
+    },
+    {
+      "id": "hu-identity",
+      "pack": "priority_global",
+      "language": "Hungarian",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "te|o|ok|jatekos",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "buzi"
+        }
+      ],
+      "safeExample": "A tanulmány a buzi szó sértő használatát elemzi."
+    },
+    {
+      "id": "sk-personal",
+      "pack": "priority_global",
+      "language": "Slovak",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ty|on|ona|hrac|sportovec|sportovkyna",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:ty\\s+)?si\\s+(?:idiot|debil|hlupak)"
+        }
+      ],
+      "safeExample": "Slovník vysvetľuje slovo idiot ako urážku."
+    },
+    {
+      "id": "sk-dismissal",
+      "pack": "priority_global",
+      "language": "Slovak",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "ty|vy",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "chod\\s+do\\s+riti"
+        }
+      ],
+      "safeExample": "Výskum prekladá frázu ako jazykový príklad."
+    },
+    {
+      "id": "sk-family",
+      "pack": "priority_global",
+      "language": "Slovak",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ty|on|hrac",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "syn\\s+kurvy"
+        }
+      ],
+      "safeExample": "Jazykovedec cituje rodinnú urážku vo výskume."
+    },
+    {
+      "id": "sk-death",
+      "pack": "priority_global",
+      "language": "Slovak",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ty|vy",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "zdochni"
+        }
+      ],
+      "safeExample": "Pravidlo uvádza slovo iba ako zakázaný príklad."
+    },
+    {
+      "id": "sk-identity",
+      "pack": "priority_global",
+      "language": "Slovak",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "ty|on|oni|hrac",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "buzerant(?:i|a|om)?"
+        }
+      ],
+      "safeExample": "Štúdia analyzuje homofóbny výraz v historickom kontexte."
+    },
+    {
+      "id": "bcs-personal",
+      "pack": "priority_global",
+      "language": "Serbian · Croatian · Bosnian",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ti|on|ona|igrac|sportista|ти|он|она|играч|спортиста",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:ti\\s+si|ти\\s+си)\\s+(?:idiot|budala|debil|kreten|идиот|будала|дебил|кретен)"
+        }
+      ],
+      "safeExample": "Rječnik objašnjava riječ idiot kao uvredu."
+    },
+    {
+      "id": "bcs-dismissal",
+      "pack": "priority_global",
+      "language": "Serbian · Croatian · Bosnian",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "ti|vi|ти|ви",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "odjebi|марш"
+        }
+      ],
+      "safeExample": "Istraživanje prevodi izraz kao jezički primjer."
+    },
+    {
+      "id": "bcs-family",
+      "pack": "priority_global",
+      "language": "Serbian · Croatian · Bosnian",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ti|tebi|ти|теби",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "jebem\\s+ti\\s+(?:mater|majku)|јебем\\s+ти\\s+(?:матер|мајку)"
+        }
+      ],
+      "safeExample": "Lingvista citira porodičnu uvredu u istraživanju."
+    },
+    {
+      "id": "bcs-death",
+      "pack": "priority_global",
+      "language": "Serbian · Croatian · Bosnian",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ti|vi|ти|ви",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "crkni|цркни"
+        }
+      ],
+      "safeExample": "Pravilo navodi riječ samo kao zabranjeni primjer."
+    },
+    {
+      "id": "bcs-identity",
+      "pack": "priority_global",
+      "language": "Serbian · Croatian · Bosnian",
+      "mechanism": "identity_slur",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "ti|on|oni|igrac|ти|он|они|играч",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "peder(?:u|i|a)?|педер(?:у|и|а)?"
+        }
+      ],
+      "safeExample": "Studija analizira homofobni izraz u istorijskom kontekstu."
+    },
+    {
+      "id": "bn-personal",
+      "pack": "next_wave",
+      "language": "Bengali · Romanised Bengali",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "তুমি|তুই|tumi|tui|খেলোয়াড়|kheloyar",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:তুমি|তুই)\\s+(?:বোকা|গাধা)|(?:tumi|tui)\\s+(?:boka|gadha)"
+        }
+      ],
+      "safeExample": "অভিধান বোকা শব্দটিকে অপমানজনক উদাহরণ হিসেবে ব্যাখ্যা করে।"
+    },
+    {
+      "id": "bn-dismissal",
+      "pack": "next_wave",
+      "language": "Bengali · Romanised Bengali",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "তুমি|তুই|tumi|tui",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "চুপ\\s*কর|chup\\s+koro?"
+        }
+      ],
+      "safeExample": "গবেষণাটি চুপ কর বাক্যাংশটি অনুবাদের উদাহরণ হিসেবে ব্যবহার করে।"
+    },
+    {
+      "id": "bn-family",
+      "pack": "next_wave",
+      "language": "Bengali · Romanised Bengali",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "তুমি|তুই|tumi|tui",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "মাদারচোদ|madar(?:chod|chud)"
+        }
+      ],
+      "safeExample": "গবেষণাটি পারিবারিক গালিটিকে ভাষাতাত্ত্বিক উদাহরণ হিসেবে উদ্ধৃত করে।"
+    },
+    {
+      "id": "bn-death",
+      "pack": "next_wave",
+      "language": "Bengali · Romanised Bengali",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "তুমি|তুই|tumi|tui",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "মরে\\s*যা|more\\s+ja"
+        }
+      ],
+      "safeExample": "নীতিটি বাক্যাংশটিকে নিষিদ্ধ উদাহরণ হিসেবে উল্লেখ করে।"
+    },
+    {
+      "id": "bn-animal",
+      "pack": "next_wave",
+      "language": "Bengali · Romanised Bengali",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "তুমি|তুই|tumi|tui",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:তুমি|তুই)\\s+(?:কুকুর|জানোয়ার)|(?:tumi|tui)\\s+(?:kukur|janowar)"
+        }
+      ],
+      "safeExample": "কুকুরটি পার্কে দৌড়াচ্ছে।"
+    },
+    {
+      "id": "fa-personal",
+      "pack": "next_wave",
+      "language": "Persian / Farsi",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "تو|شما|to|shoma|بازیکن",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "تو\\s+(?:احمقی|نادانی)|to\\s+(?:ahmaghi|nadani)"
+        }
+      ],
+      "safeExample": "فرهنگ واژه احمق را به عنوان توهین توضیح می‌دهد."
+    },
+    {
+      "id": "fa-dismissal",
+      "pack": "next_wave",
+      "language": "Persian / Farsi",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "تو|شما|to|shoma",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "گمشو|gomsho"
+        }
+      ],
+      "safeExample": "پژوهش عبارت گمشو را به عنوان نمونه ترجمه می‌کند."
+    },
+    {
+      "id": "fa-family",
+      "pack": "next_wave",
+      "language": "Persian / Farsi",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "تو|شما|to|shoma",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "مادرجنده|madarjendeh"
+        }
+      ],
+      "safeExample": "پژوهشگر توهین خانوادگی را فقط برای تحلیل زبانی نقل می‌کند."
+    },
+    {
+      "id": "fa-death",
+      "pack": "next_wave",
+      "language": "Persian / Farsi",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "تو|شما|to|shoma",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "بمیر|bemir"
+        }
+      ],
+      "safeExample": "سیاست واژه بمیر را به عنوان نمونه ممنوع ذکر می‌کند."
+    },
+    {
+      "id": "fa-animal",
+      "pack": "next_wave",
+      "language": "Persian / Farsi",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "تو|شما|to|shoma",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "تو\\s+(?:سگی|حیوانی)|to\\s+(?:sagi|heyvani)"
+        }
+      ],
+      "safeExample": "این حیوان در باغ‌وحش زندگی می‌کند."
+    },
+    {
+      "id": "he-personal",
+      "pack": "next_wave",
+      "language": "Hebrew",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "אתה|את|הוא|היא|שחקן|שחקנית",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:אתה|את)\\s+(?:אידיוט|אידיוטית|טיפש|טיפשה)"
+        }
+      ],
+      "safeExample": "המילון מסביר את המילה אידיוט כדוגמה פוגענית."
+    },
+    {
+      "id": "he-dismissal",
+      "pack": "next_wave",
+      "language": "Hebrew",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "אתה|את",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:לך|לכי)\\s+לעזאזל"
+        }
+      ],
+      "safeExample": "המחקר מתרגם את הביטוי לך לעזאזל כדוגמה לשונית."
+    },
+    {
+      "id": "he-family",
+      "pack": "next_wave",
+      "language": "Hebrew",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "אתה|את|הוא|היא|שחקן|שחקנית",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:בן|בת)\\s+זונה"
+        }
+      ],
+      "safeExample": "המחקר מצטט קללה משפחתית לצורך ניתוח בלבד."
+    },
+    {
+      "id": "he-death",
+      "pack": "next_wave",
+      "language": "Hebrew",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "אתה|את",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "תמותי?"
+        }
+      ],
+      "safeExample": "המדיניות מציגה את המילה כדוגמה אסורה בלבד."
+    },
+    {
+      "id": "he-animal",
+      "pack": "next_wave",
+      "language": "Hebrew",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "אתה|את",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:אתה|את)\\s+(?:כלב|חיה)"
+        }
+      ],
+      "safeExample": "הכלב רץ בפארק."
+    },
+    {
+      "id": "id-personal",
+      "pack": "next_wave",
+      "language": "Indonesian",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "kamu|anda|dia|pemain|atlet",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "kamu\\s+(?:bodoh|goblok|tolol)"
+        }
+      ],
+      "safeExample": "Kamus menjelaskan kata bodoh sebagai contoh penghinaan."
+    },
+    {
+      "id": "id-dismissal",
+      "pack": "next_wave",
+      "language": "Indonesian",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "kamu|anda",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "pergi\\s+sana|diam\\s+kamu"
+        }
+      ],
+      "safeExample": "Penelitian menerjemahkan frasa pergi sana sebagai contoh."
+    },
+    {
+      "id": "id-sexualised",
+      "pack": "next_wave",
+      "language": "Indonesian",
+      "mechanism": "sexualised_personal_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "lu|kamu|anda",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:ngentot|entot)\\s+(?:lu|kamu)"
+        }
+      ],
+      "safeExample": "Penelitian bahasa mengutip makian seksual untuk analisis."
+    },
+    {
+      "id": "id-death",
+      "pack": "next_wave",
+      "language": "Indonesian",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "kamu|anda|lu",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mati\\s+saja|mampus"
+        }
+      ],
+      "safeExample": "Kebijakan menyebut frasa itu hanya sebagai contoh terlarang."
+    },
+    {
+      "id": "id-animal",
+      "pack": "next_wave",
+      "language": "Indonesian",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "kamu|anda|lu",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "kamu\\s+(?:anjing|babi)|(?:anjing|babi)\\s+kamu"
+        }
+      ],
+      "safeExample": "Anjing itu bermain di taman."
+    },
+    {
+      "id": "ms-personal",
+      "pack": "next_wave",
+      "language": "Malay",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "kau|awak|anda|dia|pemain|atlet",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "kau\\s+(?:bodoh|bangang|bengap)"
+        }
+      ],
+      "safeExample": "Kamus menerangkan kata bodoh sebagai contoh penghinaan."
+    },
+    {
+      "id": "ms-dismissal",
+      "pack": "next_wave",
+      "language": "Malay",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "kau|awak|anda",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "diam\\s+lah|pergi\\s+sana"
+        }
+      ],
+      "safeExample": "Kajian menterjemah frasa diam lah sebagai contoh bahasa."
+    },
+    {
+      "id": "ms-family",
+      "pack": "next_wave",
+      "language": "Malay",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "kau|awak|anda",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "pukimak"
+        }
+      ],
+      "safeExample": "Kajian bahasa memetik makian keluarga untuk analisis."
+    },
+    {
+      "id": "ms-death",
+      "pack": "next_wave",
+      "language": "Malay",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "kau|awak|anda",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "pergi\\s+mampus|mati\\s+lah"
+        }
+      ],
+      "safeExample": "Dasar menyebut frasa itu sebagai contoh yang dilarang."
+    },
+    {
+      "id": "ms-animal",
+      "pack": "next_wave",
+      "language": "Malay",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "kau|awak|anda",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "kau\\s+(?:anjing|babi)|(?:anjing|babi)\\s+kau"
+        }
+      ],
+      "safeExample": "Anjing itu berlari di taman."
+    },
+    {
+      "id": "vi-personal",
+      "pack": "next_wave",
+      "language": "Vietnamese",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "may|ban|no|cau thu|van dong vien",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "may\\s+(?:ngu|dan)"
+        }
+      ],
+      "safeExample": "Từ điển giải thích từ ngu như một ví dụ xúc phạm."
+    },
+    {
+      "id": "vi-dismissal",
+      "pack": "next_wave",
+      "language": "Vietnamese",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "may|ban",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "cut\\s+di"
+        }
+      ],
+      "safeExample": "Nghiên cứu dịch cụm từ cút đi như một ví dụ ngôn ngữ."
+    },
+    {
+      "id": "vi-family",
+      "pack": "next_wave",
+      "language": "Vietnamese",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "may|ban",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "dit\\s+me\\s+may"
+        }
+      ],
+      "safeExample": "Nghiên cứu ngôn ngữ trích dẫn lời xúc phạm gia đình để phân tích."
+    },
+    {
+      "id": "vi-death",
+      "pack": "next_wave",
+      "language": "Vietnamese",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "may|ban",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "chet\\s+di"
+        }
+      ],
+      "safeExample": "Chính sách chỉ trích dẫn cụm từ này như ví dụ bị cấm."
+    },
+    {
+      "id": "vi-animal",
+      "pack": "next_wave",
+      "language": "Vietnamese",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "may|ban",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "do\\s+cho|may\\s+la\\s+cho"
+        }
+      ],
+      "safeExample": "Con chó đang chạy trong công viên."
+    },
+    {
+      "id": "th-personal",
+      "pack": "next_wave",
+      "language": "Thai",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "มึง|คุณ|เขา|นักกีฬา",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "มึง(?:มัน)?โง่"
+        }
+      ],
+      "safeExample": "พจนานุกรมอธิบายคำว่าโง่เป็นตัวอย่างคำดูหมิ่น"
+    },
+    {
+      "id": "th-dismissal",
+      "pack": "next_wave",
+      "language": "Thai",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "มึง|คุณ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ไปให้พ้น|หุบปาก"
+        }
+      ],
+      "safeExample": "งานวิจัยแปลคำว่าไปให้พ้นเป็นตัวอย่างทางภาษา"
+    },
+    {
+      "id": "th-family",
+      "pack": "next_wave",
+      "language": "Thai",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "มึง|คุณ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "เย็ดแม่มึง"
+        }
+      ],
+      "safeExample": "งานวิจัยภาษาอ้างคำด่าครอบครัวเพื่อการวิเคราะห์"
+    },
+    {
+      "id": "th-death",
+      "pack": "next_wave",
+      "language": "Thai",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "มึง|คุณ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ไปตายซะ|ตายซะ"
+        }
+      ],
+      "safeExample": "นโยบายยกวลีนี้เป็นตัวอย่างต้องห้ามเท่านั้น"
+    },
+    {
+      "id": "th-animal",
+      "pack": "next_wave",
+      "language": "Thai",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "มึง|คุณ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ไอ้ควาย|มึงเป็นควาย"
+        }
+      ],
+      "safeExample": "ควายกำลังกินหญ้าในทุ่ง"
+    },
+    {
+      "id": "tl-personal",
+      "pack": "next_wave",
+      "language": "Tagalog / Filipino",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ikaw|ka|mo|siya|manlalaro|atleta",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "(?:ang\\s+)?bobo\\s+mo|tanga\\s+ka"
+        }
+      ],
+      "safeExample": "Ipinaliliwanag ng diksyunaryo ang salitang bobo bilang mapanlait."
+    },
+    {
+      "id": "tl-dismissal",
+      "pack": "next_wave",
+      "language": "Tagalog / Filipino",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "ikaw|ka|mo",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "tumahimik\\s+ka|layuan\\s+mo\\s+ako"
+        }
+      ],
+      "safeExample": "Isinasalin ng pananaliksik ang pariralang tumahimik ka bilang halimbawa."
+    },
+    {
+      "id": "tl-family",
+      "pack": "next_wave",
+      "language": "Tagalog / Filipino",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ikaw|ka|mo",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "putang\\s+ina\\s+mo|tangina\\s+mo"
+        }
+      ],
+      "safeExample": "Sinisipi ng pag-aaral ang mura sa pamilya para sa pagsusuri."
+    },
+    {
+      "id": "tl-death",
+      "pack": "next_wave",
+      "language": "Tagalog / Filipino",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ikaw|ka",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mamatay\\s+ka"
+        }
+      ],
+      "safeExample": "Binabanggit ng patakaran ang parirala bilang ipinagbabawal na halimbawa."
+    },
+    {
+      "id": "tl-animal",
+      "pack": "next_wave",
+      "language": "Tagalog / Filipino",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ikaw|ka",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "hayop\\s+ka"
+        }
+      ],
+      "safeExample": "Ang hayop ay nasa kagubatan."
+    },
+    {
+      "id": "sw-personal",
+      "pack": "next_wave",
+      "language": "Swahili",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "wewe|yeye|mchezaji|mwanariadha",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "wewe\\s+ni\\s+(?:mjinga|mpumbavu)"
+        }
+      ],
+      "safeExample": "Kamusi inaeleza neno mjinga kama mfano wa tusi."
+    },
+    {
+      "id": "sw-dismissal",
+      "pack": "next_wave",
+      "language": "Swahili",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "wewe|yeye",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "nyamaza|nenda\\s+zako"
+        }
+      ],
+      "safeExample": "Utafiti unatafsiri neno nyamaza kama mfano wa lugha."
+    },
+    {
+      "id": "sw-family",
+      "pack": "next_wave",
+      "language": "Swahili",
+      "mechanism": "severe_family_degradation",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "wewe|yeye|mchezaji",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mwana\\s+wa\\s+mbwa"
+        }
+      ],
+      "safeExample": "Utafiti wa lugha unanukuu tusi la familia kwa uchambuzi."
+    },
+    {
+      "id": "sw-death",
+      "pack": "next_wave",
+      "language": "Swahili",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "wewe|yeye",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "nenda\\s+ukafe|kufa\\s+wewe"
+        }
+      ],
+      "safeExample": "Sera inataja kifungu hiki kama mfano uliopigwa marufuku."
+    },
+    {
+      "id": "sw-animal",
+      "pack": "next_wave",
+      "language": "Swahili",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "wewe|yeye",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "wewe\\s+ni\\s+mnyama|mbwa\\s+wewe"
+        }
+      ],
+      "safeExample": "Mnyama huyo anaishi msituni."
+    },
+    {
+      "id": "am-personal",
+      "pack": "next_wave",
+      "language": "Amharic",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "አንተ|አንቺ|እሱ|እሷ|ተጫዋች",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "አንተ\\s+(?:ደደብ|ሞኝ)\\s+ነህ|አንቺ\\s+(?:ደደብ|ሞኝ)\\s+ነሽ"
+        }
+      ],
+      "safeExample": "መዝገበ ቃላት ደደብ የሚለውን ቃል እንደ ስድብ ያብራራል።"
+    },
+    {
+      "id": "am-dismissal",
+      "pack": "next_wave",
+      "language": "Amharic",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "አንተ|አንቺ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ዝም\\s+በል|ዝም\\s+በይ"
+        }
+      ],
+      "safeExample": "ጥናቱ ዝም በል የሚለውን ሐረግ እንደ ትርጉም ምሳሌ ይጠቀማል።"
+    },
+    {
+      "id": "am-family",
+      "pack": "next_wave",
+      "language": "Amharic",
+      "mechanism": "severe_family_degradation",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "targeted_prohibited",
+      "targets": "አንተ|አንቺ|እሱ|እሷ|ተጫዋች",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "የውሻ\\s+ልጅ"
+        }
+      ],
+      "safeExample": "የቋንቋ ጥናቱ የቤተሰብ ስድብን ለትንታኔ ይጠቅሳል።"
+    },
+    {
+      "id": "am-death",
+      "pack": "next_wave",
+      "language": "Amharic",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "አንተ|አንቺ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ሙት"
+        }
+      ],
+      "safeExample": "ፖሊሲው ቃሉን እንደ የተከለከለ ምሳሌ ብቻ ይጠቅሳል።"
+    },
+    {
+      "id": "am-animal",
+      "pack": "next_wave",
+      "language": "Amharic",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "አንተ|አንቺ",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "አንተ\\s+ውሻ\\s+ነህ|አንቺ\\s+ውሻ\\s+ነሽ"
+        }
+      ],
+      "safeExample": "ውሻው በመናፈሻው ውስጥ ይሮጣል።"
+    },
+    {
+      "id": "ta-personal",
+      "pack": "v412_language",
+      "language": "Tamil · Tanglish",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "நீ|நீங்கள்|அவன்|அவள்|வீரர்|nee|ni|avan|aval|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "முட்டாள்|mutt+a+l"
+        }
+      ],
+      "safeExample": "அகராதி முட்டாள் என்ற சொல்லை அவமதிப்பாக விளக்குகிறது."
+    },
+    {
+      "id": "ta-dismissal",
+      "pack": "v412_language",
+      "language": "Tamil · Tanglish",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "நீ|நீங்கள்|அவன்|அவள்|வீரர்|nee|ni|avan|aval|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "வாயை\\s*மூடு|vaaya?\\s+moodu"
+        }
+      ],
+      "safeExample": "அகராதி முட்டாள் என்ற சொல்லை அவமதிப்பாக விளக்குகிறது."
+    },
+    {
+      "id": "ta-severe",
+      "pack": "v412_language",
+      "language": "Tamil · Tanglish",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "நீ|நீங்கள்|அவன்|அவள்|வீரர்|nee|ni|avan|aval|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "தேவடியா\\s*மகனே|thevadiya\\s+magane"
+        }
+      ],
+      "safeExample": "அகராதி முட்டாள் என்ற சொல்லை அவமதிப்பாக விளக்குகிறது."
+    },
+    {
+      "id": "ta-death",
+      "pack": "v412_language",
+      "language": "Tamil · Tanglish",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "நீ|நீங்கள்|அவன்|அவள்|வீரர்|nee|ni|avan|aval|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "செத்து\\s*போ|seth+u\\s+po"
+        }
+      ],
+      "safeExample": "அகராதி முட்டாள் என்ற சொல்லை அவமதிப்பாக விளக்குகிறது."
+    },
+    {
+      "id": "ta-animal",
+      "pack": "v412_language",
+      "language": "Tamil · Tanglish",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "நீ|நீங்கள்|அவன்|அவள்|வீரர்|nee|ni|avan|aval|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "நாய்|naai"
+        }
+      ],
+      "safeExample": "நாய் பூங்காவில் ஓடுகிறது."
+    },
+    {
+      "id": "te-personal",
+      "pack": "v412_language",
+      "language": "Telugu · Tenglish",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "నువ్వు|మీరు|అతను|ఆమె|ఆటగాడు|nuvvu|meeru|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "మూర్ఖ(?:ుడివి|ుడు|ురాలు)|moor+k+h?u?du"
+        }
+      ],
+      "safeExample": "నిఘంటువు మూర్ఖుడు అనే పదాన్ని అవమానంగా వివరిస్తుంది."
+    },
+    {
+      "id": "te-dismissal",
+      "pack": "v412_language",
+      "language": "Telugu · Tenglish",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "నువ్వు|మీరు|అతను|ఆమె|ఆటగాడు|nuvvu|meeru|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "నోరు\\s*మూయి|noru\\s+muyi"
+        }
+      ],
+      "safeExample": "నిఘంటువు మూర్ఖుడు అనే పదాన్ని అవమానంగా వివరిస్తుంది."
+    },
+    {
+      "id": "te-severe",
+      "pack": "v412_language",
+      "language": "Telugu · Tenglish",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "నువ్వు|మీరు|అతను|ఆమె|ఆటగాడు|nuvvu|meeru|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "లంజ\\s*కొడకా|lanja\\s+kodaka"
+        }
+      ],
+      "safeExample": "నిఘంటువు మూర్ఖుడు అనే పదాన్ని అవమానంగా వివరిస్తుంది."
+    },
+    {
+      "id": "te-death",
+      "pack": "v412_language",
+      "language": "Telugu · Tenglish",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "నువ్వు|మీరు|అతను|ఆమె|ఆటగాడు|nuvvu|meeru|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "చచ్చిపో|chach+i?po"
+        }
+      ],
+      "safeExample": "నిఘంటువు మూర్ఖుడు అనే పదాన్ని అవమానంగా వివరిస్తుంది."
+    },
+    {
+      "id": "te-animal",
+      "pack": "v412_language",
+      "language": "Telugu · Tenglish",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "నువ్వు|మీరు|అతను|ఆమె|ఆటగాడు|nuvvu|meeru|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "కుక్క(?:వు)?|kukka"
+        }
+      ],
+      "safeExample": "కుక్క పార్కులో పరుగెడుతోంది."
+    },
+    {
+      "id": "kn-personal",
+      "pack": "v412_language",
+      "language": "Kannada · Kanglish",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ನೀನು|ನೀವು|ಅವನು|ಅವಳು|ಆಟಗಾರ|neenu|ninu|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ಮೂರ್ಖ|moor+k+ha"
+        }
+      ],
+      "safeExample": "ನಿಘಂಟು ಮೂರ್ಖ ಎಂಬ ಪದವನ್ನು ಅವಮಾನವೆಂದು ವಿವರಿಸುತ್ತದೆ."
+    },
+    {
+      "id": "kn-dismissal",
+      "pack": "v412_language",
+      "language": "Kannada · Kanglish",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "ನೀನು|ನೀವು|ಅವನು|ಅವಳು|ಆಟಗಾರ|neenu|ninu|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ಬಾಯಿ\\s*ಮುಚ್ಚು|baayi\\s+much+u"
+        }
+      ],
+      "safeExample": "ನಿಘಂಟು ಮೂರ್ಖ ಎಂಬ ಪದವನ್ನು ಅವಮಾನವೆಂದು ವಿವರಿಸುತ್ತದೆ."
+    },
+    {
+      "id": "kn-severe",
+      "pack": "v412_language",
+      "language": "Kannada · Kanglish",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ನೀನು|ನೀವು|ಅವನು|ಅವಳು|ಆಟಗಾರ|neenu|ninu|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ಸೂಳೆ\\s*ಮಗನೇ|soole\\s+magane"
+        }
+      ],
+      "safeExample": "ನಿಘಂಟು ಮೂರ್ಖ ಎಂಬ ಪದವನ್ನು ಅವಮಾನವೆಂದು ವಿವರಿಸುತ್ತದೆ."
+    },
+    {
+      "id": "kn-death",
+      "pack": "v412_language",
+      "language": "Kannada · Kanglish",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "ನೀನು|ನೀವು|ಅವನು|ಅವಳು|ಆಟಗಾರ|neenu|ninu|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ಸತ್ತು\\s*ಹೋಗು|sattu\\s+hogu"
+        }
+      ],
+      "safeExample": "ನಿಘಂಟು ಮೂರ್ಖ ಎಂಬ ಪದವನ್ನು ಅವಮಾನವೆಂದು ವಿವರಿಸುತ್ತದೆ."
+    },
+    {
+      "id": "kn-animal",
+      "pack": "v412_language",
+      "language": "Kannada · Kanglish",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "ನೀನು|ನೀವು|ಅವನು|ಅವಳು|ಆಟಗಾರ|neenu|ninu|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ನಾಯಿ|naayi"
+        }
+      ],
+      "safeExample": "ನಾಯಿ ಉದ್ಯಾನದಲ್ಲಿ ಓಡುತ್ತಿದೆ."
+    },
+    {
+      "id": "ml-personal",
+      "pack": "v412_language",
+      "language": "Malayalam · Manglish",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "നീ|നിങ്ങൾ|അവൻ|അവൾ|കളിക്കാരൻ|nee|ningal|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "മണ്ട(?:നാണ്|ൻ|ി)|mand+a+n"
+        }
+      ],
+      "safeExample": "നിഘണ്ടു മണ്ടൻ എന്ന വാക്കിനെ അപമാനമായി വിശദീകരിക്കുന്നു."
+    },
+    {
+      "id": "ml-dismissal",
+      "pack": "v412_language",
+      "language": "Malayalam · Manglish",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "നീ|നിങ്ങൾ|അവൻ|അവൾ|കളിക്കാരൻ|nee|ningal|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "വായ\\s*അടക്ക്|vaaya\\s+adakku"
+        }
+      ],
+      "safeExample": "നിഘണ്ടു മണ്ടൻ എന്ന വാക്കിനെ അപമാനമായി വിശദീകരിക്കുന്നു."
+    },
+    {
+      "id": "ml-severe",
+      "pack": "v412_language",
+      "language": "Malayalam · Manglish",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "നീ|നിങ്ങൾ|അവൻ|അവൾ|കളിക്കാരൻ|nee|ningal|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "വേശ്യയുടെ\\s*മകനേ|veshyayude\\s+makane"
+        }
+      ],
+      "safeExample": "നിഘണ്ടു മണ്ടൻ എന്ന വാക്കിനെ അപമാനമായി വിശദീകരിക്കുന്നു."
+    },
+    {
+      "id": "ml-death",
+      "pack": "v412_language",
+      "language": "Malayalam · Manglish",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "നീ|നിങ്ങൾ|അവൻ|അവൾ|കളിക്കാരൻ|nee|ningal|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ചത്തു\\s*പോ|chath+u\\s+po"
+        }
+      ],
+      "safeExample": "നിഘണ്ടു മണ്ടൻ എന്ന വാക്കിനെ അപമാനമായി വിശദീകരിക്കുന്നു."
+    },
+    {
+      "id": "ml-animal",
+      "pack": "v412_language",
+      "language": "Malayalam · Manglish",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "നീ|നിങ്ങൾ|അവൻ|അവൾ|കളിക്കാരൻ|nee|ningal|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "പട്ടി(?:യാണ്)?|patti"
+        }
+      ],
+      "safeExample": "പട്ടി പാർക്കിൽ ഓടുന്നു."
+    },
+    {
+      "id": "mr-personal",
+      "pack": "v412_language",
+      "language": "Marathi",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "तू|तुम्ही|तो|ती|खेळाडू|tu|tumhi|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "मूर्ख|mur+k+h"
+        }
+      ],
+      "safeExample": "शब्दकोश मूर्ख या शब्दाचे अपमानकारक उदाहरण देतो."
+    },
+    {
+      "id": "mr-dismissal",
+      "pack": "v412_language",
+      "language": "Marathi",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "तू|तुम्ही|तो|ती|खेळाडू|tu|tumhi|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "गप्प\\s*बस|gapp\\s+bas"
+        }
+      ],
+      "safeExample": "शब्दकोश मूर्ख या शब्दाचे अपमानकारक उदाहरण देतो."
+    },
+    {
+      "id": "mr-severe",
+      "pack": "v412_language",
+      "language": "Marathi",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "तू|तुम्ही|तो|ती|खेळाडू|tu|tumhi|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "रांडेचा\\s*मुलगा|rand(?:e|i)cha\\s+mulga"
+        }
+      ],
+      "safeExample": "शब्दकोश मूर्ख या शब्दाचे अपमानकारक उदाहरण देतो."
+    },
+    {
+      "id": "mr-death",
+      "pack": "v412_language",
+      "language": "Marathi",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "तू|तुम्ही|तो|ती|खेळाडू|tu|tumhi|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "मरून\\s*जा|marun\\s+ja"
+        }
+      ],
+      "safeExample": "शब्दकोश मूर्ख या शब्दाचे अपमानकारक उदाहरण देतो."
+    },
+    {
+      "id": "mr-animal",
+      "pack": "v412_language",
+      "language": "Marathi",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "तू|तुम्ही|तो|ती|खेळाडू|tu|tumhi|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "कुत्रा|kutra"
+        }
+      ],
+      "safeExample": "कुत्रा उद्यानात धावत आहे."
+    },
+    {
+      "id": "ne-personal",
+      "pack": "v412_language",
+      "language": "Nepali",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "तँ|तिमी|तपाईं|ऊ|खेलाडी|ta|timi|tapai|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "मूर्ख|mur+k+ha"
+        }
+      ],
+      "safeExample": "शब्दकोशले मूर्ख शब्दलाई अपमानको उदाहरणका रूपमा व्याख्या गर्छ."
+    },
+    {
+      "id": "ne-dismissal",
+      "pack": "v412_language",
+      "language": "Nepali",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "तँ|तिमी|तपाईं|ऊ|खेलाडी|ta|timi|tapai|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "चुप\\s*लाग|chup\\s+laga"
+        }
+      ],
+      "safeExample": "शब्दकोशले मूर्ख शब्दलाई अपमानको उदाहरणका रूपमा व्याख्या गर्छ."
+    },
+    {
+      "id": "ne-severe",
+      "pack": "v412_language",
+      "language": "Nepali",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "तँ|तिमी|तपाईं|ऊ|खेलाडी|ta|timi|tapai|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "रन्डीको\\s*छोरा|randiko\\s+chhora"
+        }
+      ],
+      "safeExample": "शब्दकोशले मूर्ख शब्दलाई अपमानको उदाहरणका रूपमा व्याख्या गर्छ."
+    },
+    {
+      "id": "ne-death",
+      "pack": "v412_language",
+      "language": "Nepali",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "तँ|तिमी|तपाईं|ऊ|खेलाडी|ta|timi|tapai|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "मरेस्|mares"
+        }
+      ],
+      "safeExample": "शब्दकोशले मूर्ख शब्दलाई अपमानको उदाहरणका रूपमा व्याख्या गर्छ."
+    },
+    {
+      "id": "ne-animal",
+      "pack": "v412_language",
+      "language": "Nepali",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "तँ|तिमी|तपाईं|ऊ|खेलाडी|ta|timi|tapai|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "कुकुर|kukur"
+        }
+      ],
+      "safeExample": "कुकुर पार्कमा दौडिरहेको छ."
+    },
+    {
+      "id": "ha-personal",
+      "pack": "v412_language",
+      "language": "Hausa",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "kai|ke|ku|shi|ita|dan wasa|yar wasa|player|athlete|you",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "wawa"
+        }
+      ],
+      "safeExample": "Kamus ya bayyana kalmar wawa a matsayin misalin zagi."
+    },
+    {
+      "id": "ha-dismissal",
+      "pack": "v412_language",
+      "language": "Hausa",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "kai|ke|ku|shi|ita|dan wasa|yar wasa|player|athlete|you",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "yi\\s+shiru|tafi\\s+can"
+        }
+      ],
+      "safeExample": "Kamus ya bayyana kalmar wawa a matsayin misalin zagi."
+    },
+    {
+      "id": "ha-severe",
+      "pack": "v412_language",
+      "language": "Hausa",
+      "mechanism": "severe_family_degradation",
+      "outcome": "review",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "kai|ke|ku|shi|ita|dan wasa|yar wasa|player|athlete|you",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "dan\\s+iska"
+        }
+      ],
+      "safeExample": "Kamus ya bayyana kalmar wawa a matsayin misalin zagi."
+    },
+    {
+      "id": "ha-death",
+      "pack": "v412_language",
+      "language": "Hausa",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "kai|ke|ku|shi|ita|dan wasa|yar wasa|player|athlete|you",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "je\\s+ka\\s+mutu"
+        }
+      ],
+      "safeExample": "Kamus ya bayyana kalmar wawa a matsayin misalin zagi."
+    },
+    {
+      "id": "ha-animal",
+      "pack": "v412_language",
+      "language": "Hausa",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "kai|ke|ku|shi|ita|dan wasa|yar wasa|player|athlete|you",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "kare"
+        }
+      ],
+      "safeExample": "Kare yana gudu a filin shakatawa."
+    },
+    {
+      "id": "yo-personal",
+      "pack": "v412_language",
+      "language": "Yorùbá",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "o|iwo|e|oun|elere|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "omugo"
+        }
+      ],
+      "safeExample": "Ìwé-itumọ̀ ṣàlàyé ọ̀rọ̀ òmùgọ̀ gẹ́gẹ́ bí ẹ̀gàn."
+    },
+    {
+      "id": "yo-dismissal",
+      "pack": "v412_language",
+      "language": "Yorùbá",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "o|iwo|e|oun|elere|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "dake"
+        }
+      ],
+      "safeExample": "Ìwé-itumọ̀ ṣàlàyé ọ̀rọ̀ òmùgọ̀ gẹ́gẹ́ bí ẹ̀gàn."
+    },
+    {
+      "id": "yo-severe",
+      "pack": "v412_language",
+      "language": "Yorùbá",
+      "mechanism": "severe_family_degradation",
+      "outcome": "review",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "o|iwo|e|oun|elere|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "omo\\s+ale"
+        }
+      ],
+      "safeExample": "Ìwé-itumọ̀ ṣàlàyé ọ̀rọ̀ òmùgọ̀ gẹ́gẹ́ bí ẹ̀gàn."
+    },
+    {
+      "id": "yo-death",
+      "pack": "v412_language",
+      "language": "Yorùbá",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "o|iwo|e|oun|elere|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "lo\\s+ku"
+        }
+      ],
+      "safeExample": "Ìwé-itumọ̀ ṣàlàyé ọ̀rọ̀ òmùgọ̀ gẹ́gẹ́ bí ẹ̀gàn."
+    },
+    {
+      "id": "yo-animal",
+      "pack": "v412_language",
+      "language": "Yorùbá",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "o|iwo|e|oun|elere|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "aja"
+        }
+      ],
+      "safeExample": "Ajá ń sáré ní ọgbà."
+    },
+    {
+      "id": "ig-personal",
+      "pack": "v412_language",
+      "language": "Igbo",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "i|ị|gi|ya|onye egwu|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "nzuzu"
+        }
+      ],
+      "safeExample": "Akwụkwọ okwu kọwara nzuzu dịka ihe atụ nke mkparị."
+    },
+    {
+      "id": "ig-dismissal",
+      "pack": "v412_language",
+      "language": "Igbo",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "i|ị|gi|ya|onye egwu|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mechie\\s+onu"
+        }
+      ],
+      "safeExample": "Akwụkwọ okwu kọwara nzuzu dịka ihe atụ nke mkparị."
+    },
+    {
+      "id": "ig-severe",
+      "pack": "v412_language",
+      "language": "Igbo",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "i|ị|gi|ya|onye egwu|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "nwa\\s+akwuna"
+        }
+      ],
+      "safeExample": "Akwụkwọ okwu kọwara nzuzu dịka ihe atụ nke mkparị."
+    },
+    {
+      "id": "ig-death",
+      "pack": "v412_language",
+      "language": "Igbo",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "i|ị|gi|ya|onye egwu|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "gaa\\s+nwuo"
+        }
+      ],
+      "safeExample": "Akwụkwọ okwu kọwara nzuzu dịka ihe atụ nke mkparị."
+    },
+    {
+      "id": "ig-animal",
+      "pack": "v412_language",
+      "language": "Igbo",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "i|ị|gi|ya|onye egwu|you|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "nkita"
+        }
+      ],
+      "safeExample": "Nkịta na-agba ọsọ n'ogige."
+    },
+    {
+      "id": "pcm-personal",
+      "pack": "v412_language",
+      "language": "Nigerian Pidgin",
+      "mechanism": "personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "you|u|e|she|dem|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "mumu"
+        }
+      ],
+      "safeExample": "Dictionary explain mumu as example of insult."
+    },
+    {
+      "id": "pcm-dismissal",
+      "pack": "v412_language",
+      "language": "Nigerian Pidgin",
+      "mechanism": "dismissive_command",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "phrase",
+      "targets": "you|u|e|she|dem|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "commot\\s+(?:for|from)\\s+here"
+        }
+      ],
+      "safeExample": "Dictionary explain mumu as example of insult."
+    },
+    {
+      "id": "pcm-severe",
+      "pack": "v412_language",
+      "language": "Nigerian Pidgin",
+      "mechanism": "sexualised_family_abuse",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "you|u|e|she|dem|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "ashawo\\s+pikin"
+        }
+      ],
+      "safeExample": "Dictionary explain mumu as example of insult."
+    },
+    {
+      "id": "pcm-death",
+      "pack": "v412_language",
+      "language": "Nigerian Pidgin",
+      "mechanism": "harm",
+      "outcome": "block",
+      "untargetedOutcome": null,
+      "mode": "prohibited",
+      "targets": "you|u|e|she|dem|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "go\\s+die"
+        }
+      ],
+      "safeExample": "Dictionary explain mumu as example of insult."
+    },
+    {
+      "id": "pcm-animal",
+      "pack": "v412_language",
+      "language": "Nigerian Pidgin",
+      "mechanism": "dehumanising_label",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "targeted",
+      "targets": "you|u|e|she|dem|player|athlete",
+      "patterns": [
+        {
+          "type": "regex",
+          "value": "animal|dog"
+        }
+      ],
+      "safeExample": "The dog dey run for park."
+    },
+    {
+      "id": "cross-target-label",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "code_switched_abuse",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The dictionary compares the words boka and fool."
+    },
+    {
+      "id": "cross-stacked-labels",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "stacked_personal_degradation",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The study compares bodoh and mumu as dataset labels."
+    },
+    {
+      "id": "cross-separator-evasion",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "moderation_evasion",
+      "outcome": "warning",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "Spell mumu as m-u-m-u for the exercise."
+    },
+    {
+      "id": "coded-good-ones",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "coded_group_stereotype",
+      "outcome": "review",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The paper analyses the phrase one of the good ones as a stereotype."
+    },
+    {
+      "id": "coded-global-control",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "coded_identity_conspiracy",
+      "outcome": "review",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The lecture discusses historical globalist conspiracy narratives."
+    },
+    {
+      "id": "coded-triple-parentheses",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "coded_identity_targeting",
+      "outcome": "review",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The linguistics paper shows (((name))) as an example of coded notation."
+    },
+    {
+      "id": "coded-numeric",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "coded_group_stereotype",
+      "outcome": "review",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The research paper analyses the 13/50 dog-whistle construction."
+    },
+    {
+      "id": "coded-belonging",
+      "pack": "v412_context",
+      "language": "English / contextual",
+      "mechanism": "coded_exclusion",
+      "outcome": "review",
+      "untargetedOutcome": null,
+      "mode": "contextual",
+      "targets": null,
+      "patterns": [],
+      "safeExample": "The phrase not our kind appears in the film review."
+    }
+  ]
+}

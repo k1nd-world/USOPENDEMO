@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>K1ND.world — Demo rehearsal</title>
+  <link rel="stylesheet" href="/assets/css/styles.css?v=4.24.1.0" />
+  <style>
+    body { background: var(--paper); }
+    .demo-shell { max-width: 1100px; margin: 0 auto; padding: 28px 20px 80px; }
+    .demo-top { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:24px; }
+    .demo-top h1 { margin-top:8px; }
+    .demo-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap:20px; }
+    .demo-card { background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:22px; }
+    .demo-card h2 { font-size:1.2rem; margin-bottom:8px; }
+    .status-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 0; }
+    .status-box { padding:12px; border-radius:var(--r-md); border:1px solid var(--line); background:var(--paper); }
+    .status-box b { display:block; font-size:1.2rem; }
+    .status-box span { font-size:.78rem; color:var(--muted); }
+    .rehearsal textarea { width:100%; min-height:110px; box-sizing:border-box; padding:13px 14px; border:1px solid var(--line-strong); border-radius:var(--r-md); font:inherit; resize:vertical; }
+    .demo-result { margin-top:12px; padding:13px 14px; border-radius:var(--r-md); border:1px solid var(--line); background:var(--paper); min-height:48px; }
+    .demo-result.clean { background:var(--ok-tint); border-color:#BFE3CD; }
+    .demo-result.warning { background:var(--warn-tint); border-color:#EAD6B0; }
+    .demo-result.review { background:var(--teal-tint); border-color:var(--teal-line); }
+    .demo-result.block { background:var(--danger-tint); border-color:#EBC9C4; }
+    .sample-row { display:flex; gap:7px; flex-wrap:wrap; margin-top:12px; }
+    .sample { border:1px solid var(--line-strong); background:#fff; border-radius:999px; padding:6px 10px; cursor:pointer; font-size:.78rem; }
+    .steps { counter-reset:step; display:grid; gap:10px; margin-top:14px; }
+    .step { display:grid; grid-template-columns:28px 1fr auto; gap:10px; align-items:center; padding:11px 0; border-top:1px solid var(--line); }
+    .step:first-child { border-top:0; }
+    .step:before { counter-increment:step; content:counter(step); width:26px; height:26px; display:grid; place-items:center; border-radius:50%; background:var(--ink); color:#fff; font-size:.75rem; font-weight:700; }
+    .step b { display:block; font-size:.9rem; }
+    .step span { display:block; color:var(--muted); font-size:.78rem; margin-top:2px; }
+    .pass-list { display:grid; gap:7px; margin-top:12px; }
+    .pass-row { display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px solid var(--line); font-size:.84rem; }
+    .callout { margin-top:14px; padding:12px 14px; border-left:3px solid var(--teal); background:var(--teal-tint); border-radius:0 var(--r-sm) var(--r-sm) 0; font-size:.84rem; }
+    @media (max-width:850px) { .demo-grid { grid-template-columns:1fr; } .status-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="demo-shell">
+    <div class="demo-top">
+      <div>
+        <a class="brand" href="/"><span class="k">K1ND</span><span class="dot">.</span><span class="world">world</span></a>
+        <span class="eyebrow" style="display:block;margin-top:18px">Private rehearsal page</span>
+        <h1>K1ND demo readiness check</h1>
+        <p class="muted" style="max-width:720px">Use this before any presentation to confirm the live moderation engine, rehearse adversarial examples and jump to each product screen. Do not type a real slur during a live presentation; use the hidden automated check below or a sanitised prohibited-content example.</p>
+      </div>
+      <div class="row gap-8 wrap">
+        <a class="btn btn-ghost" href="/moderation-test.html">Full test harness</a>
+        <a class="btn btn-teal" href="/demo-lab">Open Demo Lab</a>
+      </div>
+    </div>
+
+    <div class="demo-grid">
+      <section class="demo-card rehearsal">
+        <span class="eyebrow">Live pre-entry moderation</span>
+        <h2>Nothing reaches “Publish” unchecked</h2>
+        <p class="muted">Hard-block content is stopped on the keystroke or paste that would complete it. Warning and enhanced-review content can be entered, but the original cannot publish directly.</p>
+        <div class="status-grid">
+          <div class="status-box"><b id="pass-count">—</b><span>engine checks passing</span></div>
+          <div class="status-box"><b>Live</b><span>keystroke and paste guard</span></div>
+          <div class="status-box"><b>3 layers</b><span>entry + publish + store backstop</span></div>
+        </div>
+        <textarea id="rehearsal" placeholder="Type a normal criticism, warning case, address or phone number…"></textarea>
+        <div id="demo-result" class="demo-result"><span class="muted">The live classification will appear here.</span></div>
+        <div class="sample-row">
+          <button class="sample" data-load="She played too passively in the final set and needs to be more aggressive on the return.">Normal criticism</button>
+          <button class="sample" data-load="Your first serve kept landing short, you useless clown.">Source-backed rewrite</button>
+          <button class="sample" data-load="Why don't you just fuck off, you idiot?">Boundary-setting rewrite</button>
+          <button class="sample" data-load="Fat cow.">Appearance abuse</button>
+          <button class="sample" data-load="Everyone go spam her account after that loss.">Enhanced review</button>
+          <button class="sample" data-load="That player is a rapist.">Serious allegation</button>
+          <button class="sample" data-load="I'm going to destroy you in the final.">Sporting context</button>
+          <button class="sample" data-type="slur">Run hidden slur-entry test</button>
+          <button class="sample" data-type="address">Type address test</button>
+          <button class="sample" data-type="phone">Type phone test</button>
+        </div>
+        <div class="callout"><strong>Call-safe hard-block demo:</strong> use “Go back to where you came from” or the hidden automated slur test. The system will not reveal which exact token triggered personal-information detection.</div>
+      </section>
+
+      <section class="demo-card">
+        <span class="eyebrow">Build verification</span>
+        <h2>Safeguarding checks</h2>
+        <div id="pass-list" class="pass-list"></div>
+        <p class="muted" style="font-size:.78rem;margin-top:12px">The image screen demonstrates the intended workflow. It is not represented as a production-grade visual safety model.</p>
+      </section>
+
+      <section class="demo-card">
+        <span class="eyebrow">Suggested screen order</span>
+        <h2>Product demonstration</h2>
+        <div class="steps">
+          <div class="step"><div><b>Live Athlete Shield</b><span>Sign in as Jordan Blake, run the 24-message protection burst, then show the protected inbox, campaign graph and human-held threat packet.</span></div><a class="btn btn-quiet btn-sm" href="/athlete-shield">Open</a></div>
+          <div class="step"><div><b>Demo Lab</b><span>Choose the audience preset and run the adversarial test first.</span></div><a class="btn btn-quiet btn-sm" href="/demo-lab">Open</a></div>
+          <div class="step"><div><b>Feed and sporting experience</b><span>Show credible multi-sport content and normal criticism.</span></div><a class="btn btn-quiet btn-sm" href="/feed">Open</a></div>
+          <div class="step"><div><b>Working profiles and follows</b><span>Follow beside a username, open the profile, then switch to the Following feed.</span></div><a class="btn btn-quiet btn-sm" href="/user/maravolkov">Open</a></div>
+          <div class="step"><div><b>Observer vs verified</b><span>Use the top-right role switcher.</span></div><a class="btn btn-quiet btn-sm" href="/feed">Open</a></div>
+          <div class="step"><div><b>Verification journey</b><span>Identity check is a demo workflow.</span></div><a class="btn btn-quiet btn-sm" href="/verify">Open</a></div>
+          <div class="step"><div><b>Normal criticism</b><span>Publish without interruption.</span></div><a class="btn btn-quiet btn-sm" href="/feed">Open</a></div>
+          <div class="step"><div><b>Are-you-sure intervention</b><span>Original cannot be posted unchanged.</span></div><a class="btn btn-quiet btn-sm" href="/feed">Open</a></div>
+          <div class="step"><div><b>Hard blocks and personal information</b><span>Slur, address and phone entry stop live.</span></div><a class="btn btn-quiet btn-sm" href="/create">Open</a></div>
+          <div class="step"><div><b>Images and context</b><span>Use the Demo Lab image simulator, then show trusted-poster media selection.</span></div><a class="btn btn-quiet btn-sm" href="/demo-lab">Open</a></div>
+          <div class="step"><div><b>Reporting</b><span>Report a post or comment from the feed.</span></div><a class="btn btn-quiet btn-sm" href="/feed">Open</a></div>
+          <div class="step"><div><b>Enhanced review queue</b><span>Switch to Admin and show held content.</span></div><a class="btn btn-quiet btn-sm" href="/admin">Open</a></div>
+          <div class="step"><div><b>Trust and accountability trail</b><span>Show prevention and behaviour patterns.</span></div><a class="btn btn-quiet btn-sm" href="/trust-dashboard">Open</a></div>
+        </div>
+      </section>
+
+      <section class="demo-card">
+        <span class="eyebrow">Prepared examples</span>
+        <h2>Use these in the call</h2>
+        <div class="pass-list">
+          <div class="pass-row"><span><b>Allowed:</b> “She played too passively in the final set…”</span><span class="badge badge-ok">clean</span></div>
+          <div class="pass-row"><span><b>Source-backed rewrite:</b> the first-serve criticism is retained exactly.</span><span class="badge badge-warn">rewrite</span></div>
+          <div class="pass-row"><span><b>Phrase-aware rewrite:</b> dismissive profanity becomes “Please leave me alone.”</span><span class="badge badge-warn">coherent</span></div>
+          <div class="pass-row"><span><b>Enhanced:</b> “Everyone go spam her account…”</span><span class="badge badge-review">held</span></div>
+          <div class="pass-row"><span><b>Address:</b> “42 Oakfield Road, SW1A 2AA”</span><span class="badge badge-danger">entry stopped</span></div>
+          <div class="pass-row"><span><b>Phone:</b> “07700 900123”</span><span class="badge badge-danger">entry stopped</span></div>
+        </div>
+        <div class="callout"><strong>Best lines:</strong> “This is the abuse the athlete never has to see.” · “The intervention happens between impulse and publication.” · “No emergency action or external delivery happens without a human.”</div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import { moderateContent, TEST_CASES } from "/assets/js/moderation.js?v=4.24.1.0";
+    import { attachLiveSafetyGuard } from "/assets/js/lib/liveGuard.js?v=4.24.1.0";
+
+    const esc = (s) => String(s).replace(/[&<>\"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+    const ta = document.getElementById("rehearsal");
+    const result = document.getElementById("demo-result");
+
+    function classify() {
+      if (!ta.value.trim()) { result.className = "demo-result"; result.innerHTML = '<span class="muted">The live classification will appear here.</span>'; return; }
+      const r = moderateContent(ta.value);
+      result.className = `demo-result ${r.outcome}`;
+      const labels = { clean:"Clean — allowed", warning:"Are you sure? — source-backed rewrite, self-edit, cancel or enhanced moderation", review:"Enhanced moderation — held privately", block:"Hard block — cannot publish" };
+      const draft = r.rewriteSuggestion || r.safeDraftSuggestion;
+      const draftLabel = r.safeDraftSuggestion ? "Validated new draft (original stays blocked)" : "Source-backed rewrite";
+      result.innerHTML = `<strong>${labels[r.outcome]}</strong><div class="muted" style="margin-top:4px">${esc(r.reason)}</div>${draft ? `<div style="margin-top:8px"><b>${draftLabel}:</b> ${esc(draft)}</div>${r.rewrite?.sourceBasis ? `<div class="muted" style="margin-top:4px"><b>Kept from the post:</b> ${esc(r.rewrite.sourceBasis)}</div>` : ""}` : ""}`;
+    }
+    attachLiveSafetyGuard(ta, { onSafeInput: classify });
+    ta.addEventListener("input", classify);
+
+    const checks = [
+      ["Normal sporting criticism", "She played too passively in the final set and needs to be more aggressive on the return.", "clean"],
+      ["Source-backed sporting rewrite", "Your first serve kept landing short, you useless clown.", "warning"],
+      ["Phrase-aware profanity rewrite", "Why don't you just fuck off, you idiot?", "warning"],
+      ["Direct appearance abuse intervened", "Fat cow.", "warning"],
+      ["Borderline pile-on held", "Everyone go spam her account after that loss.", "review"],
+      ["Serious allegation held", "That player is a rapist.", "review"],
+      ["Doping allegation held", "She is doping.", "review"],
+      ["Official bribery allegation held", "The umpire took money to make that call.", "review"],
+      ["Competitive hyperbole allowed", "I'm going to destroy you in the final.", "clean"],
+      ["Real threat still blocked", "I'm going to hurt you in the final.", "block"],
+      ["Obfuscated slur blocked", "n1gger", "block"],
+      ["Stopped near-complete slur fragment intercepted", "nigge", "warning"],
+      ["Street address blocked", "42 Oakfield Road, SW1A 2AA", "block"],
+      ["UK phone number blocked", "Call her on 07700 900123", "block"],
+      ["Hotel-room detail blocked", "Room 214 at the Riverside Hotel", "block"],
+      ["Targeted primate emoji blocked", "Send that 🦍 back where she belongs.", "block"],
+      ["Sexual coercion blocked", "Send me your nudes.", "block"],
+      ["Training location blocked", "She trains at Riverside Tennis Academy.", "block"],
+      ["Legitimate match score allowed", "She won 7-6 6-4 and saved three break points.", "clean"],
+    ];
+    const passed = TEST_CASES.filter((test) => {
+      const outcome = moderateContent(test.input, test.context || {});
+      const rewriteOK = !test.expectRewrite || outcome.rewriteSuggestion === test.expectRewrite || (outcome.rewrite?.suppressedCandidate === test.expectRewrite && outcome.rewrite?.evaluation?.suitable === false);
+      const noRewriteOK = !test.expectNoRewrite || outcome.rewriteSuggestion === undefined;
+      const safeDraftOK = !test.expectSafeDraft || outcome.safeDraftSuggestion === test.expectSafeDraft;
+      const noSafeDraftOK = !test.expectNoSafeDraft || outcome.safeDraftSuggestion === undefined;
+      const sourceBasisOK = !test.expectSourceBasis || String(outcome.rewrite?.sourceBasis || "").toLowerCase().includes(test.expectSourceBasis.toLowerCase());
+      const safeDraftValidated = !outcome.safeDraftSuggestion || (outcome.rewrite?.status === "safe_new_draft" && outcome.rewrite?.validatedClean === true && moderateContent(outcome.safeDraftSuggestion, test.context || {}).outcome === "clean");
+      const noBlockBypass = test.expect !== "block" || outcome.rewriteSuggestion === undefined;
+      const speechActOK = !test.expectSpeechAct || outcome.analysis?.contextAssessment?.speechActId === test.expectSpeechAct;
+      const assessment = outcome.analysis?.contextAssessment;
+      const targetRoleOK = !test.expectTargetRole || assessment?.targetAudience?.role === test.expectTargetRole;
+      const targetScopeOK = !test.expectTargetScope || assessment?.targetScope === test.expectTargetScope;
+      const pileOnOK = !test.expectPileOn || assessment?.conversation?.pileOn === true;
+      const repeatedOK = test.expectRepeatedTargeting == null || assessment?.conversation?.repeatedAuthorInterventions === test.expectRepeatedTargeting;
+      const rewriteOptionsOK = !test.expectRewriteOptions || outcome.rewrite?.options?.length >= test.expectRewriteOptions || outcome.rewrite?.status === "fidelity_not_proven";
+      const clauseMapOK = !test.expectClauseMap || outcome.rewrite?.clauses?.length >= 2;
+      const codeSwitchOK = !test.expectCodeSwitch || outcome.codeSwitch === true;
+      const codedMeaningOK = !test.expectCodedMeaning || !!outcome.analysis?.codedMeaning;
+      const crossThreadOK = test.expectCrossThread == null || assessment?.conversation?.crossThreadInterventions === test.expectCrossThread;
+      const semantic = outcome.analysis?.semanticIntent;
+      const semanticActOK = !test.expectSemanticAct || semantic?.summary?.dominantSpeechAct === test.expectSemanticAct;
+      const mixedIntentOK = !test.expectMixedIntent || semantic?.summary?.mixedIntent === true;
+      const severeFloorOK = !test.expectSevereFloor || semantic?.severeFloor?.locked === true;
+      return outcome.outcome === test.expect && rewriteOK && noRewriteOK && safeDraftOK && noSafeDraftOK && sourceBasisOK && safeDraftValidated && noBlockBypass && speechActOK && targetRoleOK && targetScopeOK && pileOnOK && repeatedOK && rewriteOptionsOK && clauseMapOK && codeSwitchOK && codedMeaningOK && crossThreadOK && semanticActOK && mixedIntentOK && severeFloorOK;
+    }).length;
+    document.getElementById("pass-count").textContent = `${passed}/${TEST_CASES.length}`;
+    document.getElementById("pass-list").innerHTML = checks.map(([label, text, expected]) => {
+      const got = moderateContent(text).outcome;
+      return `<div class="pass-row"><span>${esc(label)}</span><span class="badge ${got === expected ? "badge-ok" : "badge-danger"}">${got === expected ? "PASS" : "FAIL"}</span></div>`;
+    }).join("");
+
+    function typeSafely(text) {
+      ta.value = ""; ta.focus(); classify();
+      let i = 0;
+      const timer = setInterval(() => {
+        if (i >= text.length) { clearInterval(timer); return; }
+        const ch = text[i++];
+        ta.setSelectionRange(ta.value.length, ta.value.length);
+        const before = new InputEvent("beforeinput", { bubbles:true, cancelable:true, inputType:"insertText", data:ch });
+        const allowed = ta.dispatchEvent(before);
+        if (allowed) {
+          ta.setRangeText(ch, ta.selectionStart, ta.selectionEnd, "end");
+          ta.dispatchEvent(new InputEvent("input", { bubbles:true, inputType:"insertText", data:ch }));
+        }
+      }, 45);
+    }
+
+    document.addEventListener("click", (e) => {
+      const load = e.target.closest("[data-load]");
+      if (load) { ta.value = load.dataset.load; ta.dispatchEvent(new InputEvent("input", { bubbles:true })); ta.focus(); }
+      const test = e.target.closest("[data-type]");
+      if (!test) return;
+      const values = { slur:"n1gger", address:"42 Oakfield Road", phone:"07700 900123" };
+      typeSafely(values[test.dataset.type]);
+    });
+  </script>
+</body>
+</html>
