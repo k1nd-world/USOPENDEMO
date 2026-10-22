@@ -334,7 +334,7 @@ class TournamentOperations:
         return {
             "version": TOURNAMENT_VERSION,
             "tournament": {
-                "id": TOURNAMENT_ID, "name": "K1ND New York Major Operations Demo",
+                "id": TOURNAMENT_ID, "name": "K1ND MVP v10/2026",
                 "venue": "New York tournament demonstration environment",
                 "status": program["status"], "mode": program["mode"],
                 "revision": program["revision"], "launchedAt": program["launched_at"],

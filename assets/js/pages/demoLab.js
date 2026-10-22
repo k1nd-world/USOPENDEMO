@@ -205,7 +205,7 @@ function paint(outlet) {
           <a class="btn btn-ghost" data-link href="/hate-stress-test">Open Hate Stress Test</a>
           <button class="btn btn-ghost" data-full-reset>Reset everything</button>
         </div>
-        <div class="presenter-readiness"><span>US Open presenter mode</span><b>${presenterLocked ? "Locked — role switching and reset controls are hidden" : "Ready — lock the interface before presenting"} · ${redTeamCount} live probe${redTeamCount === 1 ? "" : "s"} recorded</b><button class="btn ${presenterLocked ? "btn-quiet" : "btn-teal"} btn-sm" data-presenter-lock>${presenterLocked ? "Exit presenter lock" : "Enter presenter lock"}</button></div>
+        <div class="presenter-readiness"><span>MVP v10/2026 presenter mode</span><b>${presenterLocked ? "Locked — role switching and reset controls are hidden" : "Ready — lock the interface before presenting"} · ${redTeamCount} live probe${redTeamCount === 1 ? "" : "s"} recorded</b><button class="btn ${presenterLocked ? "btn-quiet" : "btn-teal"} btn-sm" data-presenter-lock>${presenterLocked ? "Exit presenter lock" : "Enter presenter lock"}</button></div>
       </div>
     </section>
 

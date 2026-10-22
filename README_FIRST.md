@@ -1,3 +1,13 @@
+# K1ND.world — MVP v10/2026
+
+Launch START_OFFLINE_DEMO.command to run this separate copy at http://127.0.0.1:8137/.
+
+The product label is MVP v10/2026. It retains the black, white and fluorescent yellow theme and the original v4.24.1 application functionality, four courts, policies and demo content. Internal policy versions, API identifiers and deterministic seed values are preserved. No deployment was performed.
+
+The original source instructions follow as historical application documentation.
+
+---
+
 # K1ND.world Functional Social MVP v4.24.1
 
 Version: **4.24.1 — Hosted Tournament Operations Deployment**
@@ -14,6 +24,15 @@ V4.24.1 was created from an exact copy of V4.24.0. The preserved V4.24.0 source 
 - Audience QR generation now has a cross-platform Python path for the Linux host while retaining the macOS local path.
 - Static-only hosting failures now explain that the K1ND application service is required instead of showing a generic 404.
 - See `DEPLOY_TO_RENDER.md` for the exact setup sequence.
+
+## Offline flight launch on a Mac
+
+1. Keep the complete `USOPENDEMO` folder on the Mac before travelling.
+2. Double-click `START_OFFLINE_DEMO.command` while still online once, so macOS can approve it.
+3. If macOS blocks it, Control-click the file, choose **Open**, then choose **Open** again.
+4. Keep the Terminal window open while presenting. The browser opens at `http://127.0.0.1:8035/sign-in` and does not require internet.
+5. Use the local account PINs. Jordan Blake's moderator PIN is `8642`.
+6. Close the Terminal window when the demonstration is finished.
 
 ## The major upgrade
 

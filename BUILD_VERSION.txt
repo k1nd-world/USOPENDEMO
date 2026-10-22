@@ -1,1 +1,2 @@
-K1ND.world v4.24.1 — Hosted Tournament Operations Deployment
+K1ND.world MVP v10/2026 — black / white / fluorescent yellow edition
+Application base: v4.24.1

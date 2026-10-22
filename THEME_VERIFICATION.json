@@ -1,0 +1,45 @@
+{
+  "base_version": "K1ND.world v4.24.1 \u2014 Hosted Tournament Operations Deployment",
+  "source": "/Users/nimesh/Documents/Codex/2026-08-28/referenced-chatgpt-conversation-this-is-an-4/outputs/USOPENDEMO 2",
+  "zip_ui_matches": true,
+  "ui_files_compared": 65,
+  "unchanged_javascript": true,
+  "unchanged_python": true,
+  "modified_source_files": [
+    "index.html",
+    "START_OFFLINE_DEMO.command",
+    "moderation-test.html",
+    "demo-rehearsal.html",
+    "assets/css/styles.css"
+  ],
+  "contrast_ratios": {
+    "ink_on_yellow": 17.1,
+    "ink_on_white": 18.92,
+    "muted_on_paper": 5.75,
+    "focus_on_white": 5.35
+  },
+  "visual_checks": [
+    "1440x1000: landing, authenticated tournament overview and lower panels",
+    "390x844: landing, feed, sign-in, authenticated tournament overview",
+    "390px landing/feed/tournament document width equals viewport; no horizontal page overflow",
+    "Seeded local moderator login succeeds; tournament access gate retained before login"
+  ],
+  "scope": "Theme only; JavaScript and Python byte-identical. No original data, keys, private investor documents or stores copied. Fresh QA data isolated in work/preview-data, excluded from deliverable.",
+  "mvp_rename": {
+    "display_name": "MVP v10/2026",
+    "changed_files": [
+      "assets/js/pages/tournamentOperations.js",
+      "assets/js/pages/admin.js",
+      "assets/js/pages/demoLab.js",
+      "assets/js/pages/landing.js",
+      "assets/js/pages/signIn.js",
+      "assets/server/tournament_operations.py",
+      "START_OFFLINE_DEMO.command",
+      "index.html",
+      "BUILD_VERSION.txt",
+      "README_FIRST.md",
+      "THEME_README.md"
+    ],
+    "scope": "Display text and local metadata only; original application logic and theme preserved."
+  }
+}

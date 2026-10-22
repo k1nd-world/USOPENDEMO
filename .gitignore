@@ -3,3 +3,8 @@ __pycache__/
 .DS_Store
 data/*
 !data/.gitkeep
+
+.env*
+*.sqlite3*
+.k1nd_server_secret
+release-backups/

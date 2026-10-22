@@ -1,14 +1,18 @@
+# Existing-service update; retain service ID and disk. Do not create a duplicate Blueprint.
 services:
   - type: web
-    name: us-open-demo
+    name: MVP
     runtime: python
     region: frankfurt
     plan: 0.5c-512mb
     numInstances: 1
     buildCommand: pip install --disable-pip-version-check -r requirements.txt
-    startCommand: python3 serve.py
+    startCommand: python3 tools/start_hosted.py
     healthCheckPath: /api/health
-    autoDeployTrigger: commit
+    autoDeployTrigger: "off"
+
+    domains:
+      - mvp.k1nd.world
 
     envVars:
       - key: PYTHON_VERSION

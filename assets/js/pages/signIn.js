@@ -23,7 +23,7 @@ export function renderSignIn(outlet) {
     return;
   }
   outlet.innerHTML = `<section class="auth-shell">
-    <div class="auth-intro"><span class="eyebrow">V4.24.1 Hosted Tournament Operations</span><h1>Choose a governed demo account</h1>
+    <div class="auth-intro"><span class="eyebrow">MVP v10/2026</span><h1>Choose a governed demo account</h1>
       <p>These demonstration accounts use real server sessions and enforced permissions. Enter the private four-digit PIN provided by the K1ND presenter.</p>
     </div>
     <div class="auth-grid">

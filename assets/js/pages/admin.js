@@ -217,7 +217,7 @@ function paint(outlet) {
           </div>
         </div>
         <div class="language-architecture">
-          <div class="lexicon-subhead"><div><b>US Open Presenter Shield</b><span>Fail-safe uncertainty and evasion guard · ${UNCERTAINTY_GUARD_VERSION}</span></div><span class="badge badge-review">active fail-safe</span></div>
+          <div class="lexicon-subhead"><div><b>MVP Presenter Shield</b><span>Fail-safe uncertainty and evasion guard · ${UNCERTAINTY_GUARD_VERSION}</span></div><span class="badge badge-review">active fail-safe</span></div>
           <div class="language-architecture-flow">
             <div><span>01</span><b>Normalise compatibility text</b><small>Fullwidth, circled, mathematical, accented and common substituted characters are evaluated consistently.</small></div>
             <div><span>02</span><b>Detect separator attacks</b><small>Spacing, punctuation, underscores, slashes, line breaks, emoji and combining marks cannot split reviewed terms safely.</small></div>

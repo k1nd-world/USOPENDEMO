@@ -135,7 +135,7 @@ export function renderLanding(outlet) {
     </section>
 
     <footer class="site-footer">
-      <span><strong>F1ND your K1ND.</strong>${publicMode ? " — Passion stays. Abuse doesn't." : " — Tournament Operations v4.24.1. Demo data only."}</span>
+      <span><strong>F1ND your K1ND.</strong>${publicMode ? " — Passion stays. Abuse doesn't." : " — MVP v10/2026. Demo data only."}</span>
       <span>No gambling advertising.${publicMode ? "" : " Fictional profiles with rights-safe, public-domain tennis photography."}</span>
     </footer>
   </div>
