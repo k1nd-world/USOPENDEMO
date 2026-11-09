@@ -36,14 +36,15 @@
     .callout { margin-top:14px; padding:12px 14px; border-left:3px solid var(--teal); background:var(--teal-tint); border-radius:0 var(--r-sm) var(--r-sm) 0; font-size:.84rem; }
     @media (max-width:850px) { .demo-grid { grid-template-columns:1fr; } .status-grid { grid-template-columns:1fr; } }
   </style>
+  <link rel="stylesheet" href="/assets/css/product.css?v=mvp.10.2026.brand1">
 </head>
 <body>
   <main class="demo-shell">
     <div class="demo-top">
       <div>
-        <a class="brand" href="/"><span class="k">K1ND</span><span class="dot">.</span><span class="world">world</span></a>
+        <a class="brand product-brand" href="/"><span class="product-brand-image" role="img" aria-label="K1ND.world"></span></a>
         <span class="eyebrow" style="display:block;margin-top:18px">Private rehearsal page</span>
-        <h1>K1ND demo readiness check</h1>
+        <h1>K1ND.world demo readiness check</h1>
         <p class="muted" style="max-width:720px">Use this before any presentation to confirm the live moderation engine, rehearse adversarial examples and jump to each product screen. Do not type a real slur during a live presentation; use the hidden automated check below or a sanitised prohibited-content example.</p>
       </div>
       <div class="row gap-8 wrap">
@@ -123,8 +124,8 @@
   </main>
 
   <script type="module">
-    import { moderateContent, TEST_CASES } from "/assets/js/moderation.js?v=4.24.1.0";
-    import { attachLiveSafetyGuard } from "/assets/js/lib/liveGuard.js?v=4.24.1.0";
+    import { moderateContent, TEST_CASES } from "/assets/js/moderation.js?v=4.24.1.brand1";
+    import { attachLiveSafetyGuard } from "/assets/js/lib/liveGuard.js?v=4.24.1.brand1";
 
     const esc = (s) => String(s).replace(/[&<>\"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
     const ta = document.getElementById("rehearsal");

@@ -4,11 +4,11 @@ import {
   useCurrentUser, getState, getProfile, getProfileByHandle, profilePath, isFollowing, getFollowerCount,
   getFollowingCount, getFollowers, getFollowing, toggleFollow,
   addLike, removeLike,
-} from "../store.js?v=4.24.1.0";
+} from "../store.js?v=4.24.1.brand1";
 import { escapeHtml, timeAgo, fmtDate, fmtCount } from "../lib/util.js";
 import { authorBadges, heartIcon, commentIcon, toast } from "../lib/ui.js";
 import { render as renderRoute } from "../lib/router.js";
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 const activeTabs = new Map();
 
@@ -54,7 +54,7 @@ export function renderPublicProfile(outlet, params = {}) {
           ${authorBadges(profile, { hideRole: publicMode })}
         </div>
         <div class="public-profile-handle">@${escapeHtml(profile.handle || profile.id)}</div>
-        <p class="public-profile-bio">${escapeHtml(profile.bio || "K1ND community member.")}</p>
+        <p class="public-profile-bio">${escapeHtml(profile.bio || "K1ND.world community member.")}</p>
         <div class="public-profile-meta">
           ${profile.location ? `<span>⌖ ${escapeHtml(profile.location)}</span>` : ""}
           ${profile.favouriteSport ? `<span>◉ ${escapeHtml(profile.favouriteSport)}</span>` : ""}
@@ -145,7 +145,7 @@ function renderAbout(profile, state, publicMode) {
   return `<div class="profile-about-grid">
     <div class="info-card">
       <div class="card-eyebrow">About</div>
-      <p>${escapeHtml(profile.bio || "K1ND community member.")}</p>
+      <p>${escapeHtml(profile.bio || "K1ND.world community member.")}</p>
       <div class="kvline"><span class="k">Public handle</span><span class="v">@${escapeHtml(profile.handle || profile.id)}</span></div>
       <div class="kvline"><span class="k">Favourite sport</span><span class="v">${escapeHtml(profile.favouriteSport || "Sport")}</span></div>
       <div class="kvline"><span class="k">Location</span><span class="v">${escapeHtml(profile.location || "Not shared")}</span></div>

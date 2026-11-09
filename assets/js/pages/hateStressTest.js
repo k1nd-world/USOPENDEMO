@@ -1,7 +1,7 @@
-import { moderateContent, TEST_CASES } from "../moderation.js?v=4.24.1.0";
-import { HATE_STRESS_CASES } from "../hateStressCases.js?v=4.24.1.0";
+import { moderateContent, TEST_CASES } from "../moderation.js?v=4.24.1.brand1";
+import { HATE_STRESS_CASES } from "../hateStressCases.js?v=4.24.1.brand1";
 import { escapeHtml } from "../lib/util.js";
-import { runMediaEvidenceTests } from "../mediaIntelligence.js?v=4.24.1.0";
+import { runMediaEvidenceTests } from "../mediaIntelligence.js?v=4.24.1.brand1";
 
 function runCases(cases) {
   return cases.map((test) => {

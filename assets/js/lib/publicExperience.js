@@ -1,28 +1,16 @@
-const KEY = "k1nd-public-experience-v423";
-export const PUBLIC_EXPERIENCE_EVENT = "k1nd:public-experience";
+import { isAdmin, isServerAuthenticated, useCurrentUser } from "../store.js?v=4.24.1.brand1";
 
 export const INTERNAL_PATHS = new Set([
   "/demo-lab", "/media-lab", "/hate-stress-test", "/trust-dashboard",
-  "/admin", "/pilot-ops", "/event-command", "/safety-intelligence", "/athlete-shield", "/athlete", "/arena-control",
+  "/admin", "/tournament-operations", "/pilot-ops", "/event-command", "/safety-intelligence", "/athlete-shield", "/athlete", "/arena-control",
 ]);
 
+export function isModeratorSession() {
+  return isServerAuthenticated() && isAdmin(useCurrentUser());
+}
+
 export function isPublicExperience() {
-  try { return sessionStorage.getItem(KEY) === "active"; }
-  catch (_) { return false; }
-}
-
-export function enterPublicExperience() {
-  try { sessionStorage.setItem(KEY, "active"); }
-  catch (_) {}
-  window.dispatchEvent(new CustomEvent(PUBLIC_EXPERIENCE_EVENT, { detail:{ active:true } }));
-}
-
-export function exitPublicExperience() {
-  try { sessionStorage.removeItem(KEY); }
-  catch (_) {}
-  window.dispatchEvent(new CustomEvent(PUBLIC_EXPERIENCE_EVENT, { detail:{ active:false } }));
-}
-
-export function isInternalPath(path) {
-  return INTERNAL_PATHS.has(String(path || ""));
+  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const verificationWorkspace = path === "/verify" && new URLSearchParams(window.location.search).get("workspace") === "1";
+  return !isModeratorSession() || !(INTERNAL_PATHS.has(path) || verificationWorkspace);
 }

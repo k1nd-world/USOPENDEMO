@@ -1,18 +1,18 @@
 // assets/js/pages/feed.js
 
 import {
-  useCurrentUser, getState, getProfile, canComment, canPublish,
+  useCurrentUser, getState, getProfile, canComment, canPublish, isServerAuthenticated,
   addLike, removeLike, addComment, addReport, logModerationEvent,
   isFollowing, toggleFollow, getFollowerCount, profilePath, toggleRepost, getConversationEnvelope,
-} from "../store.js?v=4.24.1.0";
+} from "../store.js?v=4.24.1.brand1";
 import { timeAgo, escapeHtml } from "../lib/util.js";
 import { heartIcon, commentIcon, flagIcon, authorBadges, toast } from "../lib/ui.js";
-import { submitWithModeration } from "../lib/moderationFlow.js?v=4.24.1.0";
-import { attachLiveSafetyGuard, getLiveGuardIncident } from "../lib/liveGuard.js?v=4.24.1.0";
+import { submitWithModeration } from "../lib/moderationFlow.js?v=4.24.1.brand1";
+import { attachLiveSafetyGuard, getLiveGuardIncident } from "../lib/liveGuard.js?v=4.24.1.brand1";
 import { openModal } from "../lib/modal.js";
-import { openTrustTrail } from "../lib/trustTrail.js?v=4.24.1.0";
+import { openTrustTrail } from "../lib/trustTrail.js?v=4.24.1.brand1";
 import { render as renderRoute } from "../lib/router.js";
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 // In-progress comment text, preserved across store-driven re-renders.
 const commentDrafts = {};
@@ -29,39 +29,60 @@ export function renderFeed(outlet) {
     ? allPosts.filter((post) => post.authorId === user.id || followedIds.has(post.authorId))
     : allPosts;
 
+  const signedIn = isServerAuthenticated();
   outlet.innerHTML = `
-    <div class="feed-wrap">
-      <div class="page-head feed-page-head">
-        <div><span class="eyebrow">Chronological feed</span><h1>The feed</h1></div>
-        <div class="feed-head-actions">
-          <div class="feed-filter" role="group" aria-label="Feed filter">
-            <button class="feed-filter-btn ${feedMode === "all" ? "active" : ""}" data-action="feed-mode" data-mode="all">All community</button>
-            <button class="feed-filter-btn ${feedMode === "following" ? "active" : ""}" data-action="feed-mode" data-mode="following">Following</button>
+    <div class="feed-wrap ${publicMode ? "product-feed" : ""}">
+      <section class="product-timeline" aria-labelledby="feed-title">
+        <div class="page-head feed-page-head">
+          <div><span class="eyebrow">Your community</span><h1 id="feed-title">Feed</h1>
+            ${publicMode ? '<p class="feed-intro">Follow the people and sport you care about.</p>' : ""}
           </div>
-          ${canPublish(user) ? `<a class="btn btn-teal" data-link href="/create">New post</a>` : ""}
+          ${canPublish(user) ? '<a class="btn btn-teal feed-create" data-link href="/create">New post</a>' : ""}
         </div>
-      </div>
-      ${!canComment(user) ? observerBanner() : ""}
-      ${communityPulse(s, publicMode)}
-      <div class="feed">${posts.length ? posts.map((p) => renderPost(p, user, s, publicMode)).join("") : followingEmpty()}</div>
+        <div class="feed-filter" role="group" aria-label="Feed filter">
+          <button class="feed-filter-btn ${feedMode === "all" ? "active" : ""}" data-action="feed-mode" data-mode="all" aria-pressed="${feedMode === "all"}">Community</button>
+          <button class="feed-filter-btn ${feedMode === "following" ? "active" : ""}" data-action="feed-mode" data-mode="following" aria-pressed="${feedMode === "following"}">Following</button>
+        </div>
+        ${!canComment(user) ? observerBanner(signedIn) : ""}
+        <div class="feed">${posts.length ? posts.map((p) => renderPost(p, user, s, publicMode)).join("") : followingEmpty()}</div>
+      </section>
+      ${publicMode ? feedSidebar(signedIn) : ""}
     </div>`;
 
-  attachHandlers(outlet.querySelector(".feed-wrap"), user, publicMode);
+  attachHandlers(outlet.querySelector(".feed-wrap"), user);
 }
 
-function communityPulse(s, publicMode) {
-  const sports = ["football", "tennis", "rugby", "motorsport"];
-  const labels = { football: "Matchday debate", tennis: "Finals week", rugby: "Big-game calls", motorsport: "Race strategy" };
-  return `<div class="community-pulse"><div class="pulse-title"><span class="live-dot"></span><b>Community pulse</b><small>${publicMode ? "Live conversations" : "Live demo conversations"}</small></div><div class="pulse-topics">${sports.map((sport) => {
-    const n = s.posts.filter((p) => p.sport === sport && p.moderationStatus !== "removed").length;
-    return `<span><b>${labels[sport]}</b><small>${n} active ${publicMode ? "post" : "demo post"}${n === 1 ? "" : "s"} · ${sport}</small></span>`;
-  }).join("")}</div></div>`;
+function feedSidebar(signedIn) {
+  return `
+    <aside class="product-feed-aside" aria-label="Around K1ND.world">
+      <section class="product-match-card">
+        <div class="product-match-visual" role="presentation"></div>
+        <div class="product-match-copy">
+          <span class="eyebrow">Tennis</span>
+          <h2>Matchday</h2>
+          <p>Follow a match together and join the conversation from Centre Court.</p>
+          <a class="btn btn-teal btn-sm" data-link href="/arena">Open Matchday <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <section class="product-participation">
+        <span class="eyebrow">Community standards</span>
+        <h2>Keep it about the sport</h2>
+        <p>Posts and comments are checked before they appear.</p>
+        <a href="https://k1nd.world/community-standards.html">Read the standards <span aria-hidden="true">↗</span></a>
+      </section>
+      <div class="product-feed-footer">
+        <span>Product preview with fictional profiles and match data.</span>
+        ${signedIn ? "" : '<a data-link href="/sign-in">Sign in</a>'}
+        <a href="https://k1nd.world/privacy.html">Privacy</a>
+        <a data-link href="/about">About K1ND.world</a>
+      </div>
+    </aside>`;
 }
 
-function observerBanner() {
-  return `<div class="observer-banner">
-    <span>You're browsing as an <b>Observer</b>. You can like posts — become verified to join the conversation.</span>
-    <a class="btn btn-teal btn-sm" data-link href="/verify">Become verified</a>
+function observerBanner(signedIn) {
+  return `<div class="observer-banner product-join-banner">
+    <span><b>${signedIn ? "Join the conversation" : "You’re browsing as a guest"}</b><small>${signedIn ? "Verify your profile to comment." : "Sign in with a preview account. Profiles are fictional."}</small></span>
+    <a class="btn btn-primary btn-sm" data-link href="${signedIn ? "/verify" : "/sign-in"}">${signedIn ? "Verify" : "Sign in"}</a>
   </div>`;
 }
 
@@ -98,7 +119,7 @@ function renderPost(p, user, s, publicMode) {
           <span class="post-time">@${escapeHtml(a.handle || a.id)} · ${timeAgo(p.createdAt)} ago · ${escapeHtml(p.sport)}</span>
         </div>
         <div class="topbar-spacer"></div>
-        ${publicMode ? "" : `<button class="trust-icon-btn" data-action="trust" data-type="post" data-id="${p.id}" title="Open K1ND Trust Trail">🛡</button>`}
+        ${publicMode ? "" : `<button class="trust-icon-btn" data-action="trust" data-type="post" data-id="${p.id}" title="Open K1ND.world Trust Trail">🛡</button>`}
         <button class="icon-btn" data-action="report" data-type="post" data-id="${p.id}" title="Report post">${flagIcon()}</button>
       </header>
 
@@ -146,7 +167,7 @@ function renderComment(c, replies = [], user, publicMode) {
           <div class="c-text">${escapeHtml(c.content)}</div>
           ${canComment(user) ? `<button class="reply-action" data-action="reply" data-id="${c.id}" data-post="${c.postId}" data-author="${c.authorId}">Reply</button>` : ""}
         </div>
-        ${publicMode ? "" : `<button class="trust-icon-btn" data-action="trust" data-type="comment" data-id="${c.id}" title="Open K1ND Trust Trail">🛡</button>`}
+        ${publicMode ? "" : `<button class="trust-icon-btn" data-action="trust" data-type="comment" data-id="${c.id}" title="Open K1ND.world Trust Trail">🛡</button>`}
         <button class="icon-btn" data-action="report" data-type="comment" data-id="${c.id}" title="Report comment">${flagIcon()}</button>
       </div>
       ${replies.length ? `<div class="comment-replies">${replies.map((r) => renderReply(r, user, publicMode)).join("")}</div>` : ""}
@@ -158,7 +179,7 @@ function renderReply(c, user, publicMode) {
   return `<div class="comment reply-comment">
     <a class="avatar-link" data-link href="${profilePath(a)}"><img class="avatar avatar-sm" src="${a.avatarUrl}" alt=""></a>
     <div class="body"><div class="c-top"><a class="c-name user-link" data-link href="${profilePath(a)}">${escapeHtml(a.displayName)}</a>${authorBadges(a, { hideRole: publicMode })}<span class="c-time">· ${timeAgo(c.createdAt)} ago</span></div><div class="c-text">${escapeHtml(c.content)}</div></div>
-    ${publicMode ? "" : `<button class="trust-icon-btn" data-action="trust" data-type="comment" data-id="${c.id}" title="Open K1ND Trust Trail">🛡</button>`}
+    ${publicMode ? "" : `<button class="trust-icon-btn" data-action="trust" data-type="comment" data-id="${c.id}" title="Open K1ND.world Trust Trail">🛡</button>`}
   </div>`;
 }
 
@@ -169,7 +190,7 @@ function repeatIcon() {
 function commentComposer(p, user, publicMode) {
   if (!canComment(user)) {
     return `<div class="locked-note">🔒
-      <span>Observers can browse and like. <a data-link href="/verify">Become verified</a> to comment.</span>
+      <span><a data-link href="${isServerAuthenticated() ? "/verify" : "/sign-in"}">${isServerAuthenticated() ? "Verify" : "Sign in"}</a> to comment.</span>
     </div>`;
   }
   const draft = escapeHtml(commentDrafts[p.id] || "");
@@ -185,9 +206,9 @@ function commentComposer(p, user, publicMode) {
     <div class="comment-composer">
       <img class="avatar avatar-sm" src="${user.avatarUrl}" alt="">
       <div class="cc-input">
-        <textarea data-comment-input data-id="${p.id}" rows="1" placeholder="Add a comment…">${draft}</textarea>
+        <textarea data-comment-input data-id="${p.id}" rows="1" aria-label="Write a comment" placeholder="Add a comment…">${draft}</textarea>
         <div class="cc-row">
-          <span class="cc-hint">${publicMode ? "Context-aware safety check" : `🛡 ${escapeHtml(contextLabel)}`}</span>
+          <span class="cc-hint">${publicMode ? "Checked before it appears" : `🛡 ${escapeHtml(contextLabel)}`}</span>
           <button class="btn btn-teal btn-sm" data-action="comment" data-id="${p.id}">Comment</button>
         </div>
       </div>
@@ -196,7 +217,7 @@ function commentComposer(p, user, publicMode) {
 
 function autoGrow(ta) { ta.style.height = "auto"; ta.style.height = ta.scrollHeight + "px"; }
 
-function attachHandlers(root, user, publicMode) {
+function attachHandlers(root, user) {
   if (!root) return;
 
   // Preserve drafts, auto-grow and stop hard-block content on the keystroke
@@ -246,7 +267,7 @@ function attachHandlers(root, user, publicMode) {
       const item = type === "post" ? state.posts.find((x) => x.id === id) : state.comments.find((x) => x.id === id);
       if (item) openTrustTrail(item, type);
     } else if (action === "report") {
-      openReport(user, type, id, publicMode);
+      openReport(user, type, id);
     }
   });
 }
@@ -291,17 +312,17 @@ const REPORT_REASONS = [
   ["Spam or off-topic", "btn-ghost"],
 ];
 
-function openReport(user, targetType, targetId, publicMode) {
+function openReport(user, targetType, targetId) {
   openModal({
     title: `Report this ${targetType}`,
-    bodyHtml: `<p class="muted">${publicMode ? "Tell us what's wrong. Reports are reviewed by the safety team." : "Tell moderators what's wrong. Reports go to the admin review queue."}</p>`,
+    bodyHtml: `<p class="muted">Tell us what’s wrong. Reports are saved in this preview.</p>`,
     buttons: [
       ...REPORT_REASONS.map(([reason, cls]) => ({
         label: reason, class: cls,
         onClick: () => {
           addReport(user, targetType, targetId, reason);
           logModerationEvent(user.id, targetType, "(reported content)", "report", reason);
-          toast(publicMode ? "Report sent to the safety team" : "Report sent to moderators");
+          toast("Report saved in this preview");
         },
       })),
       { label: "Cancel", class: "btn-quiet" },

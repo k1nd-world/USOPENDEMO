@@ -1,5 +1,5 @@
-import { getState } from "../store.js?v=4.24.1.0";
-import { getAudiencePreset, getDemoPrefs, setMetricView } from "../lib/demoMode.js?v=4.24.1.0";
+import { getState } from "../store.js?v=4.24.1.brand1";
+import { getAudiencePreset, getDemoPrefs, setMetricView } from "../lib/demoMode.js?v=4.24.1.brand1";
 import { sealSvg } from "../lib/ui.js";
 
 function liveMetrics(s) {

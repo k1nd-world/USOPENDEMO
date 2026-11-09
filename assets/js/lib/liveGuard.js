@@ -3,7 +3,7 @@
 // It stops a hard-block pattern on the keystroke/paste that would complete it,
 // while submitWithModeration remains the final backstop before publication.
 
-import { moderateContent } from "../moderation.js?v=4.24.1.0";
+import { moderateContent } from "../moderation.js?v=4.24.1.brand1";
 
 function blockedMessage(result) {
   const map = {

@@ -5,27 +5,27 @@ import {
   updateReportStatus, setModerationStatus, setVerificationStatus,
   resolveEnhancedReview, submitLanguageCandidate, resolveLanguageCandidate, resolveRedTeamCase, resolvePolicyLearning,
   resolveAppeal, getHarassmentGraph,
-} from "../store.js?v=4.24.1.0";
+} from "../store.js?v=4.24.1.brand1";
 import { escapeHtml, timeAgo, fmtDate } from "../lib/util.js";
 import { toast } from "../lib/ui.js";
 import { current, navigate } from "../lib/router.js";
-import { EMERGING_LANGUAGE_RULES, EMERGING_LANGUAGE_VERSION } from "../emergingLanguage.js?v=4.24.1.0";
-import { MULTILINGUAL_ABUSE_RULES, MULTILINGUAL_PACK_VERSION } from "../multilingualAbuse.js?v=4.24.1.0";
-import { LANGUAGE_POLICY_ARCHITECTURE } from "../languageCoverage.js?v=4.24.1.0";
-import { POLISH_ABUSE_RULES, POLISH_PACK_VERSION } from "../polishAbuse.js?v=4.24.1.0";
-import { GLOBAL_RACIAL_SLUR_RULES, GLOBAL_RACIAL_PACK_VERSION } from "../globalRacialSlurs.js?v=4.24.1.0";
-import { AUSTRALIAN_ABUSE_RULES, AUSTRALIAN_PACK_VERSION } from "../australianAbuse.js?v=4.24.1.0";
-import { CZECH_BALTIC_ABUSE_RULES, CZECH_BALTIC_PACK_VERSION } from "../czechBalticAbuse.js?v=4.24.1.0";
-import { CONTEXT_ENGINE_VERSION } from "../contextIntelligence.js?v=4.24.1.0";
-import { UNCERTAINTY_GUARD_VERSION } from "../uncertaintyGuard.js?v=4.24.1.0";
-import { WESTERN_EUROPEAN_ABUSE_RULES, WESTERN_EUROPEAN_PACK_VERSION } from "../westernEuropeanAbuse.js?v=4.24.1.0";
-import { PRIORITY_GLOBAL_ABUSE_RULES, PRIORITY_GLOBAL_PACK_VERSION } from "../priorityGlobalAbuse.js?v=4.24.1.0";
-import { NEXT_WAVE_ABUSE_RULES, NEXT_WAVE_PACK_VERSION } from "../nextWaveAbuse.js?v=4.24.1.0";
-import { V412_LANGUAGE_RULES, V412_LANGUAGE_PACK_VERSION } from "../v412LanguageWave.js?v=4.24.1.0";
-import { V412_SIGNAL_RULES, V412_SIGNAL_PACK_VERSION } from "../v412ContextSignals.js?v=4.24.1.0";
-import { getLanguageQualitySnapshot } from "../languageQuality.js?v=4.24.1.0";
-import { getServerEvidenceSummary, getServerHealth, persistAdjudicationOnServer } from "../serverEvidence.js?v=4.24.1.0";
-import { getModerationCases, getEvaluationSummary, updateModerationCase } from "../serverPlatform.js?v=4.24.1.0";
+import { EMERGING_LANGUAGE_RULES, EMERGING_LANGUAGE_VERSION } from "../emergingLanguage.js?v=4.24.1.brand1";
+import { MULTILINGUAL_ABUSE_RULES, MULTILINGUAL_PACK_VERSION } from "../multilingualAbuse.js?v=4.24.1.brand1";
+import { LANGUAGE_POLICY_ARCHITECTURE } from "../languageCoverage.js?v=4.24.1.brand1";
+import { POLISH_ABUSE_RULES, POLISH_PACK_VERSION } from "../polishAbuse.js?v=4.24.1.brand1";
+import { GLOBAL_RACIAL_SLUR_RULES, GLOBAL_RACIAL_PACK_VERSION } from "../globalRacialSlurs.js?v=4.24.1.brand1";
+import { AUSTRALIAN_ABUSE_RULES, AUSTRALIAN_PACK_VERSION } from "../australianAbuse.js?v=4.24.1.brand1";
+import { CZECH_BALTIC_ABUSE_RULES, CZECH_BALTIC_PACK_VERSION } from "../czechBalticAbuse.js?v=4.24.1.brand1";
+import { CONTEXT_ENGINE_VERSION } from "../contextIntelligence.js?v=4.24.1.brand1";
+import { UNCERTAINTY_GUARD_VERSION } from "../uncertaintyGuard.js?v=4.24.1.brand1";
+import { WESTERN_EUROPEAN_ABUSE_RULES, WESTERN_EUROPEAN_PACK_VERSION } from "../westernEuropeanAbuse.js?v=4.24.1.brand1";
+import { PRIORITY_GLOBAL_ABUSE_RULES, PRIORITY_GLOBAL_PACK_VERSION } from "../priorityGlobalAbuse.js?v=4.24.1.brand1";
+import { NEXT_WAVE_ABUSE_RULES, NEXT_WAVE_PACK_VERSION } from "../nextWaveAbuse.js?v=4.24.1.brand1";
+import { V412_LANGUAGE_RULES, V412_LANGUAGE_PACK_VERSION } from "../v412LanguageWave.js?v=4.24.1.brand1";
+import { V412_SIGNAL_RULES, V412_SIGNAL_PACK_VERSION } from "../v412ContextSignals.js?v=4.24.1.brand1";
+import { getLanguageQualitySnapshot } from "../languageQuality.js?v=4.24.1.brand1";
+import { getServerEvidenceSummary, getServerHealth, persistAdjudicationOnServer } from "../serverEvidence.js?v=4.24.1.brand1";
+import { getModerationCases, getEvaluationSummary, updateModerationCase } from "../serverPlatform.js?v=4.24.1.brand1";
 
 export function renderAdmin(outlet) {
   const user = useCurrentUser();

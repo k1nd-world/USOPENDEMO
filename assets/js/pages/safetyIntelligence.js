@@ -1,9 +1,9 @@
-import { useCurrentUser, isAdmin } from "../store.js?v=4.24.1.0";
+import { useCurrentUser, isAdmin } from "../store.js?v=4.24.1.brand1";
 import { escapeHtml } from "../lib/util.js";
 import { toast } from "../lib/ui.js";
 import {
   getSafetyIntelligenceSummary, inspectSafetyIntelligence, runSafetyAdversarialGate,
-} from "../serverPlatform.js?v=4.24.1.0";
+} from "../serverPlatform.js?v=4.24.1.brand1";
 
 const label = (value) => escapeHtml(String(value || "unknown").replaceAll("_", " "));
 const sentence = (value) => escapeHtml(String(value || "Not available."));

@@ -1,11 +1,11 @@
-import { useCurrentUser, isAdmin } from "../store.js?v=4.24.1.0";
+import { useCurrentUser, isAdmin } from "../store.js?v=4.24.1.brand1";
 import { escapeHtml } from "../lib/util.js";
 import { toast } from "../lib/ui.js";
 import {
   authorizeTournamentEscalation, getTournamentMatchReport, getTournamentOperations,
   launchTournamentDemo, resetTournamentDemo, runTournamentPreflight,
   updateTournamentAthletePhase, updateTournamentIncident,
-} from "../tournamentPlatform.js?v=4.24.1.0";
+} from "../tournamentPlatform.js?v=4.24.1.brand1";
 
 let operations = null;
 let preflight = null;

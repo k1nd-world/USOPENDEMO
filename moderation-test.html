@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>K1ND · Moderation engine — test harness</title>
+  <title>K1ND.world · Moderation engine — test harness</title>
   <link rel="stylesheet" href="/assets/css/styles.css?v=4.24.1.yellow.20261022" />
   <style>
     .wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 96px; }
@@ -52,11 +52,12 @@
     }
     .chip:hover { background: var(--paper); }
   </style>
+  <link rel="stylesheet" href="/assets/css/product.css?v=mvp.10.2026.brand1">
 </head>
 <body>
   <div class="wrap">
     <div class="head">
-      <a class="brand" href="/" data-link><span class="k">K1ND</span><span class="dot">.</span><span class="world">world</span></a>
+      <a class="brand product-brand" href="/" data-link><span class="product-brand-image" role="img" aria-label="K1ND.world"></span></a>
       <div class="demo-note" style="margin-top:14px">
         <span>🧪</span>
         <div><b>Stage 2 · Moderation engine (standalone).</b> This page is not part of
@@ -120,8 +121,8 @@
   <script type="module">
     let moderateContent, TEST_CASES;
     try {
-      ({ moderateContent, TEST_CASES } = await import("/assets/js/moderation.js?v=4.24.1.0"));
-      window.__attachLiveSafetyGuard = (await import("/assets/js/lib/liveGuard.js?v=4.24.1.0")).attachLiveSafetyGuard;
+      ({ moderateContent, TEST_CASES } = await import("/assets/js/moderation.js?v=4.24.1.brand1"));
+      window.__attachLiveSafetyGuard = (await import("/assets/js/lib/liveGuard.js?v=4.24.1.brand1")).attachLiveSafetyGuard;
       window.__k1ndLoaded = true;
     } catch (err) {
       console.error("Failed to load moderation engine:", err);
@@ -222,7 +223,7 @@
         inner += `<p style="margin-top:8px;font-weight:560">The original stays hidden until enhanced moderation approves it.</p>`;
       }
       if (r.outcome === "block") {
-        inner += `<p style="margin-top:8px;font-weight:560">The original cannot be posted on K1ND${r.safeDraftSuggestion ? "; only the separately validated clean draft may be used" : ""}.</p>`;
+        inner += `<p style="margin-top:8px;font-weight:560">The original cannot be posted on K1ND.world${r.safeDraftSuggestion ? "; only the separately validated clean draft may be used" : ""}.</p>`;
       }
       inner += `</div>`;
       result.innerHTML = inner;

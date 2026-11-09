@@ -1,6 +1,6 @@
 // assets/js/pages/landing.js — the public front door (route "/").
 
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 export function renderLanding(outlet) {
   const publicMode = isPublicExperience();
@@ -43,7 +43,7 @@ export function renderLanding(outlet) {
       </div>
     </section>
 
-    <section class="trust-strip" aria-label="K1ND product principles">
+    <section class="trust-strip" aria-label="K1ND.world product principles">
       <div><strong>Verified-first</strong><span>Private verification. Public confidence.</span></div>
       <div><strong>Accountability by design</strong><span>Real identity behind every participating voice.</span></div>
       <div><strong>Prevention before publication</strong><span>AI-assisted checks intervene before harm goes live.</span></div>
@@ -63,7 +63,7 @@ export function renderLanding(outlet) {
     <!-- MODEL -->
     <section>
       <div class="sec-head">
-        <span class="eyebrow">How K1ND works</span>
+        <span class="eyebrow">How K1ND.world works</span>
         <h2>Safety is built into participation, not added after the damage is done</h2>
         <p>Three connected layers reduce harmful content before it reaches the public feed.</p>
       </div>
@@ -77,7 +77,7 @@ export function renderLanding(outlet) {
         <div class="pillar">
           <div class="num">02</div>
           <h3>Intervention before publication</h3>
-          <p>When language becomes personal or aggressive, K1ND keeps the author's identifiable proposition and critical tone, removes the abusive span, and shows what was retained. If no real point exists, it refuses to invent one.</p>
+          <p>When language becomes personal or aggressive, K1ND.world keeps the author's identifiable proposition and critical tone, removes the abusive span, and shows what was retained. If no real point exists, it refuses to invent one.</p>
         </div>
         <div class="pillar">
           <div class="num">03</div>
@@ -94,7 +94,7 @@ export function renderLanding(outlet) {
         <div class="sec-head">
           <span class="eyebrow">A safer place for sport</span>
           <h2>Sport needs passion. It does not need personal abuse.</h2>
-          <p>Athletes compete under intense public scrutiny, and a difficult result can trigger abuse within seconds. K1ND is designed
+          <p>Athletes compete under intense public scrutiny, and a difficult result can trigger abuse within seconds. K1ND.world is designed
             to preserve the energy of sporting conversation while reducing the personal harm
             that too often follows high-emotion moments.</p>
         </div>
@@ -135,7 +135,7 @@ export function renderLanding(outlet) {
     </section>
 
     <footer class="site-footer">
-      <span><strong>F1ND your K1ND.</strong>${publicMode ? " — Passion stays. Abuse doesn't." : " — MVP v10/2026. Demo data only."}</span>
+      <span><strong>F1ND your K1ND.world.</strong>${publicMode ? " — Passion stays. Abuse doesn't." : " — MVP v10/2026. Demo data only."}</span>
       <span>No gambling advertising.${publicMode ? "" : " Fictional profiles with rights-safe, public-domain tennis photography."}</span>
     </footer>
   </div>

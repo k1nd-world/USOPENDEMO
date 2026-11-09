@@ -1,4 +1,4 @@
-import { serverRequest } from "./serverPlatform.js?v=4.24.1.0";
+import { serverRequest } from "./serverPlatform.js?v=4.24.1.brand1";
 
 export function getTournamentOperations() {
   return serverRequest("/api/tournament-operations/summary");

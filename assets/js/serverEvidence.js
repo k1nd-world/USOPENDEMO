@@ -1,4 +1,4 @@
-import { serverRequest } from "./serverPlatform.js?v=4.24.1.0";
+import { serverRequest } from "./serverPlatform.js?v=4.24.1.brand1";
 
 async function request(path, options = {}) {
   return serverRequest(path, options);

@@ -1,21 +1,21 @@
 // assets/js/moderation.js
-import { moderateEmergingLanguage } from "./emergingLanguage.js?v=4.24.1.0";
-import { moderateMultilingualAbuse } from "./multilingualAbuse.js?v=4.24.1.0";
-import { getLanguageCoverage } from "./languageCoverage.js?v=4.24.1.0";
-import { moderatePolishAbuse } from "./polishAbuse.js?v=4.24.1.0";
-import { moderateGlobalRacialSlurs } from "./globalRacialSlurs.js?v=4.24.1.0";
-import { refineRewrite } from "./intentRewrite.js?v=4.24.1.0";
-import { moderateAustralianAbuse } from "./australianAbuse.js?v=4.24.1.0";
-import { moderateCzechBalticAbuse } from "./czechBalticAbuse.js?v=4.24.1.0";
-import { moderateWesternEuropeanAbuse } from "./westernEuropeanAbuse.js?v=4.24.1.0";
-import { moderatePriorityGlobalAbuse, PRIORITY_GLOBAL_TEST_CASES } from "./priorityGlobalAbuse.js?v=4.24.1.0";
-import { moderateNextWaveAbuse, NEXT_WAVE_TEST_CASES } from "./nextWaveAbuse.js?v=4.24.1.0";
-import { analyzeContext, applyContextPolicy, finalizeContext } from "./contextIntelligence.js?v=4.24.1.0";
-import { moderateUncertainty } from "./uncertaintyGuard.js?v=4.24.1.0";
-import { moderateV412LanguageWave, V412_LANGUAGE_TEST_CASES } from "./v412LanguageWave.js?v=4.24.1.0";
-import { moderateV412Signals, V412_SIGNAL_TEST_CASES } from "./v412ContextSignals.js?v=4.24.1.0";
-import { evaluateRewriteFidelity } from "./rewriteFidelity.js?v=4.24.1.0";
-import { analyzeSemanticIntent, applySemanticPolicy, SEMANTIC_INTENT_TEST_CASES } from "./semanticIntent.js?v=4.24.1.0";
+import { moderateEmergingLanguage } from "./emergingLanguage.js?v=4.24.1.brand1";
+import { moderateMultilingualAbuse } from "./multilingualAbuse.js?v=4.24.1.brand1";
+import { getLanguageCoverage } from "./languageCoverage.js?v=4.24.1.brand1";
+import { moderatePolishAbuse } from "./polishAbuse.js?v=4.24.1.brand1";
+import { moderateGlobalRacialSlurs } from "./globalRacialSlurs.js?v=4.24.1.brand1";
+import { refineRewrite } from "./intentRewrite.js?v=4.24.1.brand1";
+import { moderateAustralianAbuse } from "./australianAbuse.js?v=4.24.1.brand1";
+import { moderateCzechBalticAbuse } from "./czechBalticAbuse.js?v=4.24.1.brand1";
+import { moderateWesternEuropeanAbuse } from "./westernEuropeanAbuse.js?v=4.24.1.brand1";
+import { moderatePriorityGlobalAbuse, PRIORITY_GLOBAL_TEST_CASES } from "./priorityGlobalAbuse.js?v=4.24.1.brand1";
+import { moderateNextWaveAbuse, NEXT_WAVE_TEST_CASES } from "./nextWaveAbuse.js?v=4.24.1.brand1";
+import { analyzeContext, applyContextPolicy, finalizeContext } from "./contextIntelligence.js?v=4.24.1.brand1";
+import { moderateUncertainty } from "./uncertaintyGuard.js?v=4.24.1.brand1";
+import { moderateV412LanguageWave, V412_LANGUAGE_TEST_CASES } from "./v412LanguageWave.js?v=4.24.1.brand1";
+import { moderateV412Signals, V412_SIGNAL_TEST_CASES } from "./v412ContextSignals.js?v=4.24.1.brand1";
+import { evaluateRewriteFidelity } from "./rewriteFidelity.js?v=4.24.1.brand1";
+import { analyzeSemanticIntent, applySemanticPolicy, SEMANTIC_INTENT_TEST_CASES } from "./semanticIntent.js?v=4.24.1.brand1";
 // =============================================================================
 // K1ND.world — pre-publication moderation engine (Phase 1, pure client-side).
 //
@@ -23,7 +23,7 @@ import { analyzeSemanticIntent, applySemanticPolicy, SEMANTIC_INTENT_TEST_CASES 
 //   outcome: "clean" | "warning" | "review" | "block"
 //
 // This function runs BEFORE any post or comment is written to the store —
-// stopping harmful content before publication is the entire point of K1ND.
+// stopping harmful content before publication is the entire point of K1ND.world.
 //   • clean   → allowed as typed.
 //   • warning → "Are you sure?" — targeted, aggressive, insulting or borderline.
 //               A safer rewrite is offered, generated FROM the user's own text.
@@ -127,7 +127,7 @@ function containsSlur(original, norm) {
   return [...SLUR_EVASION_RES, ...SLUR_PHRASE_EVASION_RES].some((re) => re.test(folded) || re.test(bangAsI));
 }
 
-// Severe targeted misogynistic abuse that the K1ND policy does not permit to
+// Severe targeted misogynistic abuse that the K1ND.world policy does not permit to
 // be published. Kept separate from the hate-slur taxonomy so moderation logs
 // use an accurate reason code. Common spacing, punctuation, repeated-letter
 // and leetspeak evasions are handled by the same pre-publication guard.
@@ -583,7 +583,7 @@ function suggestRewrite(original) {
   if (directProfanityRewrite) return directProfanityRewrite;
 
   // Preserve harsh criticism of the sporting action while removing a trailing
-  // personal insult. This is a core K1ND distinction: "terrible pass" can stay;
+  // personal insult. This is a core K1ND.world distinction: "terrible pass" can stay;
   // "you idiot" cannot.
   if (/\b(?:performance|match|game|set|result|decision|call|shot|serve|return|strategy|tactic|play|pass|tackle|penalty|lap|over|wicket|delivery|race|pit\s*stop)\b/i.test(direct) &&
       /,?\s*you\s+(?:are\s+|were\s+)?(?:an?\s+)?(?:idiot|moron|clown|loser|muppet|numpty|donkey|coward)\b/i.test(direct)) {
@@ -777,7 +777,7 @@ function suggestRewrite(original) {
 
 
 // Strong criticism of a sporting object (performance, decision, shot, strategy)
-// is deliberately allowed. K1ND intervenes when criticism becomes a personal
+// is deliberately allowed. K1ND.world intervenes when criticism becomes a personal
 // attack, not simply because the sporting opinion is harsh. These phrases are
 // removed from the warning scan; any other abusive wording in the same message
 // still triggers the normal rules.
@@ -1023,7 +1023,7 @@ function decisionAnalysis(original, result, context) {
     abuseElement,
     contextualReading: directSelfHarm ? "direct encouragement of self-harm" : context?.speechAct?.label || (targetType === "sporting action or object" ? "sporting criticism" : targetType === "person" ? "interpersonal / targeted language" : "general expression"),
     signals:[...new Set(signals)],
-    policyRationale: result.policyRationale || `${result.reason}. K1ND distinguishes criticism of sporting actions from language that harms, degrades, threatens, exposes or unfairly accuses a person.`,
+    policyRationale: result.policyRationale || `${result.reason}. K1ND.world distinguishes criticism of sporting actions from language that harms, degrades, threatens, exposes or unfairly accuses a person.`,
     confidence: result.contextOverride ? "high" : result.outcome === "clean" ? "medium" : result.outcome === "warning" ? "medium-high" : "high",
     action,
     codedMeaning:result.codedMeaning || null,
@@ -1084,8 +1084,8 @@ export function moderateContent(text, conversationContext = {}) {
       : safeOptions.length ? {
         ...rewrite, status:"fidelity_not_proven", suggestion:undefined, suppressedCandidate:safeOptions[0].suggestion,
         evaluation:safeOptions[0].evaluation, options:[],
-        rationale:"The possible wording passed the safety rules, but K1ND could not prove that it preserves the author's real point, so it is withheld.",
-      } : { status:"no_validated_option", suggestion:undefined, preservedPoint:"None validated", removed:rewrite.removed, clauses:rewrite.clauses, options:[], rationale:"Possible wording was generated, but no option passed K1ND's own moderation rules, so none is offered." };
+        rationale:"The possible wording passed the safety rules, but K1ND.world could not prove that it preserves the author's real point, so it is withheld.",
+      } : { status:"no_validated_option", suggestion:undefined, preservedPoint:"None validated", removed:rewrite.removed, clauses:rewrite.clauses, options:[], rationale:"Possible wording was generated, but no option passed K1ND.world's own moderation rules, so none is offered." };
   }
   let refined = ["warning", "review"].includes(result.outcome)
     ? { ...result, rewriteSuggestion:rewrite.suggestion, rewrite }
@@ -1097,7 +1097,7 @@ export function moderateContent(text, conversationContext = {}) {
     if (draftDecision.outcome === "clean") {
       refined = { ...refined, safeDraftSuggestion:rewrite.suggestion, rewrite:{ ...rewrite, validatedClean:true } };
     } else {
-      refined = { ...result, rewrite:{ status:"blocked_no_safe_draft", suggestion:undefined, preservedPoint:"None validated", removed:"Prohibited original", rationale:"A possible draft was found but did not pass K1ND's own moderation rules, so it is not offered." } };
+      refined = { ...result, rewrite:{ status:"blocked_no_safe_draft", suggestion:undefined, preservedPoint:"None validated", removed:"Prohibited original", rationale:"A possible draft was found but did not pass K1ND.world's own moderation rules, so it is not offered." } };
     }
   }
   if (refined.rewrite) {
@@ -1117,7 +1117,7 @@ export function moderateContent(text, conversationContext = {}) {
           suppressedCandidate:refined.rewrite.suggestion,
           suggestion:undefined,
           options:[],
-          rationale:"A safer sentence was found, but K1ND could not prove that it accurately preserves the author's real point. It is withheld rather than replaced with generic wording.",
+          rationale:"A safer sentence was found, but K1ND.world could not prove that it accurately preserves the author's real point. It is withheld rather than replaced with generic wording.",
         },
       };
     }
@@ -1169,7 +1169,7 @@ export const TEST_CASES = [
   { input: "तुम साला हो।", expect: "warning", expectNoRewrite:true },
   { input: "The literal brother-in-law word is saala.", expect: "clean", note: "Literal kinship explanation remains allowed." },
   { input: "You haraam saala.", expect: "warning", expectNoRewrite:true },
-  { input: "Kurwa mać!", expect: "warning", expectNoRewrite:true, note: "The Polish phrase is a profane exclamation with no further point, so K1ND does not invent a rewrite." },
+  { input: "Kurwa mać!", expect: "warning", expectNoRewrite:true, note: "The Polish phrase is a profane exclamation with no further point, so K1ND.world does not invent a rewrite." },
   { input: "Kurva matc!", expect: "warning", expectNoRewrite:true, note: "The phonetic spelling is recognised, but a profanity-only draft has no proposition to preserve." },
   { input: "Ty jesteś kurwą.", expect: "block", note: "Polish sexualised abuse directed at a person is hard-blocked." },
   { input: "Kurwa! Znowu przegraliśmy!", expect: "warning", expectRewrite: "Znowu przegraliśmy!", note: "The Polish sporting statement is retained verbatim while the expletive is removed." },
@@ -1456,7 +1456,7 @@ export const TEST_CASES = [
     input: "You are such an idiot.",
     expect: "warning",
     expectNoRewrite: true,
-    note: "A bare insult has no recoverable point, so K1ND does not manufacture disagreement.",
+    note: "A bare insult has no recoverable point, so K1ND.world does not manufacture disagreement.",
   },
   {
     input: "You played like a clown today.",

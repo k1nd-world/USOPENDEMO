@@ -1,11 +1,11 @@
 // assets/js/pages/profile.js
 
 import {
-  useCurrentUser, getState, canComment, canPublish, isAdmin, profilePath, updateProfile,
-} from "../store.js?v=4.24.1.0";
+  useCurrentUser, getState, canComment, canPublish, isAdmin, profilePath, updateProfile, isServerAuthenticated,
+} from "../store.js?v=4.24.1.brand1";
 import { escapeHtml, timeAgo, fmtDate } from "../lib/util.js";
 import { sealSvg, authorBadges, toast } from "../lib/ui.js";
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 function userMetrics(userId, s) {
   const ev = s.moderationEvents.filter((m) => m.userId === userId);
@@ -49,6 +49,14 @@ function statusPill(status) {
 }
 
 export function renderProfile(outlet) {
+  if (!isServerAuthenticated()) {
+    outlet.innerHTML = `<section class="product-access-card">
+      <span class="eyebrow">Your account</span><h1>Profile</h1>
+      <p>Sign in to edit your profile, see your activity and manage verification.</p>
+      <a class="btn btn-teal" data-link href="/sign-in">Sign in</a>
+    </section>`;
+    return;
+  }
   const user = useCurrentUser();
   const s = getState();
   const publicMode = isPublicExperience();
@@ -86,7 +94,7 @@ export function renderProfile(outlet) {
         <div class="profile-edit-head">
           <div>
             <div class="card-eyebrow">Public profile details</div>
-            <p class="muted">These details appear on your public K1ND profile. Your handle and verification status remain fixed.</p>
+            <p class="muted">These details appear on your public K1ND.world profile. Your handle and verification status remain fixed.</p>
           </div>
           <button class="btn btn-ghost btn-sm" type="button" data-profile-edit-toggle>Edit profile</button>
         </div>

@@ -3,7 +3,7 @@
 import {
   useCurrentUser, getState, getProfile, addLike, removeLike,
   isFollowing, getFollowerCount, toggleFollow, profilePath,
-} from "../store.js?v=4.24.1.0";
+} from "../store.js?v=4.24.1.brand1";
 import { escapeHtml, timeAgo, fmtCount } from "../lib/util.js";
 import { sealSvg, heartIcon, commentIcon, authorBadges, toast } from "../lib/ui.js";
 
@@ -39,7 +39,7 @@ export function renderAthlete(outlet) {
         </div>
         <p class="athlete-bio">
           Left-handed baseline grinder chasing a first Slam. Known for marathon three-setters and
-          a ferocious return. <em>A fictional athlete created for the K1ND demo — not a real person.</em>
+          a ferocious return. <em>A fictional athlete created for the K1ND.world demo — not a real person.</em>
         </p>
         <div class="athlete-stats">
           <div class="s"><b data-follower-count>${getFollowerCount(ATHLETE_ID).toLocaleString("en-US")}</b><span>Followers</span></div>
@@ -56,8 +56,8 @@ export function renderAthlete(outlet) {
       </div>
 
       <div class="protect-panel">
-        <div class="ph">${sealSvg(18)} Protected by K1ND</div>
-        <p class="muted" style="margin-top:6px;font-size:.9rem">Athletes take abuse alone and in real time. On K1ND, harmful messages are stopped before they ever reach a player.</p>
+        <div class="ph">${sealSvg(18)} Protected by K1ND.world</div>
+        <p class="muted" style="margin-top:6px;font-size:.9rem">Athletes take abuse alone and in real time. On K1ND.world, harmful messages are stopped before they ever reach a player.</p>
         <div class="pstats">
           <div class="s"><b>${blocks}</b><span>Abusive messages hard-blocked</span></div>
           <div class="s"><b>${warnings}</b><span>Warnings shown pre-post</span></div>

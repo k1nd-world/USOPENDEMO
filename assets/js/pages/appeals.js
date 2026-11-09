@@ -1,8 +1,8 @@
-import { useCurrentUser, getState, submitAppeal, markAppealDurability } from "../store.js?v=4.24.1.0";
+import { useCurrentUser, getState, submitAppeal, markAppealDurability } from "../store.js?v=4.24.1.brand1";
 import { escapeHtml, timeAgo } from "../lib/util.js";
 import { toast } from "../lib/ui.js";
-import { persistAppealOnServer } from "../serverEvidence.js?v=4.24.1.0";
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { persistAppealOnServer } from "../serverEvidence.js?v=4.24.1.brand1";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 const APPEALABLE = new Set(["warning", "block", "review_rejected", "review_required"]);
 

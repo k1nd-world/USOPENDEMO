@@ -1,7 +1,7 @@
 // assets/js/pages/about.js
 
 import { sealSvg } from "../lib/ui.js";
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 export function renderAbout(outlet) {
   const publicMode = isPublicExperience();
@@ -10,7 +10,7 @@ export function renderAbout(outlet) {
       <div class="page-head"><div><span class="eyebrow">Accountability by design</span><h1>Sport, without the abuse</h1></div></div>
 
       <section class="about-lead">
-        <p>K1ND exists because the platforms where fans and athletes meet were built to
+        <p>K1ND.world exists because the platforms where fans and athletes meet were built to
         maximise noise, not protect people. One difficult performance can become a wall of
         anonymous abuse aimed at a single athlete. We think that's a design choice — and
         a fixable one.</p>
@@ -26,7 +26,7 @@ export function renderAbout(outlet) {
           <div class="pillar"><div class="num">02</div><h3>Intervention before publication</h3>
             <p>Borderline originals cannot bypass the check. They must be edited, safely rewritten, or held privately for enhanced moderation.</p></div>
           <div class="pillar"><div class="num">03</div><h3>Block or hold higher-risk content</h3>
-            <p>Slurs, threats, address-sharing, phone numbers and racist symbols are hard-blocked and never published. When the same draft also contains a separable legitimate point, K1ND may offer that point as a separately validated new draft; the prohibited original never bypasses the block.</p></div>
+            <p>Slurs, threats, address-sharing, phone numbers and racist symbols are hard-blocked and never published. When the same draft also contains a separable legitimate point, K1ND.world may offer that point as a separately validated new draft; the prohibited original never bypasses the block.</p></div>
         </div>
       </section>
 
@@ -34,7 +34,7 @@ export function renderAbout(outlet) {
         <div class="sec-head"><span class="eyebrow">Prevention before publication</span><h2>One check, a proportionate response</h2>
           <p>${publicMode
             ? "Posts, comments, images and memes are assessed <em>before</em> they become visible."
-            : "In the production K1ND architecture, posts, comments, images and memes are assessed <em>before</em> they become visible. This MVP fully demonstrates the text-intervention path; identity verification and production image analysis are represented as integration workflows."}
+            : "In the production K1ND.world architecture, posts, comments, images and memes are assessed <em>before</em> they become visible. This MVP fully demonstrates the text-intervention path; identity verification and production image analysis are represented as integration workflows."}
           The goal isn't to censor rivalry or strong opinion — it's to tell the difference between heat and harm.</p></div>
         <div class="ladder">
           <div class="rung ok"><b>Allow</b><span>Normal debate, criticism, humour</span></div>
@@ -60,9 +60,9 @@ export function renderAbout(outlet) {
         <div class="founder-note">
           <div class="founder-note-label">A note from the founder</div>
           <div class="founder-note-grid">
-            <h2>Why I am building K1ND</h2>
+            <h2>Why I am building K1ND.world</h2>
             <div class="founder-note-copy">
-              <p>K1ND began with a simple question: why do we accept behaviour towards athletes online that would never be tolerated in a stadium, workplace or school?</p>
+              <p>K1ND.world began with a simple question: why do we accept behaviour towards athletes online that would never be tolerated in a stadium, workplace or school?</p>
               <p>As a father of three, I do not believe the next generation should have to choose between taking part online and protecting their wellbeing. Players should not be expected to become their own moderation department after a difficult match.</p>
               <p>This is not about removing criticism, rivalry or emotion from sport. It is about redesigning participation so there is accountability behind every voice, intervention before publication, and a clear safeguarding response when risk escalates.</p>
               <p class="founder-signoff"><strong>Nimesh Chandarana</strong><span>Founder, K1ND.world</span></p>

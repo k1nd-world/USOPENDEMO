@@ -1,14 +1,15 @@
-import { isAdmin, useCurrentUser } from "../store.js?v=4.24.1.0";
-import { moderateContent } from "../moderation.js?v=4.24.1.0";
-import { refineRewrite } from "../intentRewrite.js?v=4.24.1.0";
+import { isAdmin, useCurrentUser } from "../store.js?v=4.24.1.brand1";
+import { moderateContent } from "../moderation.js?v=4.24.1.brand1";
+import { refineRewrite } from "../intentRewrite.js?v=4.24.1.brand1";
 import {
   audienceArenaEventsUrl, getArenaPublicPreview, getArenaSessionState,
   getAudienceArenaSummary, hydrateArenaSession, joinAudienceArena,
   leaveAudienceArena, resetAudienceArena, runAudienceArenaRehearsal,
   sendAudienceArenaMessage, updateAudienceArenaControls,
-} from "../arenaPlatform.js?v=4.24.1.0";
+} from "../arenaPlatform.js?v=4.24.1.brand1";
 import { escapeHtml, timeAgo } from "../lib/util.js";
 import { toast } from "../lib/ui.js";
+import { current } from "../lib/router.js";
 
 let fanArena = null;
 let fanDecision = null;
@@ -17,6 +18,7 @@ let fanDraft = "";
 let fanSource = null;
 let fanPoll = null;
 let fanConnection = "connecting";
+let fanVisit = 0;
 let athleteArena = null;
 let athleteSource = null;
 let athletePoll = null;
@@ -26,28 +28,31 @@ let controlSource = null;
 let controlPoll = null;
 let controlConnection = "connecting";
 
-const FAN_PRESETS = [
-  ["Pure passion", "Fuck what a great shot"],
-  ["Sporting criticism", "That second serve was too predictable today."],
-  ["Mixed attack", "Your first serve kept landing short, you useless clown."],
-  ["Credible threat", "I will hurt you outside the stadium after the match."],
-];
-
 function stopFanLive() { if (fanSource) fanSource.close(); fanSource = null; clearTimeout(fanPoll); }
+export function closeMatchdayView() { fanVisit++; stopFanLive(); }
+function isMatchdayOutlet(outlet) { return current() === "/arena" && document.body.contains(outlet); }
 function stopAthleteLive() { if (athleteSource) athleteSource.close(); athleteSource = null; clearTimeout(athletePoll); }
 function stopControlLive() { if (controlSource) controlSource.close(); controlSource = null; clearTimeout(controlPoll); }
 
 export async function renderAudienceArena(outlet) {
   stopAthleteLive(); stopControlLive(); stopFanLive();
-  outlet.innerHTML = loading("Opening the Live Audience Arena…", "Checking the room and your temporary event pass.");
+  const visit = ++fanVisit;
+  const active = () => visit === fanVisit && isMatchdayOutlet(outlet);
+  outlet.innerHTML = loading("Opening Matchday…", "Checking your match access.");
   let preview;
   try {
     const requestedCode = new URLSearchParams(window.location.search).get("room") || "";
     preview = (await getArenaPublicPreview(requestedCode)).arena;
+    if (!active()) return;
     await hydrateArenaSession();
-    if (getArenaSessionState().authenticated) fanArena = (await getAudienceArenaSummary("fan")).arena;
+    if (!active()) return;
+    if (getArenaSessionState().authenticated) {
+      const result = await getAudienceArenaSummary("fan");
+      if (!active()) return;
+      fanArena = result.arena;
+    }
   } catch (error) {
-    outlet.innerHTML = errorCard("Arena connection unavailable", error.message);
+    if (active()) outlet.innerHTML = errorCard("Matchday is unavailable", error.message);
     return;
   }
   if (!getArenaSessionState().authenticated || !fanArena) {
@@ -62,88 +67,81 @@ function paintJoin(outlet, preview) {
   const code = new URLSearchParams(window.location.search).get("room") || "";
   outlet.innerHTML = `
     <div class="arena-wrap arena-join-wrap">
-      <section class="arena-join-hero">
-        <div><span class="arena-live-pill"><i></i> ${escapeHtml(preview.status)} · local venue mode</span>
-          <h1>Join ${escapeHtml(preview.event.court)}.<br><em>Your voice, protected in real time.</em></h1>
-          <p>Use the room code from the presenter. Your temporary event pass lasts only for this demonstration and does not create a permanent social account.</p>
-          <div class="arena-proof-row"><span>✓ Server-owned decisions</span><span>✓ No external service required</span><span>✓ Hostile originals stay away from ${escapeHtml(preview.event.score.player)}</span></div>
+      <section class="arena-join-hero product-matchday">
+        <div><span class="arena-live-pill">Matchday</span>
+          <h1>${escapeHtml(preview.event.court)}</h1>
+          <p>Follow the match and talk with the people watching it with you.</p>
+          <p class="product-match-disclosure">Product preview with a sample match.</p>
         </div>
         <form class="arena-join-card" data-arena-join>
-          <span class="mini-kicker">Temporary event pass</span><h2>Enter the Arena</h2>
+          <h2>Join the conversation</h2>
+          <p>Enter the room code you were given. The pass is valid for this match only.</p>
           <label>Display name<input name="displayName" maxlength="30" autocomplete="nickname" placeholder="Your first name" required></label>
-          <label>Room code<input name="roomCode" value="${escapeHtml(code)}" maxlength="12" autocomplete="off" placeholder="K1ND••" required></label>
-          <button class="btn btn-teal" type="submit">Join live audience</button>
-          <small>${preview.activeParticipants} audience participants connected · room ${escapeHtml(preview.status)}</small>
+          <label>Room code<input name="roomCode" value="${escapeHtml(code)}" maxlength="12" autocomplete="off" placeholder="Room code" required></label>
+          <button class="btn btn-teal" type="submit">Join Matchday</button>
         </form>
       </section>
-      <section class="arena-join-story"><article><b>1 · Speak naturally</b><p>Passion and strong sporting criticism remain welcome.</p></article><article><b>2 · See the reason</b><p>K1ND explains target, speech act, abuse mechanism and delivery action.</p></article><article><b>3 · Repair the point</b><p>Mixed abuse can keep its real sporting observation without a generic rewrite.</p></article><article><b>4 · Protect the player</b><p>Only allowed content enters the athlete stream.</p></article></section>
-      <div class="arena-boundary"><b>Offline-safe demonstration</b><span>All interface assets and moderation logic used here are local. Multiple devices require a trusted local network explicitly enabled by the presenter.</span></div>
     </div>`;
   outlet.querySelector("[data-arena-join]")?.addEventListener("submit", async (event) => {
     event.preventDefault(); const button = event.currentTarget.querySelector("button");
-    const form = new FormData(event.currentTarget); button.disabled = true; button.textContent = "Issuing temporary pass…";
+    const form = new FormData(event.currentTarget); button.disabled = true; button.textContent = "Joining…";
     try {
       const result = await joinAudienceArena(form.get("displayName"), form.get("roomCode"));
       fanArena = result.arena; fanDecision = null; fanDraft = "";
       paintFan(outlet); connectFan(outlet);
     } catch (error) {
-      toast(error.message || "The event pass could not be issued"); button.disabled = false; button.textContent = "Join live audience";
+      toast(error.message || "The event pass could not be issued"); button.disabled = false; button.textContent = "Join Matchday";
     }
   });
 }
 
 function paintFan(outlet) {
+  if (!isMatchdayOutlet(outlet)) return;
   const session = getArenaSessionState();
-  const c = fanArena.counters; const crowd = fanArena.crowd;
   const athlete = fanArena.event.score.player;
   outlet.innerHTML = `
     <div class="arena-wrap arena-fan-wrap">
-      <section class="arena-fan-hero">
-        <div><span class="arena-live-pill"><i></i> LIVE · ${escapeHtml(fanArena.event.court)} · ${connectionLabel(fanConnection)}</span>
-          <h1>The crowd is live.<br><em>The harm isn't.</em></h1>
-          <p>Every reaction is checked by the active K1ND server before ${escapeHtml(athlete)}'s separate screen can receive it.</p></div>
+      <section class="arena-fan-hero product-matchday">
+        <div><span class="arena-live-pill">Matchday</span>
+          <h1>${escapeHtml(fanArena.event.court)}</h1>
+          <p>Share your take on the match. Messages are checked before they reach ${escapeHtml(athlete)}.</p>
+          <p class="product-match-disclosure">Product preview with a sample match.</p>
+        </div>
         ${scoreCard(fanArena.event)}
       </section>
-      <section class="arena-proof-strip"><span><b>${c.participants}</b> joined</span><span><b>${c.received}</b> received</span><span class="good"><b>${c.delivered}</b> reached ${escapeHtml(athlete)}</span><span class="protected"><b>${c.withheld}</b> protected</span><span><b>${fanArena.latency.latestMs ?? "—"}ms</b> latest local decision</span></section>
-      <section class="arena-fan-grid">
+      <section class="arena-fan-grid product-arena-conversation">
         <div class="arena-compose-card">
           <div class="arena-person-row"><span>${escapeHtml(initials(session.displayName))}</span><div><b>${escapeHtml(session.displayName)}</b><small>${escapeHtml(session.badge)} · temporary</small></div><button type="button" data-arena-leave>Leave</button></div>
-          <form data-arena-message><textarea name="message" rows="5" maxlength="700" placeholder="React to the match…" required>${escapeHtml(fanDraft)}</textarea>
-            <div class="arena-preset-row">${FAN_PRESETS.map(([label,text]) => `<button type="button" data-arena-preset="${escapeHtml(text)}">${escapeHtml(label)}</button>`).join("")}</div>
+          <form data-arena-message><textarea name="message" aria-label="Write a match reaction" rows="5" maxlength="700" placeholder="React to the match…" required>${escapeHtml(fanDraft)}</textarea>
             <div class="arena-submit-row"><span><i></i> Room ${escapeHtml(fanArena.state.status)} · ${escapeHtml(pretty(fanArena.state.shieldLevel))} shield</span><button class="btn btn-teal" type="submit">Send live reaction</button></div>
           </form>
           ${renderFanDecision()}
         </div>
-        <aside class="arena-pulse-card"><span class="mini-kicker">Live delivery pulse</span><h2>${escapeHtml(pretty(crowd.status))}</h2><p>${escapeHtml(crowd.meaning)}</p><div class="arena-pressure"><i style="width:${crowd.score}%"></i></div>
-          <div class="arena-pulse-facts"><span><b>${crowd.score}/100</b> pressure</span><span><b>${crowd.harmfulSignals}</b> harm signals</span><span><b>${escapeHtml(pretty(crowd.friction))}</b> friction</span><span><b>${crowd.replyDelaySeconds}s</b> delay</span></div>
-          <div class="arena-offline-ready"><b>● Venue-local mode ready</b><small>SSE live updates with automatic timed fallback. No cloud service is required.</small></div>
-        </aside>
       </section>
-      <section class="arena-stream"><div><span class="mini-kicker">Audience room</span><h2>What the conversation becomes</h2></div><div class="arena-stream-list">${fanArena.roomStream.slice().reverse().map(streamItem).join("") || `<div class="match-empty">Be the first live reaction.</div>`}</div></section>
-      <div class="arena-boundary"><b>Temporary participation, permanent boundary</b><span>${escapeHtml(fanArena.boundaries.privacy)} ${escapeHtml(fanArena.boundaries.operations)}</span></div>
+      <section class="arena-stream"><div><span class="mini-kicker">Audience room</span><h2>Match conversation</h2></div><div class="arena-stream-list">${fanArena.roomStream.slice().reverse().map(streamItem).join("") || `<div class="match-empty">Be the first live reaction.</div>`}</div></section>
+
     </div>`;
   attachFan(outlet);
 }
 
 function renderFanDecision() {
-  if (!fanDecision) return `<div class="arena-decision-empty"><span>↗</span><div><b>Your server decision will appear here</b><small>The fan explanation and athlete delivery happen from one authoritative result.</small></div></div>`;
+  if (!fanDecision) return `<div class="arena-decision-empty"><span>↗</span><div><b>Messages are checked before they appear</b><small>You can edit a message if it needs a change.</small></div></div>`;
   const d = fanDecision;
   const rewrite = ["warning","review"].includes(d.outcome) && fanRewrite?.suggestion
     ? `<div class="arena-rewrite"><span>YOUR POINT KEPT</span><p>${escapeHtml(fanRewrite.preservedPoint || "The sporting observation")}</p><blockquote>${escapeHtml(fanRewrite.suggestion)}</blockquote><button class="btn btn-teal btn-sm" type="button" data-arena-rewrite>Send safer version</button></div>`
     : d.outcome !== "clean" ? `<div class="match-no-rewrite"><b>No generic rewrite invented</b><span>${escapeHtml(fanRewrite?.rationale || "State a real sporting point in your own words.")}</span></div>` : "";
-  return `<div class="arena-decision outcome-${escapeHtml(d.outcome)}"><div class="arena-decision-head"><span>${d.deliveredToAthlete ? "DELIVERED LIVE" : "KEPT FROM ATHLETE"}</span><b>${escapeHtml(d.intervention)}</b><small>${escapeHtml(pretty(d.category))} · ${d.latencyMs}ms local decision · evidence ${escapeHtml(d.evidenceDigest)}</small></div>
-    <div class="arena-why"><span><small>Target</small><b>${escapeHtml(d.target)}</b></span><span><small>Speech act</small><b>${escapeHtml(d.speechAct)}</b></span><span><small>Mechanism</small><b>${escapeHtml(d.mechanism)}</b></span><span><small>Profanity function</small><b>${escapeHtml(d.profanityFunction)}</b></span></div>${rewrite}</div>`;
+  return `<div class="arena-decision outcome-${escapeHtml(d.outcome)}"><div class="arena-decision-head">
+    <span>${d.deliveredToAthlete ? "MESSAGE SENT" : "NOT SHARED"}</span>
+    <b>${escapeHtml(d.intervention)}</b>
+    </div>${rewrite}</div>`;
 }
 
 function attachFan(outlet) {
-  outlet.querySelectorAll("[data-arena-preset]").forEach((button) => button.addEventListener("click", () => {
-    const box = outlet.querySelector('[name="message"]'); box.value = button.dataset.arenaPreset; fanDraft = box.value; box.focus();
-  }));
   outlet.querySelector('[name="message"]')?.addEventListener("input", (event) => { fanDraft = event.target.value; });
   outlet.querySelector("[data-arena-message]")?.addEventListener("submit", async (event) => {
     event.preventDefault(); const button = event.currentTarget.querySelector('button[type="submit"]');
     const text = String(new FormData(event.currentTarget).get("message") || "").trim(); if (!text) return;
-    button.disabled = true; button.textContent = "K1ND is reading the moment…";
+    button.disabled = true; button.textContent = "Sending…";
     try {
       const client = moderateContent(text, { targetUserId:"u_athlete", targetIsAthlete:true, turnsConsidered:12, postMatchWindow:true });
       fanRewrite = client.rewrite || refineRewrite(text, client);
@@ -162,31 +160,38 @@ function attachFan(outlet) {
     } catch (error) { toast(error.message); }
   });
   outlet.querySelector("[data-arena-leave]")?.addEventListener("click", async () => {
-    try { await leaveAudienceArena(); fanArena = null; fanDecision = null; fanRewrite = null; stopFanLive(); renderAudienceArena(outlet); }
+    try { await leaveAudienceArena(); fanArena = null; fanDecision = null; fanRewrite = null; stopFanLive(); if (isMatchdayOutlet(outlet)) renderAudienceArena(outlet); }
     catch (error) { toast(error.message); }
   });
 }
 
 function connectFan(outlet) {
-  scheduleFanPoll(outlet);
+  if (!isMatchdayOutlet(outlet)) return;
+  const visit = fanVisit;
+  scheduleFanPoll(outlet, visit);
   if (fanSource || !window.EventSource) { fanConnection = "timed fallback"; return; }
   fanConnection = "live stream + fallback";
   fanSource = new EventSource(audienceArenaEventsUrl("fan", "", fanArena.revision));
   paintFan(outlet);
   fanSource.addEventListener("arena", (event) => {
-    if (!document.body.contains(outlet)) return stopFanLive();
+    if (visit !== fanVisit || !isMatchdayOutlet(outlet)) return;
     try { fanArena = JSON.parse(event.data).arena; fanConnection = "live stream + fallback"; paintFan(outlet); }
     catch (_) {}
   });
-  fanSource.onerror = () => { if (fanSource) fanSource.close(); fanSource = null; fanConnection = "timed fallback"; };
+  fanSource.onerror = () => { if (visit === fanVisit && fanSource) { fanSource.close(); fanSource = null; fanConnection = "timed fallback"; } };
 }
 
-function scheduleFanPoll(outlet) {
-  clearTimeout(fanPoll); fanPoll = setTimeout(async () => {
-    if (!document.body.contains(outlet)) return stopFanLive();
-    try { const next = (await getAudienceArenaSummary("fan")).arena; if (next.revision !== fanArena.revision) { fanArena = next; paintFan(outlet); } }
-    catch (_) {}
-    scheduleFanPoll(outlet);
+function scheduleFanPoll(outlet, visit) {
+  if (visit !== fanVisit || !isMatchdayOutlet(outlet)) return;
+  clearTimeout(fanPoll);
+  fanPoll = setTimeout(async () => {
+    if (visit !== fanVisit || !isMatchdayOutlet(outlet)) return;
+    try {
+      const next = (await getAudienceArenaSummary("fan")).arena;
+      if (visit !== fanVisit || !isMatchdayOutlet(outlet)) return;
+      if (next.revision !== fanArena.revision) { fanArena = next; paintFan(outlet); }
+    } catch (_) {}
+    scheduleFanPoll(outlet, visit);
   }, 1250);
 }
 
@@ -201,7 +206,7 @@ export async function renderArenaAthlete(outlet) {
 }
 
 function paintAthleteGate(outlet, message="Enter the active room code to open the protected athlete screen.") {
-  outlet.innerHTML = `<div class="arena-athlete-gate"><section><span class="arena-live-pill">K1ND ATHLETE SCREEN</span><h1>Protected live stream</h1><p>${escapeHtml(message)}</p><form data-athlete-code><input name="room" placeholder="Room code" required><button class="btn btn-teal">Open protected screen</button></form></section></div>`;
+  outlet.innerHTML = `<div class="arena-athlete-gate"><section><span class="arena-live-pill">K1ND.world ATHLETE SCREEN</span><h1>Protected live stream</h1><p>${escapeHtml(message)}</p><form data-athlete-code><input name="room" placeholder="Room code" required><button class="btn btn-teal">Open protected screen</button></form></section></div>`;
   outlet.querySelector("[data-athlete-code]")?.addEventListener("submit", (event) => {
     event.preventDefault(); const code = String(new FormData(event.currentTarget).get("room") || "").trim().toUpperCase();
     history.replaceState({}, "", `/arena-athlete?room=${encodeURIComponent(code)}`); renderArenaAthlete(outlet);

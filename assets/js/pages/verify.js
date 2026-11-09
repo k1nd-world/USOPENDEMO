@@ -3,10 +3,10 @@
 import {
   useCurrentUser, getState, getProfile, isAdmin,
   simulateVerification, setVerificationStatus,
-} from "../store.js?v=4.24.1.0";
+} from "../store.js?v=4.24.1.brand1";
 import { escapeHtml } from "../lib/util.js";
 import { sealSvg, toast } from "../lib/ui.js";
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 // Local wizard position (0..4 = steps; 5 = outcome chooser). Not persisted.
 let wizardStep = 0;
@@ -40,10 +40,10 @@ function paint(outlet) {
   outlet.innerHTML = `
     <div class="verify-wrap">
       <div class="page-head"><div><span class="eyebrow">Private verification. Public confidence.</span><h1>Get verified</h1></div></div>
-      ${publicMode ? "" : `<div class="verify-demo-banner">${sealSvg(15)} Demo verification journey — no real identity documents or biometrics are processed in this browser preview.</div>`}
+      <div class="product-preview-disclosure">${sealSvg(15)} Verification is simulated in this preview. Do not enter real identity documents or biometric information.</div>
       <div class="verification-privacy-strip">
         <div><span class="mini-kicker">What the community sees</span><b>@${escapeHtml(user.handle || user.id)} · Verified</b><span>A public verification signal — never your passport, driving licence or selfie.</span></div>
-        <div><span class="mini-kicker">What stays private</span><b>Verification provider + K1ND identity layer</b><span>${publicMode ? "Only the data and references required for identity assurance, policy and accountability are retained." : "Production architecture would retain only the data and references required for identity assurance, policy and accountability."}</span></div>
+        <div><span class="mini-kicker">What stays private</span><b>Verification provider + K1ND.world identity layer</b><span>${publicMode ? "The planned verification flow will keep identity documents out of public profiles." : "Production architecture would retain only the data and references required for identity assurance, policy and accountability."}</span></div>
       </div>
       ${body}
       ${isAdmin(user) && !publicMode ? adminOverride() : ""}
@@ -57,7 +57,7 @@ function publicVerificationStart() {
     <div class="big-seal">${sealSvg(64)}</div>
     <span class="status-pill">Identity verification</span>
     <h2>Verify once. Participate with confidence.</h2>
-    <p class="status-line">K1ND uses a specialist identity partner to confirm there is a real person behind each participating account. Your identity documents are never shown on your public profile.</p>
+    <p class="status-line">The planned app will use a specialist identity partner to verify participation. Your public profile will show your verification status.</p>
     <div class="result-cta"><a class="btn btn-teal" data-link href="/feed">Return to the feed</a></div>
   </div>`;
 }
@@ -79,7 +79,7 @@ function wizardPanel(user) {
     card = `
       <span class="step-eyebrow">Step 1 of 5</span>
       <h2>Create account / sign in</h2>
-      <p class="step-desc">You're signed in as a demo user. In production this is your real K1ND account.</p>
+      <p class="step-desc">You're signed in as a demo user. In production this is your real K1ND.world account.</p>
       <div class="fake-field"><span>${escapeHtml(user.displayName)}</span><span class="tag">demo account</span></div>
       <div class="step-actions"><button class="btn btn-teal" data-next>Continue</button></div>`;
   } else if (step === 1) {
@@ -110,7 +110,7 @@ function wizardPanel(user) {
       <span class="step-eyebrow">Step 5 of 5</span>
       <h2>ID + biometric provider</h2>
       <p class="step-desc">In the intended production flow, a specialist identity provider matches government ID to the liveness check and returns a verification decision.</p>
-      <div class="provider-note">🔌 Integration seam — a production provider such as <b>Veriff / Sumsub / Persona</b> would run this step. Sensitive ID material would not be displayed on the public K1ND profile.</div>
+      <div class="provider-note">🔌 Integration seam — a production provider such as <b>Veriff / Sumsub / Persona</b> would run this step. Sensitive ID material would not be displayed on the public K1ND.world profile.</div>
       <div class="step-actions"><button class="btn btn-teal" data-next>Run ID check</button></div>`;
   } else {
     // outcome chooser (simulated result)

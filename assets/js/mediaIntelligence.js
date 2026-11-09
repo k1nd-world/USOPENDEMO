@@ -1,5 +1,5 @@
-import { moderateContent } from "./moderation.js?v=4.24.1.0";
-import { getCsrfToken } from "./serverPlatform.js?v=4.24.1.0";
+import { moderateContent } from "./moderation.js?v=4.24.1.brand1";
+import { getCsrfToken } from "./serverPlatform.js?v=4.24.1.brand1";
 
 const RANK = { clean:0, warning:1, review:2, block:3 };
 

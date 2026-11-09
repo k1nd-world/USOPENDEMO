@@ -1,9 +1,10 @@
-import { moderateContent } from "../moderation.js?v=4.24.1.0";
-import { useCurrentUser, resetDemo, getBehaviourProfile, seedBehaviourEscalation, getState, recordRedTeamCase } from "../store.js?v=4.24.1.0";
-import { AUDIENCE_PRESETS, getAudiencePreset, setAudiencePreset, resetDemoPrefs, isPresenterLocked, setPresenterLocked } from "../lib/demoMode.js?v=4.24.1.0";
+import { moderateContent } from "../moderation.js?v=4.24.1.brand1";
+import { useCurrentUser, resetDemo, getBehaviourProfile, seedBehaviourEscalation, getState, recordRedTeamCase } from "../store.js?v=4.24.1.brand1";
+import { AUDIENCE_PRESETS, getAudiencePreset, setAudiencePreset, resetDemoPrefs, isPresenterLocked, setPresenterLocked } from "../lib/demoMode.js?v=4.24.1.brand1";
 import { escapeHtml } from "../lib/util.js";
 import { sealSvg, toast } from "../lib/ui.js";
 import { navigate } from "../lib/router.js";
+import { logoutServerSession } from "../serverPlatform.js?v=4.24.1.brand1";
 
 let labText = "";
 let selectedImageScenario = "clean";
@@ -286,7 +287,7 @@ function attach(root, outlet) {
   const result = root.querySelector("[data-break-result]");
   if (ta) ta.addEventListener("input", () => { labText = ta.value; result.innerHTML = resultCard(labText); });
 
-  root.addEventListener("click", (e) => {
+  root.addEventListener("click", async (e) => {
     const preset = e.target.closest("[data-preset]");
     if (preset) { setAudiencePreset(preset.dataset.preset); const selected = AUDIENCE_PRESETS[preset.dataset.preset]; const pill = document.querySelector(".demo-preset-pill"); if (pill) pill.textContent = `${selected.icon} ${selected.label}`; labText = selected.demoPrompt; paint(outlet); return; }
     const ex = e.target.closest("[data-break-example]");
@@ -304,7 +305,21 @@ function attach(root, outlet) {
     if (e.target.closest("[data-presenter-lock]")) { setPresenterLocked(!isPresenterLocked()); return; }
     if (e.target.closest("[data-seed-behaviour]")) { seedBehaviourEscalation(useCurrentUser().id, 2); toast("Repeat-behaviour scenario loaded"); return; }
     if (e.target.closest("[data-role-observer]")) { navigate("/sign-in"); return; }
-    if (e.target.closest("[data-guide]")) { resetDemo(); toast("Guided demo reset — choose a signed demo account"); navigate("/sign-in"); return; }
+    const guide = e.target.closest("[data-guide]");
+    if (guide) {
+      if (guide.disabled) return;
+      guide.disabled = true;
+      try {
+        await logoutServerSession();
+        resetDemo();
+        toast("Guided demo reset. Choose a preview account.");
+        navigate("/sign-in");
+      } catch (error) {
+        toast(error.message || "Could not restart the guided demo.");
+        guide.disabled = false;
+      }
+      return;
+    }
     if (e.target.closest("[data-full-reset]")) { resetDemoPrefs(); resetDemo(); labText = ""; selectedImageScenario = "clean"; selectedConversationScenario = "standalone"; toast("Demo restored to a clean starting state"); navigate("/demo-lab", true); }
   });
 }

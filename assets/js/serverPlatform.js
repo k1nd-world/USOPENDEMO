@@ -1,4 +1,4 @@
-import { hydrateServerIdentity, hydrateServerPlatform } from "./store.js?v=4.24.1.0";
+import { hydrateServerIdentity, hydrateServerPlatform } from "./store.js?v=4.24.1.brand1";
 
 let session = { authenticated:false, user:null, csrfToken:null, expiresAt:null };
 
@@ -14,11 +14,11 @@ export async function serverRequest(path, options = {}) {
   try {
     response = await fetch(path, { credentials:"same-origin", ...options, headers });
   } catch (error) {
-    throw new Error("The K1ND application service is unavailable. Open the hosted web-service address, not a static-file or Netlify upload.");
+    throw new Error("The K1ND.world application service is unavailable. Open the hosted web-service address, not a static-file or Netlify upload.");
   }
   const payload = await response.json().catch(() => ({}));
   if (response.status === 404 && path.startsWith("/api/")) {
-    throw new Error("This address is serving only the website files. K1ND requires its hosted application service for sign-in and moderation.");
+    throw new Error("This address is serving only the website files. K1ND.world requires its hosted application service for sign-in and moderation.");
   }
   if (!response.ok || !payload.ok) throw new Error(payload.error || `Server request failed (${response.status})`);
   return payload;

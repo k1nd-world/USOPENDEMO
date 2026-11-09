@@ -1,4 +1,4 @@
-import { getProfile } from "../store.js?v=4.24.1.0";
+import { getProfile } from "../store.js?v=4.24.1.brand1";
 import { openModal } from "./modal.js";
 import { escapeHtml } from "./util.js";
 import { sealSvg } from "./ui.js";
@@ -40,7 +40,7 @@ export function openTrustTrail(item, kind = "content") {
   steps.push(trailStep("●", "Published with accountability", "The public sees the account and verification seal; the accountability layer remains private."));
 
   openModal({
-    title: "K1ND Trust Trail",
+    title: "K1ND.world Trust Trail",
     bodyHtml: `
       <div class="trust-trail-head">
         <span class="seal">${sealSvg(14)} Accountability by design</span>

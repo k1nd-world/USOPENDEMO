@@ -100,7 +100,7 @@ class SPAHandler(SimpleHTTPRequestHandler):
         self.send_header("Cross-Origin-Resource-Policy", "same-origin")
         if self.request_is_secure():
             self.send_header("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
-        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'sha256-+FnytL2r4TlnINXWHTWsdSj/0XlBam2HTytdRue4KG4=' 'sha256-P0+lZtwrS0XpCgR8MvWOTb+q2rPaa8X6OlqnU3TgRxY=' 'sha256-hImhMhunsl3B/uerC3Wlwvyr1vN0nYKeJll/FxOR8yQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'")
+        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'sha256-+FnytL2r4TlnINXWHTWsdSj/0XlBam2HTytdRue4KG4=' 'sha256-x3rBvXO01U9y5q6RHpKbuPHMwdbIAbcGn5qcuzRrfag=' 'sha256-zGzSSahtfsR0mf/5YDXN2WsdeifyZ3C0z4MZv1Ko7N4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'")
         super().end_headers()
 
     def send_json(self, status, payload, headers=None):

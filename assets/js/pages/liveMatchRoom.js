@@ -1,12 +1,12 @@
-import { useCurrentUser, isAdmin } from "../store.js?v=4.24.1.0";
+import { useCurrentUser, isAdmin } from "../store.js?v=4.24.1.brand1";
 import {
   getLiveMatchRoom, sendLiveMatchMessage, updateLiveMatchPreferences, resetLiveMatchRoom,
-} from "../serverPlatform.js?v=4.24.1.0";
-import { moderateContent } from "../moderation.js?v=4.24.1.0";
-import { refineRewrite } from "../intentRewrite.js?v=4.24.1.0";
+} from "../serverPlatform.js?v=4.24.1.brand1";
+import { moderateContent } from "../moderation.js?v=4.24.1.brand1";
+import { refineRewrite } from "../intentRewrite.js?v=4.24.1.brand1";
 import { escapeHtml, timeAgo } from "../lib/util.js";
 import { toast } from "../lib/ui.js";
-import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.0";
+import { isPublicExperience } from "../lib/publicExperience.js?v=4.24.1.brand1";
 
 let room = null;
 let lastDecision = null;
@@ -28,7 +28,7 @@ export async function renderLiveMatchRoom(outlet) {
   if (["fan", "athlete", "split"].includes(requested)) viewMode = requested;
   clearTimeout(pollTimer);
   if (!room) {
-    outlet.innerHTML = `<div class="match-room-loading"><span class="live-dot"></span><b>Opening K1ND Centre Court…</b><small>Connecting the fan composer to the protected athlete inbox.</small></div>`;
+    outlet.innerHTML = `<div class="match-room-loading"><span class="live-dot"></span><b>Opening K1ND.world Centre Court…</b><small>Connecting the fan composer to the protected athlete inbox.</small></div>`;
     try {
       room = (await getLiveMatchRoom()).room;
     } catch (error) {
@@ -51,7 +51,7 @@ function paint(outlet) {
         <div class="match-live-copy">
           <div class="match-live-kicker"><span class="live-dot"></span> LIVE · ${escapeHtml(e.round)} · ${escapeHtml(e.court)}</div>
           <h1>One conversation.<br><em>Two completely different experiences.</em></h1>
-          <p>Write as a fan and watch what reaches the athlete. Every decision comes from the active K1ND server; hostile originals never appear in Mara's inbox.</p>
+          <p>Write as a fan and watch what reaches the athlete. Every decision comes from the active K1ND.world server; hostile originals never appear in Mara's inbox.</p>
           <div class="match-view-switch" role="group" aria-label="Match Room view">
             ${viewButton("split", "Split view")}${viewButton("fan", "Fan view")}${viewButton("athlete", "Athlete view")}
           </div>
@@ -88,7 +88,7 @@ function paint(outlet) {
           </div>
         </div>
 
-        <div class="decision-spine" aria-label="K1ND decision path">
+        <div class="decision-spine" aria-label="K1ND.world decision path">
           <span>K1</span><b>UNDERSTANDS</b><i>→</i><small>target</small><small>speech act</small><small>context</small><small>harm</small><em>server decision</em>
         </div>
 
@@ -97,7 +97,7 @@ function paint(outlet) {
           <div class="athlete-room-card">
             <div class="athlete-room-head">
               <img src="/assets/images/player-action.jpg" alt="Mara Volkov competing">
-              <div><span class="shield-live-pill">K1ND SHIELD LIVE</span><h2>${escapeHtml(room.athlete.displayName)}</h2><small>${escapeHtml(room.athlete.handle)} · verified athlete</small></div>
+              <div><span class="shield-live-pill">K1ND.world SHIELD LIVE</span><h2>${escapeHtml(room.athlete.displayName)}</h2><small>${escapeHtml(room.athlete.handle)} · verified athlete</small></div>
             </div>
             <div class="athlete-wellbeing"><span>✓</span><div><b>Your protected inbox is ready</b><small>${escapeHtml(room.shieldDigest.wellbeingCopy)}</small></div></div>
             <div class="protected-inbox">
@@ -131,7 +131,7 @@ function paint(outlet) {
 
       <section class="match-story-rail">
         <article><span>1</span><b>Fan speaks naturally</b><p>Strong emotion and criticism remain welcome.</p></article>
-        <article><span>2</span><b>K1ND reads the act</b><p>Target, intent, context and abuse mechanism are separated.</p></article>
+        <article><span>2</span><b>K1ND.world reads the act</b><p>Target, intent, context and abuse mechanism are separated.</p></article>
         <article><span>3</span><b>Athlete gets protection</b><p>Safe content arrives; hostility becomes private metadata.</p></article>
         <article><span>4</span><b>Humans keep authority</b><p>Review, safeguarding and account decisions are never autonomous.</p></article>
       </section>
@@ -192,7 +192,7 @@ function attach(outlet) {
     const button = event.currentTarget.querySelector('button[type="submit"]');
     const text = String(new FormData(event.currentTarget).get("message") || "").trim();
     if (!text) return;
-    button.disabled = true; button.textContent = "K1ND is reading the moment…";
+    button.disabled = true; button.textContent = "K1ND.world is reading the moment…";
     try {
       const clientDecision = moderateContent(text, { targetUserId:"u_athlete", targetIsAthlete:true, turnsConsidered:10, postMatchWindow:true });
       lastRewrite = clientDecision.rewrite || refineRewrite(text, clientDecision);

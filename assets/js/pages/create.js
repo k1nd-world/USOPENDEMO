@@ -1,13 +1,13 @@
 // assets/js/pages/create.js
 
-import { useCurrentUser, canPublish, canComment, addPost } from "../store.js?v=4.24.1.0";
-import { submitWithModeration } from "../lib/moderationFlow.js?v=4.24.1.0";
-import { attachLiveSafetyGuard, getLiveGuardIncident } from "../lib/liveGuard.js?v=4.24.1.0";
+import { useCurrentUser, canPublish, canComment, addPost, isServerAuthenticated } from "../store.js?v=4.24.1.brand1";
+import { submitWithModeration } from "../lib/moderationFlow.js?v=4.24.1.brand1";
+import { attachLiveSafetyGuard, getLiveGuardIncident } from "../lib/liveGuard.js?v=4.24.1.brand1";
 import { toast, sealSvg } from "../lib/ui.js";
 import { escapeHtml } from "../lib/util.js";
 import { navigate } from "../lib/router.js";
 import { DEMO_PHOTOS, PHOTO_KEYS, PHOTO_LABELS, PHOTO_ALTS, analysePhoto } from "../lib/photos.js";
-import { analyseUploadedMedia } from "../mediaIntelligence.js?v=4.24.1.0";
+import { analyseUploadedMedia } from "../mediaIntelligence.js?v=4.24.1.brand1";
 
 let postDraft = "";
 let postPhoto = null;
@@ -21,7 +21,7 @@ export function renderCreate(outlet) {
   let inner;
   if (canPublish(user)) inner = fullComposer(user);
   else if (canComment(user)) inner = inviteOnlyState();   // verified, not approved to post
-  else inner = observerState();                            // observer / unverified
+  else inner = observerState(isServerAuthenticated());                            // observer / unverified
 
   outlet.innerHTML = `
     <div class="create-wrap">
@@ -30,13 +30,7 @@ export function renderCreate(outlet) {
     </div>`;
 
   if (canPublish(user)) attachComposer(outlet.querySelector(".create-wrap"), user);
-  else attachSecondary(outlet.querySelector(".create-wrap"));
-}
 
-function attachSecondary(root) {
-  if (!root) return;
-  const req = root.querySelector("[data-request-access]");
-  if (req) req.addEventListener("click", () => toast("Request noted — thanks!"));
 }
 
 function fullComposer(user) {
@@ -47,24 +41,24 @@ function fullComposer(user) {
         <div class="col">
           <div class="row gap-8"><b>${escapeHtml(user.displayName)}</b>
             <span class="seal">${sealSvg(13)} Verified</span>
-            <span class="badge badge-teal" style="font-size:.68rem;padding:1px 7px">Trusted poster</span>
+
           </div>
-          <span class="muted" style="font-size:.82rem">Posting to the K1ND sport feed</span>
+          <span class="muted" style="font-size:.82rem">Posting to the K1ND.world sport feed</span>
         </div>
       </div>
-      <div class="composer-meta-row"><label>Sport <select data-post-sport>${SPORTS.map((sp) => `<option value="${sp}" ${postSport === sp ? "selected" : ""}>${sp[0].toUpperCase()+sp.slice(1)}</option>`).join("")}</select></label><span class="badge badge-teal">Chronological feed</span></div>
-      <textarea data-post-input placeholder="Share something about the match, athlete or moment…">${escapeHtml(postDraft)}</textarea>
+      <div class="composer-meta-row"><label>Sport <select data-post-sport>${SPORTS.map((sp) => `<option value="${sp}" ${postSport === sp ? "selected" : ""}>${sp[0].toUpperCase()+sp.slice(1)}</option>`).join("")}</select></label></div>
+      <textarea data-post-input aria-label="Write your post" placeholder="Share something about the match, athlete or moment…">${escapeHtml(postDraft)}</textarea>
       <div class="composer-photos">
         <span class="cp-label">${photoIcon()} Add a photo</span>
-        <div class="cp-thumbs">
+        <details class="composer-samples"><summary>Choose a sample photo</summary><div class="cp-thumbs">
           ${PHOTO_KEYS.map((k) => `<button type="button" class="cp-thumb ${postPhoto === k ? "sel" : ""}" data-photo="${k}" title="${PHOTO_LABELS[k]}"><img src="${DEMO_PHOTOS[k]}" alt="${PHOTO_ALTS[k]}"></button>`).join("")}
-        </div>
+        </div></details>
         <label class="composer-upload">${photoIcon()} Upload your own image<input type="file" accept="image/png,image/jpeg,image/webp,image/gif" data-photo-upload></label>
         <div class="composer-upload-preview" data-upload-preview></div>
-        <span class="cp-safety">Uploaded images receive on-device OCR, Apple Vision classification, caption fusion and a durable server verdict before publication.</span>
+        <span class="cp-safety">Images are checked before they appear in the feed.</span>
       </div>
       <div class="composer-foot">
-        <span class="hint">${sealSvg(13)} Think before you post. Every post is checked before it goes live</span>
+        <span class="hint">${sealSvg(13)} Checked before it appears in the feed.</span>
         <button class="btn btn-teal" data-post-submit>Publish</button>
       </div>
     </div>`;
@@ -78,28 +72,23 @@ function inviteOnlyState() {
   return `
     <div class="locked-state">
       <span class="lock-badge">🔒 Invite-only</span>
-      <h2>You're verified — posting is next</h2>
-      <p>You are verified. Posting access is currently invite-only for trusted launch users.
-        You can already comment on any post in the feed.</p>
+      <h2>Posting access</h2>
+      <p>You can comment in the feed. Posting is currently invite-only.</p>
       <div class="row gap-12 wrap" style="margin-top:18px">
-        <button class="btn btn-ghost" data-request-access>Request posting access</button>
         <a class="btn btn-teal" data-link href="/feed">Go to the feed</a>
       </div>
-      <div class="locked-preview">Your post composer will appear here once posting is unlocked.</div>
     </div>`;
 }
 
-function observerState() {
+function observerState(signedIn) {
   return `
     <div class="locked-state">
-      <span class="lock-badge">🔒 Locked</span>
-      <h2>Create is locked for observers</h2>
-      <p>Observers can browse and like. Become verified to comment and unlock participation.</p>
+      <h2>${signedIn ? "Verification required" : "Sign in to post"}</h2>
+      <p>${signedIn ? "Verify your account to join the conversation." : "You can browse the feed now. Sign in to join the conversation."}</p>
       <div class="row gap-12 wrap" style="margin-top:18px">
-        <a class="btn btn-teal" data-link href="/verify">Become verified</a>
+        <a class="btn btn-teal" data-link href="${signedIn ? "/verify" : "/sign-in"}">${signedIn ? "Get verified" : "Sign in"}</a>
         <a class="btn btn-ghost" data-link href="/feed">Back to the feed</a>
       </div>
-      <div class="locked-preview">The post composer unlocks for trusted, verified members.</div>
     </div>`;
 }
 
@@ -142,7 +131,7 @@ function attachComposer(root, user) {
     root.querySelectorAll(".cp-thumb").forEach((item) => item.classList.remove("sel"));
     const dataUrl = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
     uploadedMedia = { file, dataUrl, name:file.name };
-    uploadPreview.innerHTML = `<img src="${dataUrl}" alt="Uploaded preview"><span><b>${escapeHtml(file.name)}</b><small>Ready for local evidence analysis</small></span>`;
+    uploadPreview.innerHTML = `<img src="${dataUrl}" alt="Uploaded preview"><span><b>${escapeHtml(file.name)}</b><small>Ready to attach</small></span>`;
   });
 
   if (btn) btn.addEventListener("click", async () => {

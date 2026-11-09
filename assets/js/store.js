@@ -9,7 +9,7 @@
 
 import { uid, avatarDataUri } from "./lib/util.js";
 import { DEMO_PHOTOS } from "./lib/photos.js";
-import { moderateContent } from "./moderation.js?v=4.24.1.0";
+import { moderateContent } from "./moderation.js?v=4.24.1.brand1";
 
 const LS_STATE = "k1nd_state_v4_15_authenticated_platform";
 
@@ -45,7 +45,7 @@ function buildSeed() {
       id: "u_observer", displayName: "Sam Rivera",
       avatarUrl: avatarDataUri("SR", 20), role: ROLES.OBSERVER,
       verificationStatus: "unverified", canPost: false, trustScore: 0,
-      handle: "samrivera", bio: "Tennis fan, weekend player and K1ND observer.", location: "London", favouriteSport: "Tennis", baseFollowers: 18,
+      handle: "samrivera", bio: "Tennis fan, weekend player and K1ND.world observer.", location: "London", favouriteSport: "Tennis", baseFollowers: 18,
       createdAt: iso(30),
     },
     {
@@ -73,7 +73,7 @@ function buildSeed() {
       id: "u_admin", displayName: "Jordan Blake",
       avatarUrl: avatarDataUri("JB", 268), role: ROLES.ADMIN,
       verificationStatus: "verified_adult", canPost: true, trustScore: 100,
-      handle: "jordanblake", bio: "K1ND community moderator. Safety, fairness and accountability by design.", location: "London", favouriteSport: "Multi-sport", baseFollowers: 340,
+      handle: "jordanblake", bio: "K1ND.world community moderator. Safety, fairness and accountability by design.", location: "London", favouriteSport: "Multi-sport", baseFollowers: 340,
       createdAt: iso(60),
     },
     // --- extra fictional identities for feed variety ---
@@ -99,10 +99,10 @@ function buildSeed() {
       createdAt: iso(18),
     },
     {
-      id: "u_tennisdesk", displayName: "K1ND Tennis Desk",
+      id: "u_tennisdesk", displayName: "K1ND.world Tennis Desk",
       avatarUrl: avatarDataUri("K1", 166), role: ROLES.VERIFIED_ADULT,
       verificationStatus: "verified_adult", canPost: true, trustScore: 95,
-      handle: "k1ndtennis", bio: "Analysis, match context and constructive tennis conversation from the K1ND desk.", location: "Global", favouriteSport: "Tennis", baseFollowers: 12800,
+      handle: "k1ndtennis", bio: "Analysis, match context and constructive tennis conversation from the K1ND.world desk.", location: "Global", favouriteSport: "Tennis", baseFollowers: 12800,
       createdAt: iso(90),
     },
     {
@@ -130,7 +130,7 @@ function buildSeed() {
       id: "u_pending", displayName: "Riley Chen",
       avatarUrl: avatarDataUri("RC", 120), role: ROLES.OBSERVER,
       verificationStatus: "pending", canPost: false, trustScore: 0,
-      handle: "rileychen", bio: "New to K1ND and completing verification.", location: "London", favouriteSport: "Tennis", baseFollowers: 6,
+      handle: "rileychen", bio: "New to K1ND.world and completing verification.", location: "London", favouriteSport: "Tennis", baseFollowers: 6,
       createdAt: iso(0, 4),
     },
     {
@@ -420,7 +420,17 @@ export function useCurrentUser() { return currentUser(); }
 export function isServerAuthenticated() { return serverAuthenticated; }
 
 export function hydrateServerPlatform(payload = {}) {
-  if (Array.isArray(payload.profiles) && payload.profiles.length) state.profiles = payload.profiles;
+  if (Array.isArray(payload.profiles) && payload.profiles.length) {
+    state.profiles = payload.profiles.map((profile) => {
+      if (profile.id !== "u_tennisdesk") return profile;
+      return {
+        ...profile,
+        displayName: profile.displayName === "K1ND Tennis Desk" ? "K1ND.world Tennis Desk" : profile.displayName,
+        bio: profile.bio === "Analysis, match context and constructive tennis conversation from the K1ND desk."
+          ? "Analysis, match context and constructive tennis conversation from the K1ND.world desk." : profile.bio,
+      };
+    });
+  }
   if (Array.isArray(payload.posts)) state.posts = payload.posts;
   if (Array.isArray(payload.comments)) state.comments = payload.comments;
   emit();
@@ -1017,7 +1027,7 @@ export function getHarassmentGraph() {
 // ---- demo reset ------------------------------------------------------------
 export function resetDemo() {
   state = buildSeed();
-  currentUserId = "u_observer";
-  localStorage.setItem(LS_USER, currentUserId);
+  // Reset presentation data without changing the server-authenticated identity.
+  if (!serverAuthenticated) currentUserId = "u_observer";
   emit();
 }

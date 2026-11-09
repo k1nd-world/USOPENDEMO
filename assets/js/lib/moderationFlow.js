@@ -2,12 +2,12 @@
 // The pre-publication gate. Both the comment composer and post composer route
 // through here BEFORE anything is written to the public store.
 
-import { moderateContent } from "../moderation.js?v=4.24.1.0";
-import { logModerationEvent, submitForEnhancedReview, getBehaviourProfile } from "../store.js?v=4.24.1.0";
+import { moderateContent } from "../moderation.js?v=4.24.1.brand1";
+import { logModerationEvent, submitForEnhancedReview, getBehaviourProfile } from "../store.js?v=4.24.1.brand1";
 import { openModal } from "./modal.js";
 import { sealSvg, toast } from "./ui.js";
 import { escapeHtml } from "./util.js";
-import { enforceOnServer, commitPublicationOnServer } from "../serverEvidence.js?v=4.24.1.0";
+import { enforceOnServer, commitPublicationOnServer } from "../serverEvidence.js?v=4.24.1.brand1";
 
 
 function auditTextForBlockedAttempt(text, category) {
@@ -89,7 +89,7 @@ export async function submitWithModeration({
       rewriteSuggestion: undefined,
       rewrite: {
         status:"needs_author_point", preservedPoint:"None detected", removed:"Potential prohibited hateful language",
-        rationale:"The stopped draft contains no clear sporting point. K1ND will not invent one; state the real point in your own words.",
+        rationale:"The stopped draft contains no clear sporting point. K1ND.world will not invent one; state the real point in your own words.",
       },
     };
   }
@@ -102,7 +102,7 @@ export async function submitWithModeration({
       outcome:"block",
       category:imageAnalysis.category || "media_safety",
       reason:imageAnalysis.reason || "Prohibited content was found in the image",
-      rewrite:{ status:"media_block", preservedPoint:"None validated", removed:"Prohibited media evidence", rationale:"K1ND does not rewrite or reproduce prohibited content found inside an image." },
+      rewrite:{ status:"media_block", preservedPoint:"None validated", removed:"Prohibited media evidence", rationale:"K1ND.world does not rewrite or reproduce prohibited content found inside an image." },
       analysis:result.analysis,
     };
   } else if (result.outcome !== "block" && imageAnalysis?.outcome === "review") {
@@ -129,7 +129,7 @@ export async function submitWithModeration({
     if (enforcement.outcome === "block" && priorOutcome !== "block") {
       result = {
         ...result, rewriteSuggestion:undefined, safeDraftSuggestion:undefined,
-        rewrite:{ status:"server_hard_block", preservedPoint:"None validated", removed:"Server-enforced prohibited content", rationale:"The independent server policy hard-blocked this original. K1ND will not create a bypass draft." },
+        rewrite:{ status:"server_hard_block", preservedPoint:"None validated", removed:"Server-enforced prohibited content", rationale:"The independent server policy hard-blocked this original. K1ND.world will not create a bypass draft." },
       };
     }
   } catch (error) {
@@ -206,9 +206,9 @@ export async function submitWithModeration({
     const mediaEvidence = imageAnalysis ? `<div class="modal-media-evidence"><span class="mini-kicker">Media evidence</span><div><b>${escapeHtml(imageAnalysis.ocr?.text ? (imageAnalysis.category === "slur" ? "[prohibited embedded text withheld]" : imageAnalysis.ocr.text) : "No readable embedded text")}</b><small>${imageAnalysis.ocr?.confidence ? `${Math.round(imageAnalysis.ocr.confidence * 100)}% OCR confidence · ` : ""}${escapeHtml(imageAnalysis.ocr?.engine || "evidence service")}</small></div><p>${escapeHtml(imageAnalysis.productionBoundary || "")}</p></div>` : "";
     openModal({
       tone: "block",
-      title: "This cannot be posted on K1ND.",
+      title: "This cannot be posted on K1ND.world.",
       bodyHtml: `<p class="muted">Flagged as <strong>${escapeHtml(result.reason.toLowerCase())}</strong>.
-        The original is blocked before publication and cannot be bypassed or sent live.</p>${serverProof}${mediaEvidence}${safeDraftCard}${safeDraft ? `<p class="muted mod-choice-copy">The clean draft is a separate composition based only on the recoverable point. It has passed K1ND's rules and can be used, edited or ignored.</p>` : ""}`,
+        The original is blocked before publication and cannot be bypassed or sent live.</p>${serverProof}${mediaEvidence}${safeDraftCard}${safeDraft ? `<p class="muted mod-choice-copy">The clean draft is a separate composition based only on the recoverable point. It has passed K1ND.world's rules and can be used, edited or ignored.</p>` : ""}`,
       buttons: [
         ...(safeDraft ? [{ label:"Use validated new draft", class:"btn-teal", onClick:async () => {
           const draftCheck = moderateContent(safeDraft, moderationContext || {});
@@ -217,7 +217,7 @@ export async function submitWithModeration({
           if (!receipt) return false;
           logModerationEvent(user.id, contentType, safeDraft, "rewrite_accepted", "User accepted source-backed draft after original hard block", eventContext());
           onPublish(safeDraft, { status:"rewritten_after_block", intervention:result, conversationContext:moderationContext, serverReceipt:receipt });
-          toast("Published the separately validated K1ND draft");
+          toast("Published the separately validated K1ND.world draft");
         } }] : []),
         { label:"Rewrite yourself", class:"btn-ghost", onClick:() => { if (onEditRequest) onEditRequest(); } },
         { label: "Understood", class: "btn-primary" },
@@ -291,7 +291,7 @@ export async function submitWithModeration({
       </div>
       <p>${isReview
         ? `This original will remain hidden unless a moderator approves it.`
-        : `K1ND found wording that targets a person rather than the sporting point. The original cannot be published immediately.`}</p>
+        : `K1ND.world found wording that targets a person rather than the sporting point. The original cannot be published immediately.`}</p>
       ${behaviour.count ? `<div class="behaviour-friction ${behaviour.stage}"><b>${escapeHtml(behaviour.label)}</b><span>${escapeHtml(behaviour.message)} · ${behaviour.count} intervention${behaviour.count === 1 ? "" : "s"} this demo session.</span></div>` : ""}
       ${result.analysis?.contextAssessment ? `<div class="moderation-context-proof">
         <span class="mini-kicker">Conversation intelligence</span>
@@ -317,7 +317,7 @@ export async function submitWithModeration({
           if (!receipt) return false;
           logModerationEvent(user.id, contentType, option.suggestion, "rewrite_accepted", `User accepted ${option.id} source-backed rewrite`, eventContext());
           onPublish(option.suggestion, { status: "rewritten", intervention: result, conversationContext:moderationContext, serverReceipt:receipt });
-          toast(`Published the ${option.label.toLowerCase()} K1ND rewrite`);
+          toast(`Published the ${option.label.toLowerCase()} K1ND.world rewrite`);
         },
       })) : []),
       { label: "Rewrite yourself", class: "btn-ghost", onClick: () => { if (onEditRequest) onEditRequest(); } },

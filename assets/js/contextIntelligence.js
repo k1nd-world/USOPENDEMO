@@ -279,7 +279,7 @@ export function applyContextPolicy(result, context) {
   }
   if (context.target.type === "person" && !context.protectedFraming) {
     if (context.audience.under18) {
-      return { ...result, outcome:"review", category:"minor_targeted_abuse", reason:"Direct abuse targeting an U18 participant requires enhanced review", policyRationale:"The wording attacks a known U18 participant. K1ND applies additional safeguarding and keeps the original private for moderator assessment." };
+      return { ...result, outcome:"review", category:"minor_targeted_abuse", reason:"Direct abuse targeting an U18 participant requires enhanced review", policyRationale:"The wording attacks a known U18 participant. K1ND.world applies additional safeguarding and keeps the original private for moderator assessment." };
     }
     if (context.conversation.pileOn) {
       return { ...result, outcome:"review", category:"coordinated_targeting", reason:"Conversation pattern indicates a developing pile-on", policyRationale:"Multiple accounts have recently targeted the same participant. The current attack is held to interrupt cumulative harassment rather than judging this line in isolation." };

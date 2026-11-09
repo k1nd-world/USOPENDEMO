@@ -1,4 +1,4 @@
-import { analyseMediaUrl, analyseUploadedMedia, runMediaEvidenceTests } from "../mediaIntelligence.js?v=4.24.1.0";
+import { analyseMediaUrl, analyseUploadedMedia, runMediaEvidenceTests } from "../mediaIntelligence.js?v=4.24.1.brand1";
 import { escapeHtml } from "../lib/util.js";
 
 const CHALLENGES = [

@@ -41,7 +41,7 @@ function noPoint(reason = "The draft contains an attack, but no sporting or disc
     suggestion: undefined,
     preservedPoint: "None detected",
     removed: "Personal attack / abusive expression",
-    rationale: `${reason} K1ND will not invent a replacement opinion; the author must state the real point in their own words.`,
+    rationale: `${reason} K1ND.world will not invent a replacement opinion; the author must state the real point in their own words.`,
   };
 }
 
@@ -188,7 +188,7 @@ export function refineRewrite(original, result) {
     return { status:"not_applicable", suggestion:result?.rewriteSuggestion };
   }
   if (result.semanticOverride === "implicit_personal_attack") {
-    return noPoint("The sarcastic personal label contains no separate proposition K1ND can safely reconstruct without inventing the author's intent.");
+    return noPoint("The sarcastic personal label contains no separate proposition K1ND.world can safely reconstruct without inventing the author's intent.");
   }
 
   const text = String(original || "").trim();
@@ -282,7 +282,7 @@ export function refineRewrite(original, result) {
   if (result.westernEuropeanRule && westernDismissalRewrites[result.westernEuropeanRule]) {
     return preserved(...westernDismissalRewrites[result.westernEuropeanRule]);
   }
-  if (result.westernEuropeanRule) return noPoint("The regional-language draft labels or attacks a person but contains no separate proposition K1ND can safely reconstruct.");
+  if (result.westernEuropeanRule) return noPoint("The regional-language draft labels or attacks a person but contains no separate proposition K1ND.world can safely reconstruct.");
 
   const priorityDismissalRewrites = {
     "ar-dismissal":["من فضلك اتركني وشأني.", "A request to be left alone", "The aggressive Arabic dismissal"],
@@ -301,7 +301,7 @@ export function refineRewrite(original, result) {
   if (result.priorityGlobalRule && priorityDismissalRewrites[result.priorityGlobalRule]) {
     return preserved(...priorityDismissalRewrites[result.priorityGlobalRule]);
   }
-  if (result.priorityGlobalRule) return noPoint("The multilingual draft attacks a person but contains no separate proposition K1ND can safely reconstruct.");
+  if (result.priorityGlobalRule) return noPoint("The multilingual draft attacks a person but contains no separate proposition K1ND.world can safely reconstruct.");
 
   const nextWaveDismissalRewrites = {
     "bn-dismissal":["দয়া করে আমাকে একটু সময় দিন।", "A request for space", "The Bengali silencing command"],
@@ -318,7 +318,7 @@ export function refineRewrite(original, result) {
   if (result.nextWaveRule && nextWaveDismissalRewrites[result.nextWaveRule]) {
     return preserved(...nextWaveDismissalRewrites[result.nextWaveRule]);
   }
-  if (result.nextWaveRule) return noPoint("The next-wave language draft contains abuse but no separate proposition K1ND can safely preserve.");
+  if (result.nextWaveRule) return noPoint("The next-wave language draft contains abuse but no separate proposition K1ND.world can safely preserve.");
 
   const v412DismissalRewrites = {
     "ta-dismissal":["தயவுசெய்து எனக்கு சிறிது இடம் கொடுங்கள்.", "A request for space", "The aggressive Tamil dismissal"],
@@ -335,8 +335,8 @@ export function refineRewrite(original, result) {
   if (result.v412LanguageRule && v412DismissalRewrites[result.v412LanguageRule]) {
     return preserved(...v412DismissalRewrites[result.v412LanguageRule]);
   }
-  if (result.v412LanguageRule) return noPoint("The code-switched or regional-language draft contains abuse but no separate proposition K1ND can safely preserve.");
-  if (result.v412SignalRule) return noPoint("The coded construction is context-dependent and contains no proposition K1ND can safely reconstruct without inventing intent.");
+  if (result.v412LanguageRule) return noPoint("The code-switched or regional-language draft contains abuse but no separate proposition K1ND.world can safely preserve.");
+  if (result.v412SignalRule) return noPoint("The coded construction is context-dependent and contains no proposition K1ND.world can safely reconstruct without inventing intent.");
 
   if (result.uncertaintyRule) return noPoint("The message uses obfuscation or uncertain targeted wording and contains no proposition the browser engine can recover safely.");
 
