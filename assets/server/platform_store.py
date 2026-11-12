@@ -28,6 +28,10 @@ DEMO_PINS = {
 }
 SESSION_HOURS = 8
 
+# Keep the recorded demo comment and receipt. The public view hides the
+# specific verified row while all four fields still match.
+DEMO_HIDDEN_COMMENT = ("c_3120e8f8b64e43a6b20ef8a7e8b932d1", "u_adult", "p1", "I lost my bet")
+
 
 def _hash_pin(pin, salt):
     return hashlib.pbkdf2_hmac("sha256", pin.encode("utf-8"), salt, 210_000)
@@ -201,7 +205,7 @@ class PlatformStore:
     def feed(self):
         with self.lock, self.connect() as db:
             posts = []
-            for row in db.execute("SELECT * FROM platform_posts ORDER BY created_at DESC"):
+            for row in db.execute("SELECT * FROM platform_posts WHERE moderation_status <> 'removed' ORDER BY created_at DESC"):
                 posts.append({
                     "id": row["content_id"], "publicationId": row["publication_id"], "authorId": row["author_id"],
                     "content": row["content"], "sport": row["sport"], "imageUrl": row["image_url"],
@@ -211,7 +215,26 @@ class PlatformStore:
                     "createdAt": row["created_at"],
                 })
             comments = []
-            for row in db.execute("SELECT * FROM platform_comments ORDER BY created_at"):
+            # The feed renders replies within their parent thread. Omit hidden
+            # threads in the same payload used by public profile replies.
+            for row in db.execute("""
+                WITH RECURSIVE hidden_comments(content_id, post_id) AS (
+                    SELECT content_id, post_id FROM platform_comments
+                    WHERE moderation_status = 'removed'
+                        OR (content_id = ? AND author_id = ? AND post_id = ? AND content = ?)
+                    UNION
+                    SELECT child.content_id, child.post_id FROM platform_comments child
+                    JOIN hidden_comments parent
+                        ON child.parent_id = parent.content_id AND child.post_id = parent.post_id
+                )
+                SELECT comment.* FROM platform_comments comment
+                JOIN platform_posts post ON post.content_id = comment.post_id
+                WHERE post.moderation_status <> 'removed'
+                    AND NOT EXISTS (
+                        SELECT 1 FROM hidden_comments hidden WHERE hidden.content_id = comment.content_id
+                    )
+                ORDER BY comment.created_at
+            """, DEMO_HIDDEN_COMMENT):
                 comments.append({
                     "id": row["content_id"], "publicationId": row["publication_id"], "postId": row["post_id"],
                     "parentId": row["parent_id"], "authorId": row["author_id"], "content": row["content"],

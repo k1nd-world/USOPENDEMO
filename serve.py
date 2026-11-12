@@ -55,6 +55,12 @@ COOKIE_NAME = "k1nd_session"
 ARENA_COOKIE_NAME = "k1nd_arena_session"
 SECURE_COOKIES = os.environ.get("K1ND_SECURE_COOKIES", "").strip().lower() in {"1", "true", "yes", "on"}
 TRUST_PROXY_HEADERS = os.environ.get("K1ND_TRUST_PROXY_HEADERS", "").strip().lower() in {"1", "true", "yes", "on"}
+DEMO_BETTING_CORRECTION = "k1nd-demo-betting-disclosure-2026-11-12.1"
+DEMO_BETTING_REASON = "The demo blocks this standalone betting-loss disclosure."
+
+
+def is_demo_betting_disclosure(text):
+    return text.strip().rstrip(".!?…").rstrip().casefold() == "i lost my bet"
 
 
 class AuthRequired(Exception):
@@ -265,6 +271,15 @@ class SPAHandler(SimpleHTTPRequestHandler):
         if invalid_client:
             client_outcome = "review"
         server = SAFETY.classify(text)
+        if is_demo_betting_disclosure(text) and server["outcome"] != "block":
+            server = {
+                **server,
+                "outcome": "block",
+                "category": "gambling_disclosure",
+                "reason": DEMO_BETTING_REASON,
+                "matchedRuleIds": [*server["matchedRuleIds"], DEMO_BETTING_CORRECTION],
+                "policyVersion": DEMO_BETTING_CORRECTION,
+            }
         media_sha = payload.get("mediaSha256")
         known_asset = payload.get("photoKey") if payload.get("photoKey") in {"action", "stadium", "clay", "ball"} else None
         media = EVIDENCE.get_media(media_sha) if media_sha else None
@@ -407,6 +422,9 @@ class SPAHandler(SimpleHTTPRequestHandler):
             raise Forbidden("This account does not have trusted-poster permission.")
         if content_type == "comment" and user.get("role") == "observer":
             raise Forbidden("Only verified participants can comment.")
+        # A clean receipt may predate the current publication rule.
+        if content_type in {"post", "comment"} and is_demo_betting_disclosure(text):
+            raise ValueError(DEMO_BETTING_REASON)
         ledger = EVIDENCE.record_publication({**payload, "userId": user["id"], "contentType": content_type})
         content = PLATFORM.create_publication(ledger["publicationId"], payload.get("receiptId"), user, content_type, text, payload.get("metadata"))
         return self.send_json(201, {"ok": True, "authorized": True, "durable": True, **ledger, "content": content, "authenticatedUserId": user["id"]})
@@ -695,7 +713,7 @@ class SPAHandler(SimpleHTTPRequestHandler):
         query = parse_qs(parsed.query)
         try:
             if clean == "/api/health":
-                return self.send_json(200, {"ok": True, "version": "4.24.1", "policyVersion": SAFETY.version, "baselinePolicyVersion": POLICY.version, "rules": POLICY.source_rule_count, "executablePatterns": POLICY.executable_patterns, "database": EVIDENCE.db_path.name, "auth": "signed-cookie-session", "feedAuthority": "server", "moderationAuthority": "server", "safetyIntelligence": "active", "pilotOperations": "active", "eventCommand": "active_demo", "eventSafetyTwin": "active_simulation", "publicExperience": "session_scoped", "liveMatchRoom": "active_simulation", "liveAudienceArena": "active_local_demo", "tournamentOperations": "active_local_demo", "arenaTransport": "server_sent_events_with_polling_fallback"})
+                return self.send_json(200, {"ok": True, "version": "4.24.1", "policyVersion": SAFETY.version, "baselinePolicyVersion": POLICY.version, "rules": POLICY.source_rule_count, "executablePatterns": POLICY.executable_patterns, "database": EVIDENCE.db_path.name, "auth": "signed-cookie-session", "feedAuthority": "server", "moderationAuthority": "server", "demoBettingCorrection": DEMO_BETTING_CORRECTION, "safetyIntelligence": "active", "pilotOperations": "active", "eventCommand": "active_demo", "eventSafetyTwin": "active_simulation", "publicExperience": "session_scoped", "liveMatchRoom": "active_simulation", "liveAudienceArena": "active_local_demo", "tournamentOperations": "active_local_demo", "arenaTransport": "server_sent_events_with_polling_fallback"})
             if clean == "/api/auth/session":
                 session = self.current_session()
                 return self.send_json(200, {"ok": True, "authenticated": bool(session), "user": session["user"] if session else None, "csrfToken": session["csrfToken"] if session else None, "expiresAt": session["expiresAt"] if session else None})
